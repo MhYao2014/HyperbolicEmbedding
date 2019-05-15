@@ -1,0 +1,10 @@
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/install.dir
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/list_install_components.dir
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/rebuild_cache.dir
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/install/local.dir
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/install/strip.dir
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/edit_cache.dir
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/fasttext-shared.dir
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/fasttext-static_pic.dir
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/fasttext-static.dir
+/home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/fasttext-bin.dir
