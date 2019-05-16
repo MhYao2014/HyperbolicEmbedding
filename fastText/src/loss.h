@@ -48,6 +48,7 @@ class Loss {
       bool backprop) = 0;
   virtual real forwardHyper(
       Matrix & wi_,
+      int32_t inWordId,
       int32_t outWordId,
       Model::State& state,
       real lr,
@@ -112,6 +113,7 @@ protected:
     std::vector<int32_t> negatives_;
     std::uniform_int_distribution<size_t> uniform_;
     int32_t getNegative(int32_t target, std::minstd_rand& rng);
+    int32_t getNegativeHyper(int32_t inputId, int32_t target, std::minstd_rand& rng);
 public:
     explicit UnitNegativeSamplingLoss(
             std::shared_ptr<Matrix>& wo,
@@ -129,6 +131,7 @@ public:
             bool backprop) override;
     real forwardHyper(
             Matrix & wi_,
+            int32_t inWordId,
             int32_t outWordId,
             Model::State& state,
             real lr,
@@ -159,6 +162,7 @@ class NegativeSamplingLoss : public BinaryLogisticLoss {
       bool backprop) override;
   real forwardHyper(
           Matrix & wi_,
+          int32_t inputId,
           int32_t outWordId,
           Model::State& state,
           real lr,

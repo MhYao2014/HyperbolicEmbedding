@@ -112,7 +112,7 @@ void Model::updateHyper(
   // 取出input vector
   state.hidden.addRow(*wi_,inWordId);
   // 进行负采样并更新context vector与input vector
-  real lossValue = loss_->forwardHyper(*wi_, outWordId, state, lr, true);
+  real lossValue = loss_->forwardHyper(*wi_, inWordId ,outWordId, state, lr, true);
   state.incrementNExamplesHyper(lossValue);
   wi_->expMapToRow(state.gradHyper, inWordId);
 }

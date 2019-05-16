@@ -460,6 +460,9 @@ void FastText::hyperskip(
     std::string inWord = x.first;
     int32_t inWordHash = dict_->find(inWord);
     int32_t inWordId = dict_->word2int_[inWordHash];
+    if (inWordId < 0) {
+        continue;
+    }
     // 逐个训练与input word 直接相连的dep context word
     for (auto& outWord: x.second) {
       // 读取output word在词表中的序号

@@ -110,13 +110,13 @@ void DenseMatrix::addVectorToRow(const Vector& vec, int64_t i, real a) {
 }
 
 real DenseMatrix::lorentzNorm(Vector& v) {
-    real result = v[0] * v[0];
+    real result = -v[0] * v[0];
     for (int64_t i = 1; i < v.size(); i++) {
         result = result + v[i] * v[i];
     }
 //    std::cerr << "\r" << result << "\r" << std::endl;
 //    result = fmax(result, 0.01);
-//    assert( result > 0);
+    assert( result > 0);
     return std::sqrt(result);
 }
 
@@ -128,8 +128,8 @@ void DenseMatrix::expMapToRow(fasttext::Vector & grad, int64_t i) {
   real coshNorm = cosh(gradLorentzNorm);
   real sinhNorm = sinh(gradLorentzNorm);
   // 把第一维度空开，跳过。
-  for (int64_t j = 1; j < n_; j++) {
-    data_[i * n_ + j] = data_[i * n_ + j] * coshNorm + sinhNorm / gradLorentzNorm * grad[j];
+  for (int64_t j = 0; j < n_; j++) {
+    data_[i * n_ + j] = data_[i * n_ + j] * coshNorm + sinhNorm / gradLorentzNorm * grad[j + 1];
   }
 }
 

@@ -166,10 +166,21 @@ void BinaryLogisticLoss::computeOutput(Model::State& state) const {
     int32_t UnitNegativeSamplingLoss::getNegative(
             int32_t target,
             std::minstd_rand &rng) {
+        int32_t negative;
+        do {
+            negative = negatives_[uniform_(rng)];
+        } while (target == negative);
+        return negative;
+    }
+
+    int32_t UnitNegativeSamplingLoss::getNegativeHyper(
+            int32_t inputId,
+            int32_t target,
+            std::minstd_rand &rng) {
       int32_t negative;
       do {
         negative = negatives_[uniform_(rng)];
-      } while (target == negative);
+      } while (target == negative or target == inputId);
         return negative;
     }
 
@@ -254,54 +265,57 @@ void BinaryLogisticLoss::computeOutput(Model::State& state) const {
 
     real UnitNegativeSamplingLoss::forwardHyper(
             Matrix & wi_,
+            int32_t inWordId,
             int32_t targetId,
             Model::State& state,
             real lr,
             bool backprop) {
         assert( targetId >= 0 );
-        Vector targetPos(wi_.size(1));
-        targetPos.zero();
-        targetPos.addRow(wi_, targetId);
+        Vector target(wi_.size(1));
+        target.zero();
+        target.addRow(wi_, targetId);
 
         // 生成u^{\hat}与v_{+}^{\hat}
         Vector uHat(state.hidden.size()+1);
         uHat.generateFrom(state.hidden);
+//        std::cerr << "\r" << state.hidden.norm() << ";" << "\r"<< std::endl;
 
-        Vector targetHat(targetPos.size()+1);
-        targetHat.generateFrom(targetPos);
+        Vector targetHat(target.size()+1);
+        targetHat.generateFrom(target);
         // 计算正样本的loss;
         real loss = 0;
         real lorentzProduct = uHat.lorentzPro(targetHat);
         assert(-lorentzProduct > 1);
         real numeraPos = exp(-acosh(-lorentzProduct));
+//        loss += acosh(-lorentzProduct);
         // 计算hidden的欧式梯度
         state.gradHyper = targetHat;
-//        state.gradHyper.hyperInverse();
-//        state.gradHyper.mul(-1);
         // 正样例并计算targetId的欧式梯度，
         Vector hHatTarget = uHat;
-//        hHatTarget.hyperInverse();
-//        hHatTarget.mul(-1);
         real diffCoff = 1 / std::sqrt(lorentzProduct*lorentzProduct - 1);
-        std::cerr << "\r" << 1 / diffCoff << "\r"<< std::endl;
         hHatTarget.mul(-diffCoff);
         state.gradHyper.mul(-diffCoff);
         // 最后进行黎曼SGD
         hHatTarget.proj(targetHat);
         hHatTarget.mul(-lr);
+        // 最后对hidden进行黎曼SGD
         wi_.expMapToRow(hHatTarget, targetId);
+//        wi_.expMapToRow(state.gradHyper, inWordId);
+//        target.zero();
+//        target.addRow(wi_, inWordId);
+//        std::cerr << "\r" << target.norm() << "*" << "\r"<< std::endl;
         // 负采样并计算梯度，最后进行黎曼SGD
-        Vector targetNeg(wi_.size(1));
+//        Vector targetNeg(wi_.size(1));
         // 这里std::vector不能用了，只能用Vector凑凑数
         std::vector<real> loreProVec;
         std::vector<int64_t> negIdVec;
         // 第一遍遍历先将每个负样本遍历完，并记录下每个负样本与hidden的内积
-        for(int32_t i = 0; i < neg_; i++) {
-            auto negativeTarget = getNegative(targetId, state.rng);
+        for (int32_t i = 0; i < neg_; i++) {
+            auto negativeTarget = getNegativeHyper(inWordId, targetId, state.rng);
             negIdVec.push_back(negativeTarget);
-            targetNeg.zero();
-            targetNeg.addRow(wi_, negativeTarget);
-            targetHat.generateFrom(targetNeg);
+            target.zero();
+            target.addRow(wi_, negativeTarget);
+            targetHat.generateFrom(target);
             lorentzProduct = uHat.lorentzPro(targetHat);
             loreProVec.push_back(lorentzProduct);
         }
@@ -322,21 +336,18 @@ void BinaryLogisticLoss::computeOutput(Model::State& state) const {
             diffCoff = numer[i] / denomi / std::sqrt((loreProVec[i]*loreProVec[i]) - 1);
             hHatTarget.zero();
             hHatTarget = uHat;
-//            hHatTarget.hyperInverse();
             hHatTarget.mul(-diffCoff);
-            targetNeg.zero();
-            targetNeg.addRow(wi_, negIdVec[i]);
-            targetHat.generateFrom(targetNeg);
+            target.zero();
+            target.addRow(wi_, negIdVec[i]);
+            targetHat.generateFrom(target);
             hHatTarget.proj(targetHat);
             hHatTarget.mul(-lr);
             wi_.expMapToRow(hHatTarget, negIdVec[i]);
             hHatHiddenTemp.zero();
             hHatHiddenTemp = targetHat;
-//            hHatHiddenTemp.hyperInverse();
             hHatHiddenTemp.mul(-diffCoff);
             state.gradHyper.addVector(hHatHiddenTemp);
         }
-        // 最后对hidden进行黎曼SGD
         state.gradHyper.proj(uHat);
         state.gradHyper.mul(-lr);
         return loss;
@@ -360,7 +371,7 @@ void BinaryLogisticLoss::computeOutput(Model::State& state) const {
       return loss;
     }
 
-    real NegativeSamplingLoss::forwardHyper(fasttext::Matrix &wi_, int32_t outWordId, fasttext::Model::State &state,
+    real NegativeSamplingLoss::forwardHyper(fasttext::Matrix &wi_, int32_t inputId, int32_t outWordId, fasttext::Model::State &state,
                                             fasttext::real lr, bool backprop) {}
 
 
