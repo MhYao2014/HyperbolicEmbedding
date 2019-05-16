@@ -469,7 +469,6 @@ void FastText::hyperskip(
       int32_t outWordHash = dict_->find(outWord);
       int32_t outWordId = dict_->word2int_[outWordHash];
       if (outWordId < 0) {
-//          std::cerr << "\r" << "*" << outWord << "*" <<std::endl;
         continue;
       }
       model_->updateHyper(inWordId, outWordId, lr, state);
@@ -843,7 +842,7 @@ void FastText::startThreads() {
     // Same condition as trainThread
   while (tokenCount_ < args_->epoch * ntokens or tokenCountTree_ < args_->epoch * ntokensTree) {
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    if (loss_ >= 0 && args_->verbose > 1) {
+    if ( args_->verbose > 1) {
       real progress = real(tokenCount_) / (args_->epoch * ntokens);
       std::cerr << "\r";
       if (args_->loss == loss_name::uns) {

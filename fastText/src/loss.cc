@@ -250,19 +250,6 @@ void BinaryLogisticLoss::computeOutput(Model::State& state) const {
         return loss;
     }
 
-//    real UnitNegativeSamplingLoss::lorentzProduct(
-//            fasttext::real u0,
-//            Vector& u,
-//            fasttext::real v0,
-//            Vector& v) {
-//        assert(u.size() == v.size());
-//        real result = -u0 * v0;
-//        for (int64_t i = 0; i < u.size(); i++) {
-//            result += u[i] * v[i];
-//        }
-//        return result;
-//}
-
     real UnitNegativeSamplingLoss::forwardHyper(
             Matrix & wi_,
             int32_t inWordId,
@@ -271,83 +258,84 @@ void BinaryLogisticLoss::computeOutput(Model::State& state) const {
             real lr,
             bool backprop) {
         assert( targetId >= 0 );
+        real loss = 0;
         Vector target(wi_.size(1));
         target.zero();
         target.addRow(wi_, targetId);
-
         // 生成u^{\hat}与v_{+}^{\hat}
         Vector uHat(state.hidden.size()+1);
         uHat.generateFrom(state.hidden);
-//        std::cerr << "\r" << state.hidden.norm() << ";" << "\r"<< std::endl;
-
         Vector targetHat(target.size()+1);
         targetHat.generateFrom(target);
-        // 计算正样本的loss;
-        real loss = 0;
+        // 计算正样本的洛仑兹内积;
         real lorentzProduct = uHat.lorentzPro(targetHat);
         assert(-lorentzProduct > 1);
         real numeraPos = exp(-acosh(-lorentzProduct));
-//        loss += acosh(-lorentzProduct);
-        // 计算hidden的欧式梯度
+        // 计算hidden与正例的欧式梯度
         state.gradHyper = targetHat;
-        // 正样例并计算targetId的欧式梯度，
         Vector hHatTarget = uHat;
+        // 计算梯度前的系数并乘上度规矩阵的逆，从而得到双曲梯度
         real diffCoff = 1 / std::sqrt(lorentzProduct*lorentzProduct - 1);
         hHatTarget.mul(-diffCoff);
         state.gradHyper.mul(-diffCoff);
-        // 最后进行黎曼SGD
+        // 对正例利用双曲梯度进行黎曼SGD
         hHatTarget.proj(targetHat);
         hHatTarget.mul(-lr);
-        // 最后对hidden进行黎曼SGD
         wi_.expMapToRow(hHatTarget, targetId);
-//        wi_.expMapToRow(state.gradHyper, inWordId);
-//        target.zero();
-//        target.addRow(wi_, inWordId);
-//        std::cerr << "\r" << target.norm() << "*" << "\r"<< std::endl;
         // 负采样并计算梯度，最后进行黎曼SGD
-//        Vector targetNeg(wi_.size(1));
-        // 这里std::vector不能用了，只能用Vector凑凑数
-        std::vector<real> loreProVec;
-        std::vector<int64_t> negIdVec;
-        // 第一遍遍历先将每个负样本遍历完，并记录下每个负样本与hidden的内积
-        for (int32_t i = 0; i < neg_; i++) {
-            auto negativeTarget = getNegativeHyper(inWordId, targetId, state.rng);
-            negIdVec.push_back(negativeTarget);
-            target.zero();
-            target.addRow(wi_, negativeTarget);
-            targetHat.generateFrom(target);
-            lorentzProduct = uHat.lorentzPro(targetHat);
-            loreProVec.push_back(lorentzProduct);
-        }
-        // 第二遍遍历负样本并计算分子分母
-        real denomi = 0;
-        real numerTemp = 0;
-        std::vector<real> numer;
-        for (int32_t i = 0; i < neg_; i++) {
-            assert(-loreProVec[i] > 1);
-            numerTemp = exp(-acosh(-loreProVec[i]));
-            numer.push_back(-numerTemp);
-            denomi += numerTemp;
-        }
-        loss += -log(numeraPos / denomi);
+//        std::vector<real> loreProVec;
+//        std::vector<int64_t> negIdVec;
+//        // 第一遍遍历先将每个负样本遍历完，并记录下每个负样本与hidden的内积
+//        for (int32_t i = 0; i < neg_; i++) {
+//            auto negativeTarget = getNegativeHyper(inWordId, targetId, state.rng);
+//            negIdVec.push_back(negativeTarget);
+//            // 抽取负样本的原始词向量
+//            target.zero();
+//            target.addRow(wi_, negativeTarget);
+//            // 生成负样本的双曲向量
+//            targetHat.generateFrom(target);
+//            // 计算负样本的洛伦茨内积
+//            lorentzProduct = uHat.lorentzPro(targetHat);
+//            loreProVec.push_back(lorentzProduct);
+//        }
+//        // 第二遍遍历负样本并计算分子分母
+//        real denomi = 0;
+//        real numerTemp = 0;
+//        std::vector<real> numer;
+//        for (int32_t i = 0; i < neg_; i++) {
+//            assert(-loreProVec[i] > 1);
+//            // 计算分子
+//            numerTemp = exp(-acosh(-loreProVec[i]));
+//            // 梯度计算中出现的负号留在了这里相乘
+//            numer.push_back(-numerTemp);
+//            // 累加分母
+//            denomi += numerTemp;
+//        }
+        // 计算损失
+        loss += -log(numeraPos);
         // 第三遍遍历负样本并更新梯度
-        Vector hHatHiddenTemp(targetHat.size());
-        for (int32_t i = 0; i < neg_; i++) {
-            diffCoff = numer[i] / denomi / std::sqrt((loreProVec[i]*loreProVec[i]) - 1);
-            hHatTarget.zero();
-            hHatTarget = uHat;
-            hHatTarget.mul(-diffCoff);
-            target.zero();
-            target.addRow(wi_, negIdVec[i]);
-            targetHat.generateFrom(target);
-            hHatTarget.proj(targetHat);
-            hHatTarget.mul(-lr);
-            wi_.expMapToRow(hHatTarget, negIdVec[i]);
-            hHatHiddenTemp.zero();
-            hHatHiddenTemp = targetHat;
-            hHatHiddenTemp.mul(-diffCoff);
-            state.gradHyper.addVector(hHatHiddenTemp);
-        }
+//        Vector hHatHiddenTemp(targetHat.size());
+//        for (int32_t i = 0; i < neg_; i++) {
+//            // 计算负样本的欧式梯度因子
+//            diffCoff = numer[i] / denomi / std::sqrt((loreProVec[i]*loreProVec[i]) - 1);
+//            // 负样本的欧式梯度是从uHat开始的
+//            hHatTarget.zero();
+//            hHatTarget = uHat;
+//            hHatTarget.mul(-diffCoff);
+//            // 取出负样本的原始词向量
+//            target.zero();
+//            target.addRow(wi_, negIdVec[i]);
+//            targetHat.generateFrom(target);
+//            // 开始做黎曼SGD
+//            hHatTarget.proj(targetHat);
+//            hHatTarget.mul(-lr);
+//            wi_.expMapToRow(hHatTarget, negIdVec[i]);
+//            // 计算hidden的欧式梯度并累加
+//            hHatHiddenTemp.zero();
+//            hHatHiddenTemp = targetHat;
+//            hHatHiddenTemp.mul(-diffCoff);
+//            state.gradHyper.addVector(hHatHiddenTemp);
+//        }
         state.gradHyper.proj(uHat);
         state.gradHyper.mul(-lr);
         return loss;
