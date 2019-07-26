@@ -1,0 +1,1 @@
+/usr/bin/c++    -pthread -std=c++11 -funroll-loops -O3 -march=native -g   CMakeFiles/HyperbolicEmbedding-bin.dir/src/main.cc.o  -o HyperbolicEmbedding -rdynamic -lpthread libHyperbolicEmbedding.a 

@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/hutao/CLionProjects/fasttext/fastText
+CMAKE_SOURCE_DIR = /home/hutao/CLionProjects/HyperbolicEmbedding
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/hutao/CLionProjects/fasttext/fastText
+CMAKE_BINARY_DIR = /home/hutao/CLionProjects/HyperbolicEmbedding
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -89,6 +89,17 @@ rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target edit_cache
+edit_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
+	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+.PHONY : edit_cache
+
+# Special rule for the target edit_cache
+edit_cache/fast: edit_cache
+
+.PHONY : edit_cache/fast
+
 # Special rule for the target install/local
 install/local: preinstall
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
@@ -111,22 +122,11 @@ install/strip/fast: install/strip
 
 .PHONY : install/strip/fast
 
-# Special rule for the target edit_cache
-edit_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
-	/usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-.PHONY : edit_cache
-
-# Special rule for the target edit_cache
-edit_cache/fast: edit_cache
-
-.PHONY : edit_cache/fast
-
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutao/CLionProjects/fasttext/fastText/CMakeFiles /home/hutao/CLionProjects/fasttext/fastText/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles /home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutao/CLionProjects/fasttext/fastText/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -155,56 +155,56 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named fasttext-shared
+# Target rules for targets named HyperbolicEmbedding-shared
 
 # Build rule for target.
-fasttext-shared: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 fasttext-shared
-.PHONY : fasttext-shared
+HyperbolicEmbedding-shared: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 HyperbolicEmbedding-shared
+.PHONY : HyperbolicEmbedding-shared
 
 # fast build rule for target.
-fasttext-shared/fast:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/build
-.PHONY : fasttext-shared/fast
+HyperbolicEmbedding-shared/fast:
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/build
+.PHONY : HyperbolicEmbedding-shared/fast
 
 #=============================================================================
-# Target rules for targets named fasttext-static_pic
+# Target rules for targets named HyperbolicEmbedding-bin
 
 # Build rule for target.
-fasttext-static_pic: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 fasttext-static_pic
-.PHONY : fasttext-static_pic
+HyperbolicEmbedding-bin: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 HyperbolicEmbedding-bin
+.PHONY : HyperbolicEmbedding-bin
 
 # fast build rule for target.
-fasttext-static_pic/fast:
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/build
-.PHONY : fasttext-static_pic/fast
+HyperbolicEmbedding-bin/fast:
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-bin.dir/build.make CMakeFiles/HyperbolicEmbedding-bin.dir/build
+.PHONY : HyperbolicEmbedding-bin/fast
 
 #=============================================================================
-# Target rules for targets named fasttext-static
+# Target rules for targets named HyperbolicEmbedding-static
 
 # Build rule for target.
-fasttext-static: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 fasttext-static
-.PHONY : fasttext-static
+HyperbolicEmbedding-static: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 HyperbolicEmbedding-static
+.PHONY : HyperbolicEmbedding-static
 
 # fast build rule for target.
-fasttext-static/fast:
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/build
-.PHONY : fasttext-static/fast
+HyperbolicEmbedding-static/fast:
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/build
+.PHONY : HyperbolicEmbedding-static/fast
 
 #=============================================================================
-# Target rules for targets named fasttext-bin
+# Target rules for targets named HyperbolicEmbedding-static_pic
 
 # Build rule for target.
-fasttext-bin: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 fasttext-bin
-.PHONY : fasttext-bin
+HyperbolicEmbedding-static_pic: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 HyperbolicEmbedding-static_pic
+.PHONY : HyperbolicEmbedding-static_pic
 
 # fast build rule for target.
-fasttext-bin/fast:
-	$(MAKE) -f CMakeFiles/fasttext-bin.dir/build.make CMakeFiles/fasttext-bin.dir/build
-.PHONY : fasttext-bin/fast
+HyperbolicEmbedding-static_pic/fast:
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/build
+.PHONY : HyperbolicEmbedding-static_pic/fast
 
 src/args.o: src/args.cc.o
 
@@ -212,9 +212,9 @@ src/args.o: src/args.cc.o
 
 # target to build an object file
 src/args.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/args.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/args.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/args.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/args.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/args.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/args.cc.o
 .PHONY : src/args.cc.o
 
 src/args.i: src/args.cc.i
@@ -223,9 +223,9 @@ src/args.i: src/args.cc.i
 
 # target to preprocess a source file
 src/args.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/args.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/args.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/args.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/args.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/args.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/args.cc.i
 .PHONY : src/args.cc.i
 
 src/args.s: src/args.cc.s
@@ -234,9 +234,9 @@ src/args.s: src/args.cc.s
 
 # target to generate assembly for a file
 src/args.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/args.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/args.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/args.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/args.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/args.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/args.cc.s
 .PHONY : src/args.cc.s
 
 src/densematrix.o: src/densematrix.cc.o
@@ -245,9 +245,9 @@ src/densematrix.o: src/densematrix.cc.o
 
 # target to build an object file
 src/densematrix.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/densematrix.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/densematrix.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/densematrix.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/densematrix.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/densematrix.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/densematrix.cc.o
 .PHONY : src/densematrix.cc.o
 
 src/densematrix.i: src/densematrix.cc.i
@@ -256,9 +256,9 @@ src/densematrix.i: src/densematrix.cc.i
 
 # target to preprocess a source file
 src/densematrix.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/densematrix.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/densematrix.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/densematrix.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/densematrix.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/densematrix.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/densematrix.cc.i
 .PHONY : src/densematrix.cc.i
 
 src/densematrix.s: src/densematrix.cc.s
@@ -267,9 +267,9 @@ src/densematrix.s: src/densematrix.cc.s
 
 # target to generate assembly for a file
 src/densematrix.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/densematrix.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/densematrix.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/densematrix.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/densematrix.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/densematrix.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/densematrix.cc.s
 .PHONY : src/densematrix.cc.s
 
 src/dictionary.o: src/dictionary.cc.o
@@ -278,9 +278,9 @@ src/dictionary.o: src/dictionary.cc.o
 
 # target to build an object file
 src/dictionary.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/dictionary.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/dictionary.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/dictionary.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/dictionary.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/dictionary.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/dictionary.cc.o
 .PHONY : src/dictionary.cc.o
 
 src/dictionary.i: src/dictionary.cc.i
@@ -289,9 +289,9 @@ src/dictionary.i: src/dictionary.cc.i
 
 # target to preprocess a source file
 src/dictionary.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/dictionary.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/dictionary.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/dictionary.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/dictionary.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/dictionary.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/dictionary.cc.i
 .PHONY : src/dictionary.cc.i
 
 src/dictionary.s: src/dictionary.cc.s
@@ -300,9 +300,9 @@ src/dictionary.s: src/dictionary.cc.s
 
 # target to generate assembly for a file
 src/dictionary.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/dictionary.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/dictionary.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/dictionary.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/dictionary.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/dictionary.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/dictionary.cc.s
 .PHONY : src/dictionary.cc.s
 
 src/fasttext.o: src/fasttext.cc.o
@@ -311,9 +311,9 @@ src/fasttext.o: src/fasttext.cc.o
 
 # target to build an object file
 src/fasttext.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/fasttext.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/fasttext.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/fasttext.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/fasttext.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/fasttext.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/fasttext.cc.o
 .PHONY : src/fasttext.cc.o
 
 src/fasttext.i: src/fasttext.cc.i
@@ -322,9 +322,9 @@ src/fasttext.i: src/fasttext.cc.i
 
 # target to preprocess a source file
 src/fasttext.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/fasttext.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/fasttext.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/fasttext.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/fasttext.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/fasttext.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/fasttext.cc.i
 .PHONY : src/fasttext.cc.i
 
 src/fasttext.s: src/fasttext.cc.s
@@ -333,9 +333,9 @@ src/fasttext.s: src/fasttext.cc.s
 
 # target to generate assembly for a file
 src/fasttext.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/fasttext.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/fasttext.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/fasttext.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/fasttext.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/fasttext.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/fasttext.cc.s
 .PHONY : src/fasttext.cc.s
 
 src/loss.o: src/loss.cc.o
@@ -344,9 +344,9 @@ src/loss.o: src/loss.cc.o
 
 # target to build an object file
 src/loss.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/loss.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/loss.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/loss.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/loss.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/loss.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/loss.cc.o
 .PHONY : src/loss.cc.o
 
 src/loss.i: src/loss.cc.i
@@ -355,9 +355,9 @@ src/loss.i: src/loss.cc.i
 
 # target to preprocess a source file
 src/loss.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/loss.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/loss.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/loss.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/loss.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/loss.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/loss.cc.i
 .PHONY : src/loss.cc.i
 
 src/loss.s: src/loss.cc.s
@@ -366,9 +366,9 @@ src/loss.s: src/loss.cc.s
 
 # target to generate assembly for a file
 src/loss.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/loss.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/loss.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/loss.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/loss.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/loss.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/loss.cc.s
 .PHONY : src/loss.cc.s
 
 src/main.o: src/main.cc.o
@@ -377,10 +377,10 @@ src/main.o: src/main.cc.o
 
 # target to build an object file
 src/main.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/main.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/main.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/main.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-bin.dir/build.make CMakeFiles/fasttext-bin.dir/src/main.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/main.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-bin.dir/build.make CMakeFiles/HyperbolicEmbedding-bin.dir/src/main.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/main.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/main.cc.o
 .PHONY : src/main.cc.o
 
 src/main.i: src/main.cc.i
@@ -389,10 +389,10 @@ src/main.i: src/main.cc.i
 
 # target to preprocess a source file
 src/main.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/main.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/main.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/main.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-bin.dir/build.make CMakeFiles/fasttext-bin.dir/src/main.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/main.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-bin.dir/build.make CMakeFiles/HyperbolicEmbedding-bin.dir/src/main.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/main.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/main.cc.i
 .PHONY : src/main.cc.i
 
 src/main.s: src/main.cc.s
@@ -401,10 +401,10 @@ src/main.s: src/main.cc.s
 
 # target to generate assembly for a file
 src/main.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/main.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/main.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/main.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-bin.dir/build.make CMakeFiles/fasttext-bin.dir/src/main.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/main.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-bin.dir/build.make CMakeFiles/HyperbolicEmbedding-bin.dir/src/main.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/main.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/main.cc.s
 .PHONY : src/main.cc.s
 
 src/matrix.o: src/matrix.cc.o
@@ -413,9 +413,9 @@ src/matrix.o: src/matrix.cc.o
 
 # target to build an object file
 src/matrix.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/matrix.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/matrix.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/matrix.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/matrix.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/matrix.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/matrix.cc.o
 .PHONY : src/matrix.cc.o
 
 src/matrix.i: src/matrix.cc.i
@@ -424,9 +424,9 @@ src/matrix.i: src/matrix.cc.i
 
 # target to preprocess a source file
 src/matrix.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/matrix.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/matrix.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/matrix.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/matrix.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/matrix.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/matrix.cc.i
 .PHONY : src/matrix.cc.i
 
 src/matrix.s: src/matrix.cc.s
@@ -435,9 +435,9 @@ src/matrix.s: src/matrix.cc.s
 
 # target to generate assembly for a file
 src/matrix.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/matrix.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/matrix.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/matrix.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/matrix.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/matrix.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/matrix.cc.s
 .PHONY : src/matrix.cc.s
 
 src/meter.o: src/meter.cc.o
@@ -446,9 +446,9 @@ src/meter.o: src/meter.cc.o
 
 # target to build an object file
 src/meter.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/meter.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/meter.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/meter.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/meter.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/meter.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/meter.cc.o
 .PHONY : src/meter.cc.o
 
 src/meter.i: src/meter.cc.i
@@ -457,9 +457,9 @@ src/meter.i: src/meter.cc.i
 
 # target to preprocess a source file
 src/meter.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/meter.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/meter.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/meter.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/meter.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/meter.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/meter.cc.i
 .PHONY : src/meter.cc.i
 
 src/meter.s: src/meter.cc.s
@@ -468,9 +468,9 @@ src/meter.s: src/meter.cc.s
 
 # target to generate assembly for a file
 src/meter.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/meter.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/meter.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/meter.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/meter.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/meter.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/meter.cc.s
 .PHONY : src/meter.cc.s
 
 src/model.o: src/model.cc.o
@@ -479,9 +479,9 @@ src/model.o: src/model.cc.o
 
 # target to build an object file
 src/model.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/model.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/model.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/model.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/model.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/model.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/model.cc.o
 .PHONY : src/model.cc.o
 
 src/model.i: src/model.cc.i
@@ -490,9 +490,9 @@ src/model.i: src/model.cc.i
 
 # target to preprocess a source file
 src/model.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/model.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/model.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/model.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/model.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/model.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/model.cc.i
 .PHONY : src/model.cc.i
 
 src/model.s: src/model.cc.s
@@ -501,9 +501,9 @@ src/model.s: src/model.cc.s
 
 # target to generate assembly for a file
 src/model.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/model.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/model.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/model.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/model.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/model.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/model.cc.s
 .PHONY : src/model.cc.s
 
 src/productquantizer.o: src/productquantizer.cc.o
@@ -512,9 +512,9 @@ src/productquantizer.o: src/productquantizer.cc.o
 
 # target to build an object file
 src/productquantizer.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/productquantizer.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/productquantizer.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/productquantizer.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/productquantizer.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/productquantizer.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/productquantizer.cc.o
 .PHONY : src/productquantizer.cc.o
 
 src/productquantizer.i: src/productquantizer.cc.i
@@ -523,9 +523,9 @@ src/productquantizer.i: src/productquantizer.cc.i
 
 # target to preprocess a source file
 src/productquantizer.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/productquantizer.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/productquantizer.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/productquantizer.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/productquantizer.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/productquantizer.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/productquantizer.cc.i
 .PHONY : src/productquantizer.cc.i
 
 src/productquantizer.s: src/productquantizer.cc.s
@@ -534,9 +534,9 @@ src/productquantizer.s: src/productquantizer.cc.s
 
 # target to generate assembly for a file
 src/productquantizer.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/productquantizer.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/productquantizer.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/productquantizer.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/productquantizer.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/productquantizer.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/productquantizer.cc.s
 .PHONY : src/productquantizer.cc.s
 
 src/quantmatrix.o: src/quantmatrix.cc.o
@@ -545,9 +545,9 @@ src/quantmatrix.o: src/quantmatrix.cc.o
 
 # target to build an object file
 src/quantmatrix.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/quantmatrix.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/quantmatrix.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/quantmatrix.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/quantmatrix.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/quantmatrix.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/quantmatrix.cc.o
 .PHONY : src/quantmatrix.cc.o
 
 src/quantmatrix.i: src/quantmatrix.cc.i
@@ -556,9 +556,9 @@ src/quantmatrix.i: src/quantmatrix.cc.i
 
 # target to preprocess a source file
 src/quantmatrix.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/quantmatrix.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/quantmatrix.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/quantmatrix.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/quantmatrix.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/quantmatrix.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/quantmatrix.cc.i
 .PHONY : src/quantmatrix.cc.i
 
 src/quantmatrix.s: src/quantmatrix.cc.s
@@ -567,9 +567,9 @@ src/quantmatrix.s: src/quantmatrix.cc.s
 
 # target to generate assembly for a file
 src/quantmatrix.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/quantmatrix.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/quantmatrix.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/quantmatrix.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/quantmatrix.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/quantmatrix.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/quantmatrix.cc.s
 .PHONY : src/quantmatrix.cc.s
 
 src/utils.o: src/utils.cc.o
@@ -578,9 +578,9 @@ src/utils.o: src/utils.cc.o
 
 # target to build an object file
 src/utils.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/utils.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/utils.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/utils.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/utils.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/utils.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/utils.cc.o
 .PHONY : src/utils.cc.o
 
 src/utils.i: src/utils.cc.i
@@ -589,9 +589,9 @@ src/utils.i: src/utils.cc.i
 
 # target to preprocess a source file
 src/utils.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/utils.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/utils.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/utils.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/utils.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/utils.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/utils.cc.i
 .PHONY : src/utils.cc.i
 
 src/utils.s: src/utils.cc.s
@@ -600,9 +600,9 @@ src/utils.s: src/utils.cc.s
 
 # target to generate assembly for a file
 src/utils.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/utils.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/utils.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/utils.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/utils.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/utils.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/utils.cc.s
 .PHONY : src/utils.cc.s
 
 src/vector.o: src/vector.cc.o
@@ -611,9 +611,9 @@ src/vector.o: src/vector.cc.o
 
 # target to build an object file
 src/vector.cc.o:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/vector.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/vector.cc.o
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/vector.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/vector.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/vector.cc.o
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/vector.cc.o
 .PHONY : src/vector.cc.o
 
 src/vector.i: src/vector.cc.i
@@ -622,9 +622,9 @@ src/vector.i: src/vector.cc.i
 
 # target to preprocess a source file
 src/vector.cc.i:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/vector.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/vector.cc.i
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/vector.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/vector.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/vector.cc.i
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/vector.cc.i
 .PHONY : src/vector.cc.i
 
 src/vector.s: src/vector.cc.s
@@ -633,9 +633,9 @@ src/vector.s: src/vector.cc.s
 
 # target to generate assembly for a file
 src/vector.cc.s:
-	$(MAKE) -f CMakeFiles/fasttext-shared.dir/build.make CMakeFiles/fasttext-shared.dir/src/vector.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static_pic.dir/build.make CMakeFiles/fasttext-static_pic.dir/src/vector.cc.s
-	$(MAKE) -f CMakeFiles/fasttext-static.dir/build.make CMakeFiles/fasttext-static.dir/src/vector.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-shared.dir/build.make CMakeFiles/HyperbolicEmbedding-shared.dir/src/vector.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static.dir/build.make CMakeFiles/HyperbolicEmbedding-static.dir/src/vector.cc.s
+	$(MAKE) -f CMakeFiles/HyperbolicEmbedding-static_pic.dir/build.make CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/vector.cc.s
 .PHONY : src/vector.cc.s
 
 # Help Target
@@ -647,13 +647,13 @@ help:
 	@echo "... install"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... edit_cache"
+	@echo "... HyperbolicEmbedding-shared"
+	@echo "... HyperbolicEmbedding-bin"
+	@echo "... HyperbolicEmbedding-static"
 	@echo "... install/local"
 	@echo "... install/strip"
-	@echo "... edit_cache"
-	@echo "... fasttext-shared"
-	@echo "... fasttext-static_pic"
-	@echo "... fasttext-static"
-	@echo "... fasttext-bin"
+	@echo "... HyperbolicEmbedding-static_pic"
 	@echo "... src/args.o"
 	@echo "... src/args.i"
 	@echo "... src/args.s"

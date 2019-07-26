@@ -7,13 +7,13 @@
 #
 
 cmake_minimum_required(VERSION 2.8.9)
-project(fasttext)
+project(HyperbolicEmbedding)
 
 # The version number.
-set (fasttext_VERSION_MAJOR 0)
-set (fasttext_VERSION_MINOR 1)
+set (HyperbolicEmbedding_VERSION_MAJOR 0)
+set (HyperbolicEmbedding_VERSION_MINOR 1)
 
-include_directories(fasttext)
+include_directories(./)
 
 set(CMAKE_CXX_FLAGS " -pthread -std=c++11 -funroll-loops -O3 -march=native")
 
@@ -47,22 +47,22 @@ set(SOURCE_FILES
     src/utils.cc
     src/vector.cc)
 
-add_library(fasttext-shared SHARED ${SOURCE_FILES} ${HEADER_FILES})
-add_library(fasttext-static STATIC ${SOURCE_FILES} ${HEADER_FILES})
-add_library(fasttext-static_pic STATIC ${SOURCE_FILES} ${HEADER_FILES})
-set_target_properties(fasttext-shared PROPERTIES OUTPUT_NAME fasttext)
-set_target_properties(fasttext-static PROPERTIES OUTPUT_NAME fasttext)
-set_target_properties(fasttext-static_pic PROPERTIES OUTPUT_NAME fasttext_pic
+add_library(HyperbolicEmbedding-shared SHARED ${SOURCE_FILES} ${HEADER_FILES})
+add_library(HyperbolicEmbedding-static STATIC ${SOURCE_FILES} ${HEADER_FILES})
+add_library(HyperbolicEmbedding-static_pic STATIC ${SOURCE_FILES} ${HEADER_FILES})
+set_target_properties(HyperbolicEmbedding-shared PROPERTIES OUTPUT_NAME HyperbolicEmbedding)
+set_target_properties(HyperbolicEmbedding-static PROPERTIES OUTPUT_NAME HyperbolicEmbedding)
+set_target_properties(HyperbolicEmbedding-static_pic PROPERTIES OUTPUT_NAME HyperbolicEmbedding_pic
   POSITION_INDEPENDENT_CODE True)
-add_executable(fasttext-bin src/main.cc)
-target_link_libraries(fasttext-bin pthread fasttext-static)
-set_target_properties(fasttext-bin PROPERTIES PUBLIC_HEADER "${HEADER_FILES}" OUTPUT_NAME fasttext)
-install (TARGETS fasttext-shared
+add_executable(HyperbolicEmbedding-bin src/main.cc)
+target_link_libraries(HyperbolicEmbedding-bin pthread HyperbolicEmbedding-static)
+set_target_properties(HyperbolicEmbedding-bin PROPERTIES PUBLIC_HEADER "${HEADER_FILES}" OUTPUT_NAME HyperbolicEmbedding)
+install (TARGETS HyperbolicEmbedding-shared
     LIBRARY DESTINATION lib)
-install (TARGETS fasttext-static
+install (TARGETS HyperbolicEmbedding-static
     ARCHIVE DESTINATION lib)
-install (TARGETS fasttext-static_pic
+install (TARGETS HyperbolicEmbedding-static_pic
     ARCHIVE DESTINATION lib)
-install (TARGETS fasttext-bin
+install (TARGETS HyperbolicEmbedding-bin
     RUNTIME DESTINATION bin
- PUBLIC_HEADER DESTINATION include/fasttext)
+ PUBLIC_HEADER DESTINATION include/HyperbolicEmbedding)

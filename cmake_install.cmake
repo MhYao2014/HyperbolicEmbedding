@@ -1,4 +1,4 @@
-# Install script for directory: /home/hutao/CLionProjects/fasttext/fastText
+# Install script for directory: /home/hutao/CLionProjects/HyperbolicEmbedding
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "")
+    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -33,60 +33,60 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfasttext.so" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfasttext.so")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libHyperbolicEmbedding.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libHyperbolicEmbedding.so")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfasttext.so"
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libHyperbolicEmbedding.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/hutao/CLionProjects/fasttext/fastText/libfasttext.so")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfasttext.so" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfasttext.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.so")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libHyperbolicEmbedding.so" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libHyperbolicEmbedding.so")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libfasttext.so")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libHyperbolicEmbedding.so")
     endif()
   endif()
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/hutao/CLionProjects/fasttext/fastText/libfasttext.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.a")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/hutao/CLionProjects/fasttext/fastText/libfasttext_pic.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding_pic.a")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/fasttext" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/fasttext")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/HyperbolicEmbedding" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/HyperbolicEmbedding")
     file(RPATH_CHECK
-         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/fasttext"
+         FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/HyperbolicEmbedding"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/hutao/CLionProjects/fasttext/fastText/fasttext")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/fasttext" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/fasttext")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/hutao/CLionProjects/HyperbolicEmbedding/HyperbolicEmbedding")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/HyperbolicEmbedding" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/HyperbolicEmbedding")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/fasttext")
+      execute_process(COMMAND "/usr/bin/strip" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/HyperbolicEmbedding")
     endif()
   endif()
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/fasttext" TYPE FILE FILES
-    "/home/hutao/CLionProjects/fasttext/fastText/src/args.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/densematrix.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/dictionary.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/fasttext.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/loss.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/matrix.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/meter.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/model.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/productquantizer.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/quantmatrix.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/real.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/utils.h"
-    "/home/hutao/CLionProjects/fasttext/fastText/src/vector.h"
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/HyperbolicEmbedding" TYPE FILE FILES
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/args.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/densematrix.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/dictionary.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/fasttext.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/loss.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/matrix.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/meter.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/model.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/productquantizer.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/quantmatrix.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/utils.h"
+    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/vector.h"
     )
 endif()
 
@@ -98,5 +98,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/hutao/CLionProjects/fasttext/fastText/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/hutao/CLionProjects/HyperbolicEmbedding/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
