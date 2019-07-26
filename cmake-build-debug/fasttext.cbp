@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="fasttext"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fasttext-static">
+				<Option output="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/libfasttext.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hutao/CLionProjects/fasttext/fastText/fasttext"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 fasttext-static"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fasttext-static/fast">
+				<Option output="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/libfasttext.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hutao/CLionProjects/fasttext/fastText/fasttext"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 fasttext-static/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fasttext-shared">
+				<Option output="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/libfasttext.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hutao/CLionProjects/fasttext/fastText/fasttext"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 fasttext-shared"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fasttext-shared/fast">
+				<Option output="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/libfasttext.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hutao/CLionProjects/fasttext/fastText/fasttext"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 fasttext-shared/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fasttext-bin">
+				<Option output="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/fasttext" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hutao/CLionProjects/fasttext/fastText/fasttext"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 fasttext-bin"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fasttext-bin/fast">
+				<Option output="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/fasttext" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hutao/CLionProjects/fasttext/fastText/fasttext"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 fasttext-bin/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fasttext-static_pic">
+				<Option output="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/libfasttext_pic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hutao/CLionProjects/fasttext/fastText/fasttext"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 fasttext-static_pic"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="fasttext-static_pic/fast">
+				<Option output="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/libfasttext_pic.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/hutao/CLionProjects/fasttext/fastText/fasttext"/>
+					<Add directory="/usr/include/c++/5"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/5"/>
+					<Add directory="/usr/include/c++/5/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/5/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 fasttext-static_pic/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/hutao/CLionProjects/fasttext/fastText/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/args.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/args.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/densematrix.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/densematrix.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/dictionary.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/dictionary.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/fasttext.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/fasttext.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/loss.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/loss.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/main.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-bin"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/matrix.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/matrix.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/meter.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/meter.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/model.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/model.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/productquantizer.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/productquantizer.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/quantmatrix.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/quantmatrix.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/real.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/utils.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/utils.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/vector.cc">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/src/vector.h">
+			<Option target="fasttext-static"/>
+			<Option target="fasttext-shared"/>
+			<Option target="fasttext-static_pic"/>
+		</Unit>
+		<Unit filename="/home/hutao/CLionProjects/fasttext/fastText/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
