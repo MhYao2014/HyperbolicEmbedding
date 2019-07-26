@@ -111,6 +111,8 @@ void Args::parseArgs(const std::vector<std::string>& args) {
         output = std::string(args.at(ai + 1));
       } else if (args[ai] == "-lr") {
         lr = std::stof(args.at(ai + 1));
+      } else if (args[ai] == "-lrTree") {
+        lr = std::stof(args.at(ai + 1));
       } else if (args[ai] == "-lrUpdateRate") {
         lrUpdateRate = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-dim") {
@@ -118,6 +120,8 @@ void Args::parseArgs(const std::vector<std::string>& args) {
       } else if (args[ai] == "-ws") {
         ws = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-epoch") {
+        epoch = std::stoi(args.at(ai + 1));
+      } else if (args[ai] == "-epochTree") {
         epoch = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-minCount") {
         minCount = std::stoi(args.at(ai + 1));
