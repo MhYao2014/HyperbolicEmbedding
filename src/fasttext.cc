@@ -773,7 +773,7 @@ std::shared_ptr<Matrix> FastText::createRandomMatrix() const {
       dict_->nwords() + args_->bucket, args_->dim);
   input->uniform(1.0 / args_->dim);
   //normalize if uns
-  if (args_->loss == loss_name::uns) {
+  if (args_->loss == loss_name::InUnit) {
     Vector l2norm(input->size(0));
     input->l2NormRow(l2norm);
     input->divideRow(l2norm);
@@ -845,7 +845,7 @@ void FastText::startThreads() {
     if ( args_->verbose > 1) {
       real progress = real(tokenCount_) / (args_->epoch * ntokens);
       std::cerr << "\r";
-      if (args_->loss == loss_name::uns) {
+      if (args_->loss == loss_name::InUnit) {
 //          std::cerr << "\rTree tokenCountTree_: " << tokenCountTree_ << " total:" << args_->epoch * ntokensTree << std::endl;
           real progressTree = real(tokenCountTree_) / (args_->epoch * ntokensTree);
           std::cerr << "\r";
@@ -869,7 +869,7 @@ void FastText::trainThread(int32_t threadId) {
     std::ifstream ifs(args_->input);
     utils::seek(ifs, threadId * utils::size(ifs) / args_->thread);
     std::ifstream ifsTree(args_->inputTree);
-    if (args_->loss == loss_name::uns) {
+    if (args_->loss == loss_name::InUnit) {
         utils::seek(ifsTree, threadId * utils::size(ifsTree) / args_->thread);
     } else {
         ifsTree.close();
@@ -905,7 +905,7 @@ void FastText::trainThread(int32_t threadId) {
                 ifsBackUp.close();
                 word2vecDone = true;
             }
-            if (args_->loss == loss_name::uns) {
+            if (args_->loss == loss_name::InUnit) {
                 if (tokenCountTree_ < args_->epoch * ntokensTree) {
                     ifsTree.seekg(ifsTreeBackUp.tellg());
                     localTokenCountTree += dict_->getLineMine(ifsTree, treedict, state.rng, ifsTreeBackUp);
@@ -923,7 +923,7 @@ void FastText::trainThread(int32_t threadId) {
             if (threadId == 0 && args_->verbose > 1)
                 loss_ = state.getLoss();
         }
-        if (args_->loss == loss_name::uns && localTokenCountTree > args_->lrUpdateRate && tokenCountTree_ < args_->epoch * ntokensTree) {
+        if (args_->loss == loss_name::InUnit && localTokenCountTree > args_->lrUpdateRate && tokenCountTree_ < args_->epoch * ntokensTree) {
             tokenCountTree_ += localTokenCountTree;
             localTokenCountTree = 0;
             if (threadId == 0 && args_->verbose > 1)
@@ -935,7 +935,7 @@ void FastText::trainThread(int32_t threadId) {
     }
     if (threadId == 0) {
         loss_ = state.getLoss();
-        if (args_->loss == loss_name::uns) {
+        if (args_->loss == loss_name::InUnit) {
             lossTree_ = state.getLossHyper();
         }
     }

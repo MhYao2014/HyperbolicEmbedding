@@ -16,7 +16,7 @@
 namespace fasttext {
 
     enum class model_name : int { cbow = 1, sg, sup };
-    enum class loss_name : int { hs = 1, ns, InUnit, OutUnit, TreeInUnit, TreeOutUnit, SyemNs, softmax, ova };
+    enum class loss_name : int { hs = 1, ns, uns, softmax, ova };
 
     class Args {
     protected:
@@ -27,19 +27,15 @@ namespace fasttext {
     public:
         Args();
         std::string input;
-        std::string inputTree;
         std::string output;
         double lr;
-        double lrTree;
         int lrUpdateRate;
         int dim;
         int ws;
         int epoch;
-        int epochTree;
         int minCount;
         int minCountLabel;
         int neg;
-        int negTree;
         int wordNgrams;
         loss_name loss;
         model_name model;
@@ -52,7 +48,6 @@ namespace fasttext {
         int verbose;
         std::string pretrainedVectors;
         bool saveOutput;
-        bool IfNeedTree;
 
         bool qout;
         bool retrain;

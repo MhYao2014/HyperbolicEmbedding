@@ -202,21 +202,6 @@ HyperbolicEmbedding_BINARY_DIR:STATIC=/home/hutao/CLionProjects/HyperbolicEmbedd
 //Value Computed by CMake
 HyperbolicEmbedding_SOURCE_DIR:STATIC=/home/hutao/CLionProjects/HyperbolicEmbedding
 
-//Dependencies for target
-fasttext-shared_LIB_DEPENDS:STATIC=
-
-//Dependencies for target
-fasttext-static_LIB_DEPENDS:STATIC=
-
-//Dependencies for target
-fasttext-static_pic_LIB_DEPENDS:STATIC=
-
-//Value Computed by CMake
-fasttext_BINARY_DIR:STATIC=/home/hutao/CLionProjects/HyperbolicEmbedding
-
-//Value Computed by CMake
-fasttext_SOURCE_DIR:STATIC=/home/hutao/CLionProjects/HyperbolicEmbedding
-
 
 ########################
 # INTERNAL cache entries

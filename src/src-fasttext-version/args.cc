@@ -17,15 +17,12 @@ namespace fasttext {
 
 Args::Args() {
   lr = 0.05;
-  lrTree = 0.025;
   dim = 100;
   ws = 5;
   epoch = 5;
-  epochTree = 2;
   minCount = 5;
   minCountLabel = 0;
   neg = 5;
-  negTree = 5;
   wordNgrams = 1;
   loss = loss_name::ns;
   model = model_name::sg;
@@ -39,7 +36,6 @@ Args::Args() {
   verbose = 2;
   pretrainedVectors = "";
   saveOutput = false;
-  IfNeedTree = false;
 
   qout = false;
   retrain = false;
@@ -54,16 +50,8 @@ std::string Args::lossToString(loss_name ln) const {
       return "hs";
     case loss_name::ns:
       return "ns";
-    case loss_name::InUnit:
-      return "inunit";
-    case loss_name::OutUnit:
-          return "outunit";
-    case loss_name::TreeInUnit:
-          return "treeinunit";
-    case loss_name::TreeOutUnit:
-          return "treeoutunit";
-    case loss_name::SyemNs:
-          return "syemns";
+    case loss_name::uns:
+      return "uns";
     case loss_name::softmax:
       return "softmax";
     case loss_name::ova:
@@ -124,7 +112,7 @@ void Args::parseArgs(const std::vector<std::string>& args) {
       } else if (args[ai] == "-lr") {
         lr = std::stof(args.at(ai + 1));
       } else if (args[ai] == "-lrTree") {
-        lr = std::stof(args.at(ai + 1));
+        lrTree = std::stof(args.at(ai + 1));
       } else if (args[ai] == "-lrUpdateRate") {
         lrUpdateRate = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-dim") {
@@ -134,7 +122,7 @@ void Args::parseArgs(const std::vector<std::string>& args) {
       } else if (args[ai] == "-epoch") {
         epoch = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-epochTree") {
-        epoch = std::stoi(args.at(ai + 1));
+        epochTree = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-minCount") {
         minCount = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-minCountLabel") {
@@ -142,7 +130,7 @@ void Args::parseArgs(const std::vector<std::string>& args) {
       } else if (args[ai] == "-neg") {
         neg = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-negTree") {
-        neg = std::stoi(args.at(ai + 1));
+        negTree = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-wordNgrams") {
         wordNgrams = std::stoi(args.at(ai + 1));
       } else if (args[ai] == "-loss") {
@@ -150,16 +138,8 @@ void Args::parseArgs(const std::vector<std::string>& args) {
           loss = loss_name::hs;
         } else if (args.at(ai + 1) == "ns") {
           loss = loss_name::ns;
-        } else if (args.at(ai + 1) == "inunit") {
-          loss = loss_name::InUnit;
-        } else if (args.at(ai + 1) == "outunit") {
-          loss = loss_name::OutUnit;
-        } else if (args.at(ai + 1) == "treeinunit") {
-          loss = loss_name::TreeInUnit;
-        } else if (args.at(ai + 1) == "treeoutunit") {
-          loss = loss_name::TreeOutUnit;
-        } else if (args.at(ai + 1) == "syemns") {
-          loss = loss_name::SyemNs;
+        } else if (args.at(ai + 1) == "uns") {
+          loss = loss_name::uns;
         } else if (args.at(ai + 1) == "softmax") {
           loss = loss_name::softmax;
         } else if (
@@ -233,9 +213,7 @@ void Args::printHelp() {
 void Args::printBasicHelp() {
   std::cerr << "\nThe following arguments are mandatory:\n"
             << "  -input              training file path\n"
-            << "  -IfNeedTree         whether need Tree related flags ["
-            << boolToString(IfNeedTree) << "]\n"
-            << "  -inputTree          Tree Context path, unecessary if don't need a tree\n"
+            << "  -inputTree          Tree Context  path\n"
             << "  -output             output file path\n"
             << "\nThe following arguments are optional:\n"
             << "  -verbose            verbosity level [" << verbose << "]\n";
@@ -262,16 +240,13 @@ void Args::printTrainingHelp() {
   std::cerr
       << "\nThe following arguments for training are optional:\n"
       << "  -lr                 learning rate [" << lr << "]\n"
-      << "  -lrTree             learning rate for Tree Loss [" << lrTree << "], unecessary if don't need a tree\n"
       << "  -lrUpdateRate       change the rate of updates for the learning rate ["
       << lrUpdateRate << "]\n"
       << "  -dim                size of word vectors [" << dim << "]\n"
       << "  -ws                 size of the context window [" << ws << "]\n"
       << "  -epoch              number of epochs [" << epoch << "]\n"
-      << "  -epochTree          number of epochs for Tree Loss [" << epochTree << "], unecessary if don't need a tree\n"
       << "  -neg                number of negatives sampled [" << neg << "]\n"
-      << "  -negTree            number of negatives sampled for Tree Loss [" << negTree << "], unecessary if don't need a tree\n"
-      << "  -loss               loss function {InUnit, OutUnit, TreeInUnit, TreeOutUnit, SyemNs, ns, hs, softmax, one-vs-all} ["
+      << "  -loss               loss function {ns, hs, softmax, one-vs-all} ["
       << lossToString(loss) << "]\n"
       << "  -thread             number of threads [" << thread << "]\n"
       << "  -pretrainedVectors  pretrained word vectors for supervised learning ["
