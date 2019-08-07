@@ -1,4 +1,4 @@
-# Install script for directory: /home/hutao/CLionProjects/HyperbolicEmbedding
+# Install script for directory: /mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,7 +39,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libHyperbolicEmbedding.so"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.so")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE SHARED_LIBRARY FILES "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.so")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libHyperbolicEmbedding.so" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libHyperbolicEmbedding.so")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -49,11 +49,11 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.a")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding_pic.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding_pic.a")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
@@ -63,7 +63,7 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/HyperbolicEmbedding"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/home/hutao/CLionProjects/HyperbolicEmbedding/HyperbolicEmbedding")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/HyperbolicEmbedding")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/HyperbolicEmbedding" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/HyperbolicEmbedding")
     if(CMAKE_INSTALL_DO_STRIP)
@@ -74,19 +74,19 @@ endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/HyperbolicEmbedding" TYPE FILE FILES
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/args.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/densematrix.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/dictionary.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/fasttext.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/loss.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/matrix.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/meter.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/model.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/productquantizer.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/quantmatrix.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/utils.h"
-    "/home/hutao/CLionProjects/HyperbolicEmbedding/src/vector.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/args.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/densematrix.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/dictionary.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/fasttext.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/loss.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/matrix.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/meter.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/model.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/productquantizer.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/quantmatrix.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/utils.h"
+    "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/vector.h"
     )
 endif()
 
@@ -98,5 +98,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/hutao/CLionProjects/HyperbolicEmbedding/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/args.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/args.h
 istream
 -
 ostream
@@ -16,7 +16,7 @@ string
 vector
 -
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/densematrix.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/densematrix.h
 cstdint
 -
 istream
@@ -28,11 +28,11 @@ vector
 assert.h
 -
 matrix.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/matrix.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/matrix.h
 real.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/dictionary.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/dictionary.h
 istream
 -
 memory
@@ -48,11 +48,11 @@ unordered_map
 vector
 -
 args.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/args.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/args.h
 real.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/fasttext.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/fasttext.h
 time.h
 -
 atomic
@@ -70,25 +70,25 @@ set
 tuple
 -
 args.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/args.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/args.h
 densematrix.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/densematrix.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/densematrix.h
 dictionary.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/dictionary.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/dictionary.h
 matrix.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/matrix.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/matrix.h
 meter.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/meter.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/meter.h
 model.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/model.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/model.h
 real.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h
 utils.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/utils.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/utils.h
 vector.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/vector.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/vector.h
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/main.cc
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/main.cc
 iomanip
 -
 iostream
@@ -98,11 +98,11 @@ queue
 stdexcept
 -
 args.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/args.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/args.h
 fasttext.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/fasttext.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/fasttext.h
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/matrix.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/matrix.h
 cstdint
 -
 istream
@@ -114,21 +114,21 @@ vector
 assert.h
 -
 real.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/meter.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/meter.h
 unordered_map
 -
 vector
 -
 dictionary.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/dictionary.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/dictionary.h
 real.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h
 utils.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/utils.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/utils.h
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/model.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/model.h
 memory
 -
 random
@@ -138,19 +138,19 @@ utility
 vector
 -
 matrix.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/matrix.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/matrix.h
 real.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h
 utils.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/utils.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/utils.h
 vector.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/vector.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/vector.h
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/utils.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/utils.h
 real.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h
 algorithm
 -
 fstream
@@ -158,7 +158,7 @@ fstream
 vector
 -
 
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/vector.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/vector.h
 cstdint
 -
 ostream
@@ -166,5 +166,5 @@ ostream
 vector
 -
 real.h
-/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h
+/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h
 

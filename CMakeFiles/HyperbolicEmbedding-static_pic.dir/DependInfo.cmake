@@ -4,19 +4,19 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/args.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/args.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/densematrix.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/densematrix.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/dictionary.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/dictionary.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/fasttext.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/fasttext.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/loss.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/loss.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/main.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/main.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/matrix.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/matrix.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/meter.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/meter.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/model.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/model.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/productquantizer.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/productquantizer.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/quantmatrix.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/quantmatrix.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/utils.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/utils.cc.o"
-  "/home/hutao/CLionProjects/HyperbolicEmbedding/src/vector.cc" "/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/vector.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/args.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/args.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/densematrix.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/densematrix.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/dictionary.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/dictionary.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/fasttext.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/fasttext.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/loss.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/loss.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/main.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/main.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/matrix.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/matrix.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/meter.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/meter.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/model.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/model.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/productquantizer.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/productquantizer.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/quantmatrix.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/quantmatrix.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/utils.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/utils.cc.o"
+  "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/vector.cc" "/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeFiles/HyperbolicEmbedding-static_pic.dir/src/vector.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

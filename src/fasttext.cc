@@ -29,26 +29,31 @@ bool comparePairs(
     const std::pair<real, std::string>& l,
     const std::pair<real, std::string>& r);
 
-std::shared_ptr<Loss> FastText::createLoss(std::shared_ptr<Matrix>& output) {
-  loss_name lossName = args_->loss;
-  switch (lossName) {
-//    case loss_name::hs:
-//      return std::make_shared<HierarchicalSoftmaxLoss>(
-//          output, getTargetCounts());
-    case loss_name::ns:
-      return std::make_shared<NegativeSamplingLoss>(
-          output, args_->neg, getTargetCounts());
-    case loss_name::uns:
-      return std::make_shared<UnitNegativeSamplingLoss>(
-          output, args_->neg, getTargetCounts());
-//    case loss_name::softmax:
-//      return std::make_shared<SoftmaxLoss>(output);
-//    case loss_name::ova:
-//      return std::make_shared<OneVsAllLoss>(output);
-    default:
-      throw std::runtime_error("Unknown loss");
-  }
-}
+    std::shared_ptr<Loss> FastText::createLoss(std::shared_ptr<Matrix>& output) {
+        loss_name lossName = args_->loss;
+        switch (lossName) {
+            case loss_name::ns:
+                return std::make_shared<NegativeSamplingLoss>(
+                        output, args_->neg, getTargetCounts());
+            case loss_name::InUnit:
+                return std::make_shared<InUnitLoss>(
+                        output, args_->neg, getTargetCounts());
+//            case loss_name::OutUnit:
+//                return std::make_shared<UnitNegativeSamplingLoss>(
+//                        output, args_->neg, getTargetCounts());
+            case loss_name::TreeInUnit:
+                return std::make_shared<TreeInUnitLoss>(
+                        output, args_->neg, getTargetCounts());
+//            case loss_name::TreeOutUnit:
+//                return std::make_shared<UnitNegativeSamplingLoss>(
+//                        output, args_->neg, getTargetCounts());
+//            case loss_name::SyemNs:
+//                return std::make_shared<UnitNegativeSamplingLoss>(
+//                        output, args_->neg, getTargetCounts());
+            default:
+                throw std::runtime_error("Unknown loss");
+        }
+    }
 
 FastText::FastText() : quant_(false), wordVectors_(nullptr) {}
 

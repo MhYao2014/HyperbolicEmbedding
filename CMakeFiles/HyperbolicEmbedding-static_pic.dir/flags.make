@@ -6,5 +6,5 @@ CXX_FLAGS =  -pthread -std=c++11 -funroll-loops -O3 -march=native -g -fPIC
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/hutao/CLionProjects/HyperbolicEmbedding/. 
+CXX_INCLUDES = -I/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/. 
 

@@ -1,344 +1,344 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_project_file>
-	<FileVersion major="1" minor="6"/>
-	<Project>
-		<Option title="HyperbolicEmbedding"/>
-		<Option makefile_is_custom="1"/>
-		<Option compiler="gcc"/>
-		<Option virtualFolders="CMake Files\;"/>
-		<Build>
-			<Target title="all">
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="install/local">
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 install/local"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="install">
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 install"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="list_install_components">
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 list_install_components"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="HyperbolicEmbedding-static">
-				<Option output="/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option object_output="./"/>
-				<Option type="2"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/hutao/CLionProjects/HyperbolicEmbedding/."/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-static"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="HyperbolicEmbedding-static/fast">
-				<Option output="/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option object_output="./"/>
-				<Option type="2"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/hutao/CLionProjects/HyperbolicEmbedding/."/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-static/fast"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="rebuild_cache">
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="HyperbolicEmbedding-shared">
-				<Option output="/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option object_output="./"/>
-				<Option type="3"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/hutao/CLionProjects/HyperbolicEmbedding/."/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-shared"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="HyperbolicEmbedding-shared/fast">
-				<Option output="/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.so" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option object_output="./"/>
-				<Option type="3"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/hutao/CLionProjects/HyperbolicEmbedding/."/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-shared/fast"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="install/strip">
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 install/strip"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="HyperbolicEmbedding-static_pic">
-				<Option output="/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding_pic.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option object_output="./"/>
-				<Option type="2"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/hutao/CLionProjects/HyperbolicEmbedding/."/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-static_pic"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="HyperbolicEmbedding-static_pic/fast">
-				<Option output="/home/hutao/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding_pic.a" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option object_output="./"/>
-				<Option type="2"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/hutao/CLionProjects/HyperbolicEmbedding/."/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-static_pic/fast"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="HyperbolicEmbedding-bin">
-				<Option output="/home/hutao/CLionProjects/HyperbolicEmbedding/HyperbolicEmbedding" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/hutao/CLionProjects/HyperbolicEmbedding/."/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-bin"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="HyperbolicEmbedding-bin/fast">
-				<Option output="/home/hutao/CLionProjects/HyperbolicEmbedding/HyperbolicEmbedding" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/home/hutao/CLionProjects/HyperbolicEmbedding"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="/home/hutao/CLionProjects/HyperbolicEmbedding/."/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-bin/fast"/>
-					<CompileFile command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -f &quot;/home/hutao/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-		</Build>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/args.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/args.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/densematrix.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/densematrix.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/dictionary.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/dictionary.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/fasttext.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/fasttext.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/loss.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/loss.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/main.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-			<Option target="HyperbolicEmbedding-bin"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/matrix.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/matrix.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/meter.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/meter.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/model.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/model.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/productquantizer.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/productquantizer.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/quantmatrix.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/quantmatrix.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/real.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/utils.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/utils.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/vector.cc">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/src/vector.h">
-			<Option target="HyperbolicEmbedding-static"/>
-			<Option target="HyperbolicEmbedding-shared"/>
-			<Option target="HyperbolicEmbedding-static_pic"/>
-		</Unit>
-		<Unit filename="/home/hutao/CLionProjects/HyperbolicEmbedding/CMakeLists.txt">
-			<Option virtualFolder="CMake Files\"/>
-		</Unit>
-	</Project>
+   <FileVersion major="1" minor="6" />
+   <Project>
+      <Option title="HyperbolicEmbedding" />
+      <Option makefile_is_custom="1" />
+      <Option compiler="gcc" />
+      <Option virtualFolders="CMake Files\;" />
+      <Build>
+      <Target title="all">
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 all" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install">
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 install" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="list_install_components">
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 list_install_components" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="rebuild_cache">
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 rebuild_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="edit_cache">
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 edit_cache" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="HyperbolicEmbedding-shared">
+         <Option output="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/." />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-shared" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="HyperbolicEmbedding-shared/fast">
+         <Option output="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.so" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option object_output="./" />
+         <Option type="3" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/." />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-shared/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="HyperbolicEmbedding-bin">
+         <Option output="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/HyperbolicEmbedding" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/." />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-bin" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="HyperbolicEmbedding-bin/fast">
+         <Option output="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/HyperbolicEmbedding" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option object_output="./" />
+         <Option type="1" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/." />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-bin/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="HyperbolicEmbedding-static">
+         <Option output="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/." />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-static" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="HyperbolicEmbedding-static/fast">
+         <Option output="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/." />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-static/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install/local">
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 install/local" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="install/strip">
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option type="4" />
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 install/strip" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="HyperbolicEmbedding-static_pic">
+         <Option output="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding_pic.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/." />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-static_pic" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      <Target title="HyperbolicEmbedding-static_pic/fast">
+         <Option output="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/libHyperbolicEmbedding_pic.a" prefix_auto="0" extension_auto="0" />
+         <Option working_dir="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding" />
+         <Option object_output="./" />
+         <Option type="2" />
+         <Option compiler="gcc" />
+         <Compiler>
+            <Add directory="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/." />
+         </Compiler>
+         <MakeCommands>
+            <Build command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 HyperbolicEmbedding-static_pic/fast" />
+            <CompileFile command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 &quot;$file&quot;" />
+            <Clean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+            <DistClean command="/usr/bin/make -f &quot;/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/Makefile&quot;  VERBOSE=1 clean" />
+         </MakeCommands>
+      </Target>
+      </Build>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/args.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/args.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/densematrix.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/densematrix.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/dictionary.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/dictionary.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/fasttext.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/fasttext.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/loss.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/loss.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/main.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-bin"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/matrix.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/matrix.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/meter.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/meter.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/model.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/model.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/productquantizer.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/productquantizer.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/quantmatrix.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/quantmatrix.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/real.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/utils.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/utils.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/vector.cc">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/src/vector.h">
+         <Option target="HyperbolicEmbedding-shared"/>
+         <Option target="HyperbolicEmbedding-static"/>
+         <Option target="HyperbolicEmbedding-static_pic"/>
+      </Unit>
+      <Unit filename="/mnt/c/Users/qyxs15/CLionProjects/HyperbolicEmbedding/CMakeLists.txt">
+          <Option virtualFolder="CMake Files\" />
+      </Unit>
+   </Project>
 </CodeBlocks_project_file>
