@@ -96,6 +96,13 @@ namespace fasttext {
                 Model::State& state,
                 real lr,
                 bool backprop) override ;
+        real forwardHyper(
+                fasttext::Matrix &wi_,
+                int32_t inWordId,
+                int32_t targetId,
+                fasttext::Model::State &state,
+                fasttext::real lr,
+                bool backprop) override {};
     };
 
     class InUnitLoss: public  NegativeSamplingLoss {
@@ -113,12 +120,19 @@ namespace fasttext {
                 int neg,
                 const std::vector<int64_t>& targetCounts);
         ~InUnitLoss() noexcept override = default;
-         real forward(
+        real forward(
                 const std::vector<int32_t> &targets,
                 int32_t targetIndex,
                 Model::State &state,
                 real lr,
                 bool backprop) override ;
+        real forwardHyper(
+                fasttext::Matrix &wi_,
+                int32_t inWordId,
+                int32_t targetId,
+                fasttext::Model::State &state,
+                fasttext::real lr,
+                bool backprop) override {};
     };
 //        virtual real forward(
 //                const std::vector<int32_t>& targets,
