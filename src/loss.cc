@@ -364,6 +364,7 @@ namespace fasttext {
             Model::State &state,
             real lr,
             bool backprop) {
+        std::cerr << "\rI am here ! The forward" << std::endl;
         assert( targetIndex >= 0 );
         assert( targetIndex < targets.size() );
         int32_t target = targets[targetIndex];

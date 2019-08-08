@@ -86,6 +86,7 @@ void Model::update(
     int32_t targetIndex,
     real lr,
     State& state) {
+//    std::cerr << "\rI am here ! The updata" << std::endl;
   if (input.size() == 0) {
     return;
   }

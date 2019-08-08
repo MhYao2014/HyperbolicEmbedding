@@ -126,13 +126,6 @@ namespace fasttext {
                 Model::State &state,
                 real lr,
                 bool backprop) override ;
-        real forwardHyper(
-                fasttext::Matrix &wi_,
-                int32_t inWordId,
-                int32_t targetId,
-                fasttext::Model::State &state,
-                fasttext::real lr,
-                bool backprop) override {};
     };
 //        virtual real forward(
 //                const std::vector<int32_t>& targets,
