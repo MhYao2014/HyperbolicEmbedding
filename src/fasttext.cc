@@ -458,10 +458,9 @@ namespace fasttext {
         for (int32_t w = 0; w < line.size(); w++) {
             // 在文本中生成词窗
             int32_t boundary = uniform(state.rng);
-            std::cerr << "\rI am here ! The update done" << std::endl;
             const std::vector<int32_t>& ngrams = dict_->getSubwords(line[w]);
-
             for (int32_t c = -boundary; c <= boundary; c++) {
+//                std::cerr << "\rI am here ! The update done" << std::endl;
                 if (c != 0 && w + c >= 0 && w + c < line.size()) {
                     model_->update(ngrams, line, w + c, lr, state);
                 }
