@@ -298,8 +298,12 @@ void Dictionary::readFromFileTree(std::istream & in) {
         if (in.eof()) {
             NotDone = false;
         }
+        if (ntokensTree_ % 1000000 == 0 && args_->verbose > 1) {
+            std::cerr << "\rRead " << ntokensTree_ / 1000000 << " Million tokens" << std::flush;
+        }
     }
-    std::cerr << "\rRead " << ntokensTree_  << " words from tree file" << std::endl;
+    std::cerr << "\rRead " << ntokensTree_ / 1000000 << " tokens from tree file" << std::endl;
+    std::cerr << "Number of words:  " << nwords_ << std::endl;
 }
 
 void Dictionary::readFromFile(std::istream& in) {
@@ -308,7 +312,7 @@ void Dictionary::readFromFile(std::istream& in) {
   while (readWord(in, word)) {
     add(word);
     if (ntokens_ % 1000000 == 0 && args_->verbose > 1) {
-      std::cerr << "\rRead " << ntokens_  << " words" << std::flush;
+      std::cerr << "\rRead " << ntokens_ / 1000000  << " Million tokens" << std::flush;
     }
     if (size_ > 0.75 * MAX_VOCAB_SIZE) {
       minThreshold++;
@@ -320,8 +324,7 @@ void Dictionary::readFromFile(std::istream& in) {
   initNgrams();
   if (args_->verbose > 0) {
     std::cerr << "\rRead " << ntokens_  << " words from original file" << std::endl;
-    std::cerr << "Number of words:  " << nwords_ << std::endl;
-    std::cerr << "Number of labels: " << nlabels_ << std::endl;
+//    std::cerr << "Number of labels: " << nlabels_ << std::endl;
   }
   if (size_ == 0) {
     throw std::invalid_argument(
