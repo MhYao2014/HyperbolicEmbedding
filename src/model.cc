@@ -135,7 +135,8 @@ void Model::updateRegular(
     int32_t target = targets[targetIndex];
     SumOutVecIds.push_back(target);
     // 进行in向量采样并更新对应的input vector
-    loss_->forwardRegular(SumOutVecIds, wo_, wi_, lr, state,true);
+    real lossValue = loss_->forwardRegular(SumOutVecIds, wo_, wi_, lr, state,true);
+    state.incrementNExamples(lossValue);
 }
 
 real Model::std_log(real x) const {

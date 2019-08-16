@@ -384,7 +384,7 @@ namespace fasttext {
             const std::vector<int64_t> &targetCounts)
             : InUnitLoss(wo, neg, targetCounts){}
 
-    void InUnitRegularLoss::forwardRegular(
+    real InUnitRegularLoss::forwardRegular(
             std::vector<int32_t>& SumOutVecIds,
             std::shared_ptr<fasttext::Matrix> &wo,
             std::shared_ptr<fasttext::Matrix> &wi,
@@ -414,6 +414,7 @@ namespace fasttext {
         SumOutVec.mul(1/RegularInVecNorm);
         SumOutVec.substract(RegularInVec);
         wi->addVectorToRow(SumOutVec, RegularInVecId, -2*lr*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/800000));
+        return std::pow(DisExpe - ConExpe, 2);
     }
 
     TreeInUnitLoss::TreeInUnitLoss(
