@@ -26,7 +26,8 @@ Model::State::State(int32_t hiddenSize, int32_t outputSize, int32_t seed)
       output(outputSize),
       grad(hiddenSize),
       gradHyper(hiddenSize + 1),
-      rng(seed) {}
+      rng(seed),
+      input(0){}
 
 real Model::State::getLoss() const {
   return lossValue_ / nexamples_;
@@ -116,6 +117,24 @@ void Model::updateHyper(
   real lossValue = loss_->forwardHyper(*wi_, inWordId ,outWordId, state, lr, true);
   state.incrementNExamplesHyper(lossValue);
   wi_->expMapToRow(state.gradHyper, inWordId);
+}
+
+void Model::updateRegular(
+        const std::vector<int32_t>& input,
+        const std::vector<int32_t>& targets,
+        int32_t targetIndex,
+        real lr,
+        State& state) {
+    // 取出当前两个样本的Output vector的序号
+//    std::cerr << "\rI am here! " << std::endl;
+    std::vector<int32_t > SumOutVecIds;
+    for (auto it = input.cbegin(); it != input.cend(); ++it) {
+        SumOutVecIds.push_back(*it);
+    }
+    int32_t target = targets[targetIndex];
+    SumOutVecIds.push_back(target);
+    // 进行in向量采样并更新对应的input vector
+    loss_->forwardRegular(SumOutVecIds, wo_, wi_, lr, state,true);
 }
 
 real Model::std_log(real x) const {

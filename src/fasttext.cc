@@ -38,6 +38,9 @@ namespace fasttext {
             case loss_name::InUnit:
                 return std::make_shared<InUnitLoss>(
                         output, args_->neg, getTargetCounts());
+            case loss_name::InUnitRegular:
+                return std::make_shared<InUnitRegularLoss>(
+                        output, args_->neg, getTargetCounts());
 //            case loss_name::OutUnit:
 //                return std::make_shared<UnitNegativeSamplingLoss>(
 //                        output, args_->neg, getTargetCounts());
@@ -495,6 +498,25 @@ namespace fasttext {
         }
     }
 
+    void FastText::Regularskip(
+            Model::State& state,
+            real lr,
+            const std::vector<int32_t>& line) {
+        std::uniform_int_distribution<> uniform(1, args_->ws);
+        // 处理当前的某一行文本
+        for (int32_t w = 0; w < line.size(); w++) {
+            // 在文本中生成词窗
+            int32_t boundary = uniform(state.rng);
+            const std::vector<int32_t>& ngrams = dict_->getSubwords(line[w]);
+            for (int32_t c = -boundary; c <= boundary; c++) {
+//                std::cerr << "\rI am here ! The update done" << std::endl;
+                if (c != 0 && w + c >= 0 && w + c < line.size()) {
+                    model_->updateRegular(ngrams, line, w + c, lr, state);
+                    model_->update(ngrams, line, w + c, lr, state);
+                }
+            }
+        }
+    }
     std::tuple<int64_t, double, double>
     FastText::test(std::istream& in, int32_t k, real threshold) {
         Meter meter;
@@ -905,7 +927,7 @@ namespace fasttext {
         bool hyperDone = false;
         std::ifstream ifsBackUp(args_->input);
         ifsBackUp.seekg(ifs.tellg());
-        if (args_->IfNeedTree == 0) {
+        if (args_->IfNeedTree == 0 && args_->IfNeedRegular == 0) {
             while (tokenCount_ < args_->epoch * ntokens) {
                 real progress = real(tokenCount_) / (args_->epoch * ntokens);
                 real lr = args_->lr * (1.0 - progress);
@@ -922,7 +944,7 @@ namespace fasttext {
                 loss_ = state.getLoss();
             }
             ifs.close();
-        } else {
+        } else if (args_->IfNeedTree == 1){
             std::ifstream ifsTree(args_->inputTree);
             utils::seek(ifsTree, threadId * utils::size(ifsTree) / args_->thread);
             const int64_t ntokensTree = dict_->ntokensTree();
@@ -939,7 +961,6 @@ namespace fasttext {
                 if (tokenCount_ < args_->epoch * ntokens ) {
                     ifs.seekg(ifsBackUp.tellg());
                     localTokenCount += dict_->getLine(ifs, line,state.rng, ifsBackUp);
-//                    std::cerr << "\rI am here ! The Trainthread" << std::endl;
                     skipgram(state, lr, line);
                 } else {
                     ifs.close();
@@ -975,6 +996,23 @@ namespace fasttext {
                 loss_ = state.getLoss();
                 lossTree_ = state.getLossHyper();
             }
+        } else if (args_->IfNeedRegular == 1) {
+            while (tokenCount_ < args_->epoch * ntokens) {
+                real progress = real(tokenCount_) / (args_->epoch * ntokens);
+                real lr = args_->lr * (1.0 - progress);
+                localTokenCount += dict_->getLine(ifs, line, state.rng, ifsBackUp);
+                Regularskip(state, lr, line);
+                if (localTokenCount > args_->lrUpdateRate) {
+                    tokenCount_ += localTokenCount;
+                    localTokenCount = 0;
+                    if (threadId == 0 && args_->verbose > 1)
+                        loss_ = state.getLoss();
+                }
+            }
+            if (threadId == 0) {
+                loss_ = state.getLoss();
+            }
+            ifs.close();
         }
     }
 

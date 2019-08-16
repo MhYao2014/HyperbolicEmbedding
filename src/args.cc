@@ -154,6 +154,8 @@ namespace fasttext {
                         loss = loss_name::InUnit;
                     } else if (args.at(ai + 1) == "OutUnit") {
                         loss = loss_name::OutUnit;
+                    } else if (args.at(ai + 1) == "InUnitRegular") {
+                        loss = loss_name::InUnitRegular;
                     } else if (args.at(ai + 1) == "TreeInUnit") {
                         loss = loss_name::TreeInUnit;
                     } else if (args.at(ai + 1) == "TreeOutUnit") {
@@ -191,6 +193,9 @@ namespace fasttext {
                     ai--;
                 } else if (args[ai] == "-IfNeedTree") {
                     IfNeedTree = true;
+                    ai--;
+                } else if (args[ai] == "-IfNeedRegular") {
+                    IfNeedRegular = true;
                     ai--;
                 } else if (args[ai] == "-qnorm") {
                     qnorm = true;
@@ -238,6 +243,8 @@ namespace fasttext {
                   << "  -input              training file path\n"
                   << "  -IfNeedTree         whether need Tree related flags ["
                   << boolToString(IfNeedTree) << "]\n"
+                  << "  -IfNeedRegular      whether need Tree related flags ["
+                  << boolToString(IfNeedRegular) << "]\n"
                   << "  -inputTree          Tree Context path, unecessary if don't need a tree\n"
                   << "  -output             output file path\n"
                   << "\nThe following arguments are optional:\n"
@@ -274,7 +281,7 @@ namespace fasttext {
                 << "  -epochTree          number of epochs for Tree Loss [" << epochTree << "], unecessary if don't need a tree\n"
                 << "  -neg                number of negatives sampled [" << neg << "]\n"
                 << "  -negTree            number of negatives sampled for Tree Loss [" << negTree << "], unecessary if don't need a tree\n"
-                << "  -loss               loss function {InUnit, OutUnit, TreeInUnit, TreeOutUnit, SyemNs, ns, hs, softmax, one-vs-all} ["
+                << "  -loss               loss function {InUnit, OutUnit, InUnitRegular, TreeInUnit, TreeOutUnit, SyemNs, ns, hs, softmax, one-vs-all} ["
                 << lossToString(loss) << "]\n"
                 << "  -thread             number of threads [" << thread << "]\n"
                 << "  -pretrainedVectors  pretrained word vectors for supervised learning ["

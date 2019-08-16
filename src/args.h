@@ -16,7 +16,7 @@
 namespace fasttext {
 
     enum class model_name : int { cbow = 1, sg, sup };
-    enum class loss_name : int { hs = 1, ns, InUnit, OutUnit, TreeInUnit, TreeOutUnit, SyemNs, softmax, ova };
+    enum class loss_name : int { hs = 1, ns, InUnit, OutUnit, InUnitRegular, TreeInUnit, TreeOutUnit, SyemNs, softmax, ova };
 
     class Args {
     protected:
@@ -53,6 +53,7 @@ namespace fasttext {
         std::string pretrainedVectors;
         bool saveOutput;
         bool IfNeedTree;
+        bool IfNeedRegular;
 
         bool qout;
         bool retrain;

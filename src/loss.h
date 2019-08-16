@@ -51,6 +51,13 @@ namespace fasttext {
                 fasttext::Model::State &state,
                 fasttext::real lr,
                 bool backprop) = 0;
+        virtual void forwardRegular(
+                std::vector<int32_t>& SumOutVecIds,
+                std::shared_ptr<fasttext::Matrix> &wo,
+                std::shared_ptr<fasttext::Matrix> &wi,
+                fasttext::real lr,
+                Model::State& state,
+                bool backprop) = 0;
         virtual void computeOutput(Model::State& state) const = 0;
         virtual void predict(
                 int32_t /*k*/,
@@ -102,6 +109,13 @@ namespace fasttext {
                 int32_t targetId,
                 fasttext::Model::State &state,
                 fasttext::real lr,
+                bool backprop) override {};
+        void forwardRegular(
+                std::vector<int32_t>& SumOutVecIds,
+                std::shared_ptr<fasttext::Matrix> &wo,
+                std::shared_ptr<fasttext::Matrix> &wi,
+                fasttext::real lr,
+                Model::State& state,
                 bool backprop) override {};
     };
 
@@ -189,6 +203,24 @@ namespace fasttext {
                 int32_t targetId,
                 Model::State& state,
                 real lr,
+                bool backprop) override ;
+    };
+
+    class InUnitRegularLoss: public InUnitLoss {
+    protected:
+    public:
+        explicit InUnitRegularLoss(
+                std::shared_ptr<Matrix>& wo,
+                int neg,
+                const std::vector<int64_t>& targetCounts);
+        ~InUnitRegularLoss() noexcept override = default;
+
+        void forwardRegular (
+                std::vector<int32_t>& SumOutVecIds,
+                std::shared_ptr<fasttext::Matrix> &wo,
+                std::shared_ptr<fasttext::Matrix> &wi,
+                real lr,
+                Model::State& state,
                 bool backprop) override ;
     };
 

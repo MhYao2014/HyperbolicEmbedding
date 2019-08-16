@@ -53,6 +53,7 @@ class Model {
     Vector grad;
     Vector gradHyper;
     std::minstd_rand rng;
+    int32_t input;
 
     State(int32_t hiddenSize, int32_t outputSize, int32_t seed);
     real getLoss() const;
@@ -76,6 +77,12 @@ class Model {
   void updateHyper(
           int32_t inWordId,
           int32_t outWordId,
+          real lr,
+          State& state);
+  void updateRegular(
+          const std::vector<int32_t>& input,
+          const std::vector<int32_t>& targets,
+          int32_t targetIndex,
           real lr,
           State& state);
   void computeHidden(const std::vector<int32_t>& input, State& state) const;

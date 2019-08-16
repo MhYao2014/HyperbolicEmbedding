@@ -74,6 +74,31 @@ void Vector::mul(const Matrix& A, const Vector& vec) {
   }
 }
 
+    void Vector::elemul(const Vector& vec) {
+        assert(vec.size() == size());
+        for (int64_t i = 0; i < size(); i++) {
+            data_[i] *= vec.data_[i];
+        }
+    }
+
+    void Vector::substract(const fasttext::Vector &vec){
+        assert(vec.size() == size());
+        for (int64_t i = 0; i < size(); i++) {
+            data_[i] -= vec.data_[i];
+        }
+    }
+
+    real Vector::dotmul(const Vector& vec) {
+        assert(vec.size() == size());
+        real result = 0;
+        for (int64_t i = 0; i < size(); i++) {
+            result += data_[i] * vec.data_[i];
+        }
+        return result;
+    }
+
+
+
 void Vector::generateFrom(fasttext::Vector & u) {
   real uNorm = u.norm();
   real uZero = std::sqrt(1 + uNorm * uNorm);

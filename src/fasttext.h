@@ -72,6 +72,7 @@ class FastText {
   void cbow(Model::State& state, real lr, const std::vector<int32_t>& line);
   void skipgram(Model::State& state, real lr, const std::vector<int32_t>& line);
   void hyperskip(Model::State& state, real lr, const std::unordered_map<std::string, std::vector<std::string>>& treedict);
+  void Regularskip(Model::State& state, real lr, const std::vector<int32_t>& line);
 
   bool quant_;
   int32_t version;

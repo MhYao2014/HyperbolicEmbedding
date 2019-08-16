@@ -378,6 +378,39 @@ namespace fasttext {
         return loss;
     }
 
+    InUnitRegularLoss::InUnitRegularLoss(
+            std::shared_ptr<fasttext::Matrix> &wo,
+            int neg,
+            const std::vector<int64_t> &targetCounts)
+            : InUnitLoss(wo, neg, targetCounts){}
+
+    void InUnitRegularLoss::forwardRegular(
+            std::vector<int32_t>& SumOutVecIds,
+            std::shared_ptr<fasttext::Matrix> &wo,
+            std::shared_ptr<fasttext::Matrix> &wi,
+            fasttext::real lr,
+            Model::State& state,
+            bool backprop) {
+        Vector SumOutVec(wo->size(1));
+        SumOutVec.zero();
+        for (auto it = SumOutVecIds.cbegin(); it != SumOutVecIds.cend(); ++it) {
+            SumOutVec.addRow(*wo, *it);
+        }
+        std::minstd_rand rng(0);
+        int32_t RegularInVecId = negatives_[uniform_(state.rng)];
+        Vector RegularInVec(wi->size(1));
+        RegularInVec.zero();
+        RegularInVec.addRow(*wi, RegularInVecId);
+        real RegularInVecNorm = RegularInVec.norm();
+        real InnerProduct = SumOutVec.dotmul(RegularInVec);
+        RegularInVec.elemul(RegularInVec);
+        RegularInVec.elemul(SumOutVec);
+        RegularInVec.mul(pow(1/RegularInVecNorm,3));
+        SumOutVec.mul(1/RegularInVecNorm);
+        SumOutVec.substract(RegularInVec);
+        wi->addVectorToRow(SumOutVec, RegularInVecId, -1*lr*std::exp(InnerProduct)*(1/1000000));
+    }
+
     TreeInUnitLoss::TreeInUnitLoss(
             std::shared_ptr<fasttext::Matrix> &wo,
             int neg,
