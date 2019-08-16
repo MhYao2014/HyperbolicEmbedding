@@ -27,7 +27,8 @@ Model::State::State(int32_t hiddenSize, int32_t outputSize, int32_t seed)
       grad(hiddenSize),
       gradHyper(hiddenSize + 1),
       rng(seed),
-      input(0){}
+      TotalSum(0),
+      SampleCount(0){}
 
 real Model::State::getLoss() const {
   return lossValue_ / nexamples_;

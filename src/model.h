@@ -53,7 +53,9 @@ class Model {
     Vector grad;
     Vector gradHyper;
     std::minstd_rand rng;
-    int32_t input;
+    int64_t SampleCount;
+    real TotalSum;
+//    int32_t input;
 
     State(int32_t hiddenSize, int32_t outputSize, int32_t seed);
     real getLoss() const;

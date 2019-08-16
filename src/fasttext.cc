@@ -835,6 +835,7 @@ namespace fasttext {
     void FastText::train(const Args& args) {
         args_ = std::make_shared<Args>(args);
         std::cerr << "\rIfNeedTree: " << args_->IfNeedTree << std::endl;
+        std::cerr << "\rIfNeedRegular: " << args_->IfNeedRegular << std::endl;
         dict_ = std::make_shared<Dictionary>(args_);
         if (args_->input == "-") {
             // manage expectations
