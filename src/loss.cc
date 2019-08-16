@@ -406,7 +406,7 @@ namespace fasttext {
         state.TotalSum += std::exp(InnerProduct);
         state.SampleCount += 1;
         real DisExpe = state.TotalSum / state.SampleCount;
-        std::cerr << "\rDisExpe: " << DisExpe << std::endl;
+//        std::cerr << "\rDisExpe: " << DisExpe << std::endl;
         real ConExpe = std::exp(real (pow(SumOutVec.norm(),2) / 2 / 100));
         RegularInVec.elemul(RegularInVec);
         RegularInVec.elemul(SumOutVec);
