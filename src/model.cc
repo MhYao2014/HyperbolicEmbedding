@@ -43,6 +43,10 @@ void Model::State::incrementNExamples(real loss) {
   nexamples_++;
 }
 
+void Model::State::incrementNExamplesRegular(real loss) {
+    lossValue_ += loss;
+}
+
 void Model::State::incrementNExamplesHyper(real loss) {
   lossValueHyper_ += loss;
   nexamplesTree_++;
@@ -136,7 +140,7 @@ void Model::updateRegular(
     SumOutVecIds.push_back(target);
     // 进行in向量采样并更新对应的input vector
     real lossValue = loss_->forwardRegular(SumOutVecIds, wo_, wi_, lr, state,true);
-    state.incrementNExamples(lossValue);
+    state.incrementNExamplesRegular(lossValue);
 }
 
 real Model::std_log(real x) const {

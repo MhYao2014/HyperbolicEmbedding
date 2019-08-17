@@ -61,6 +61,7 @@ class Model {
     real getLoss() const;
     real getLossHyper() const;
     void incrementNExamples(real loss);
+    void incrementNExamplesRegular(real loss);
     void incrementNExamplesHyper(real loss);
   };
 
