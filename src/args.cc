@@ -40,6 +40,7 @@ namespace fasttext {
         pretrainedVectors = "";
         saveOutput = false;
         IfNeedTree = false;
+        IfNeedRegular = false;
 
         qout = false;
         retrain = false;
