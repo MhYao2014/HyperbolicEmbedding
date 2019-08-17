@@ -187,10 +187,10 @@ namespace fasttext {
             : BinaryLogisticLoss(wo), neg_(neg), negatives_(), uniform_() {
         real z = 0.0;
         for (size_t i = 0; i < targetCounts.size(); i++) {
-            z += pow(targetCounts[i], 1);
+            z += pow(targetCounts[i], 0.5);
         }
         for (size_t i = 0; i < targetCounts.size(); i++) {
-            real c = pow(targetCounts[i], 1);
+            real c = pow(targetCounts[i], 0.5);
             for (size_t j = 0; j < c * NegativeSamplingLoss::NEGATIVE_TABLE_SIZE / z;
                  j++) {
                 negatives_.push_back(i);
