@@ -88,11 +88,11 @@ void Vector::mul(const Matrix& A, const Vector& vec) {
         }
     }
 
-    real Vector::dotmul(const Vector& vec) {
+    real Vector::dotmul(const Vector& vec, real t) {
         assert(vec.size() == size());
         real result = 0;
         for (int64_t i = 0; i < size(); i++) {
-            result += data_[i] * vec.data_[i];
+            result += data_[i] * vec.data_[i] * t;
         }
         return result;
     }
