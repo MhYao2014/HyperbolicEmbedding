@@ -413,7 +413,7 @@ namespace fasttext {
         RegularInVec.mul(1/pow(RegularInVecNorm,3));
         SumOutVec.mul(1/RegularInVecNorm);
         SumOutVec.substract(RegularInVec);
-        wi->addVectorToRow(SumOutVec, RegularInVecId, -2*lr*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/1000000));
+        wi->addVectorToRow(SumOutVec, RegularInVecId, -2*0.5*lr*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/10000000));
         return std::pow(DisExpe - ConExpe, 2);
 
     }
