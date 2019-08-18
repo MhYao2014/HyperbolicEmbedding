@@ -400,25 +400,24 @@ namespace fasttext {
         }
         Vector RegularInVec(wi->size(1));
         real L2Loss = 0;
-        for (int i=0; i < minibatch; i++){
-            int32_t RegularInVecId = negatives_[uniform_(state.rng)];
+        int32_t RegularInVecId = negatives_[uniform_(state.rng)];
 //            std::cerr << "\rrandom ids:" << RegularInVecId << std::endl;
-            RegularInVec.zero();
-            RegularInVec.addRow(*wi, RegularInVecId);
-            real RegularInVecNorm = RegularInVec.norm();
-            real InnerProduct = SumOutVec.dotmul(RegularInVec, 1/RegularInVecNorm);
-            state.TotalSum += std::exp(InnerProduct) / minibatch;
-            state.SampleCount += 1;
-            real DisExpe = real (state.TotalSum / state.SampleCount);
-            real ConExpe = std::exp(real (pow(SumOutVec.norm(),2) / 2 / 100));
-            RegularInVec.elemul(RegularInVec);
-            RegularInVec.elemul(SumOutVec);
-            RegularInVec.mul(1/pow(RegularInVecNorm,3));
-            SumOutVec.mul(1/RegularInVecNorm);
-            SumOutVec.substract(RegularInVec);
-            wi->addVectorToRow(SumOutVec, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/10000000));
-            L2Loss = L2Loss*0.9 + std::pow(DisExpe - ConExpe, 2)*0.1;
-        }
+        RegularInVec.zero();
+        RegularInVec.addRow(*wi, RegularInVecId);
+        real RegularInVecNorm = RegularInVec.norm();
+        real InnerProduct = SumOutVec.dotmul(RegularInVec, 1/RegularInVecNorm);
+        state.TotalSum += std::exp(InnerProduct) / minibatch;
+        state.SampleCount += 1;
+        real DisExpe = real (state.TotalSum / state.SampleCount);
+        real ConExpe = std::exp(real (pow(SumOutVec.norm(),2) / 2 / 100));
+        RegularInVec.elemul(RegularInVec);
+        RegularInVec.elemul(SumOutVec);
+        RegularInVec.mul(1/pow(RegularInVecNorm,3));
+        SumOutVec.mul(1/RegularInVecNorm);
+        SumOutVec.substract(RegularInVec);
+        wi->addVectorToRow(SumOutVec, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/10000000));
+        L2Loss = L2Loss*0.9 + std::pow(DisExpe - ConExpe, 2)*0.1;
+
         return L2Loss;
 
     }
