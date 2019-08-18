@@ -44,6 +44,7 @@ class Model {
    private:
     real lossValue_;
     real lossValueHyper_;
+    real lossValueRegular_;
     int64_t nexamples_;
     int64_t nexamplesTree_;
 
@@ -60,6 +61,7 @@ class Model {
     State(int32_t hiddenSize, int32_t outputSize, int32_t seed);
     real getLoss() const;
     real getLossHyper() const;
+    real getLossRegular() const;
     void incrementNExamples(real loss);
     void incrementNExamplesRegular(real loss);
     void incrementNExamplesHyper(real loss);

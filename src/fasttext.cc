@@ -352,6 +352,36 @@ namespace fasttext {
         log_stream << std::flush;
     }
 
+    void FastText::printInfoRegular(real progress, real loss, real lossRegular, std::ostream& log_stream) {
+        std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
+        double t =
+                std::chrono::duration_cast<std::chrono::duration<double>>(end - start_)
+                        .count();
+        double lr = args_->lr * (1.0 - progress);
+        double wst = 0;
+
+        int64_t eta = 2592000; // Default to one month in seconds (720 * 3600)
+
+        if (progress > 0 && t >= 0) {
+            progress = progress * 100;
+            eta = t * (100 - progress) / progress;
+            wst = double(tokenCount_) / t / args_->thread;
+        }
+        int32_t etah = eta / 3600;
+        int32_t etam = (eta % 3600) / 60;
+
+        log_stream << std::fixed;
+        log_stream << "Progress: ";
+        log_stream << std::setprecision(1) << std::setw(5) << progress << "%";
+        log_stream << " words/sec/thread: " << std::setw(7) << int64_t(wst);
+        log_stream << " lr: " << std::setw(9) << std::setprecision(6) << lr;
+        log_stream << " loss: " << std::setw(9) << std::setprecision(6) << loss;
+        log_stream << " lossRegular: " << std::setw(9) << std::setprecision(6) << lossRegular;
+        log_stream << " ETA: " << std::setw(3) << etah;
+        log_stream << "h" << std::setw(2) << etam << "m";
+        log_stream << std::flush;
+    }
+
     std::vector<int32_t> FastText::selectEmbeddings(int32_t cutoff) const {
         std::shared_ptr<DenseMatrix> input =
                 std::dynamic_pointer_cast<DenseMatrix>(input_);
@@ -878,6 +908,7 @@ namespace fasttext {
         tokenCount_ = 0;
         loss_ = -1;
         lossTree_ = -1;
+        lossRegular_ = 0;
         tokenCountTree_ = 0;
         const int64_t ntokens = dict_->ntokens();
         std::vector<std::thread> threads;
@@ -885,7 +916,7 @@ namespace fasttext {
             threads.push_back(std::thread([=]() { trainThread(i); }));
         }
 
-        if (args_->IfNeedTree == 0) {
+        if (args_->IfNeedTree == 0 && args_->IfNeedRegular == 0) {
             while (tokenCount_ < args_->epoch * ntokens) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
                 if (args_->verbose > 1) {
@@ -894,7 +925,7 @@ namespace fasttext {
                     printInfo(progress, loss_, std::cerr);
                 }
             }
-        } else {
+        } else if (args_->IfNeedTree == 1){
             const int64_t ntokensTree = dict_->ntokensTree();
             while (tokenCount_ < args_->epoch * ntokens or tokenCountTree_ < args_->epoch * ntokensTree) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -907,6 +938,15 @@ namespace fasttext {
             }
 //  std::cerr << "\rOriginal: " << ntokens << std::endl;
 //  std::cerr << "\rTree: " << ntokensTree << std::endl;
+        } else if (args_->IfNeedRegular == 1){
+            while (tokenCount_ < args_->epoch * ntokens) {
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                if (args_->verbose > 1) {
+                    real progress = real(tokenCount_) / (args_->epoch * ntokens);
+                    std::cerr << "\r";
+                    printInfoRegular(progress, loss_, lossRegular_, std::cerr);
+                }
+            }
         }
         // Same condition as trainThread
         for (int32_t i = 0; i < args_->thread; i++) {
@@ -1008,12 +1048,15 @@ namespace fasttext {
                 if (localTokenCount > args_->lrUpdateRate) {
                     tokenCount_ += localTokenCount;
                     localTokenCount = 0;
-                    if (threadId == 0 && args_->verbose > 1)
+                    if (threadId == 0 && args_->verbose > 1) {
                         loss_ = state.getLoss();
+                        lossRegular_ = state.getLossRegular();
+                    }
                 }
             }
             if (threadId == 0) {
                 loss_ = state.getLoss();
+                lossRegular_ = state.getLossRegular();
             }
             ifs.close();
         }

@@ -416,7 +416,7 @@ namespace fasttext {
         SumOutVec.mul(1/RegularInVecNorm);
         SumOutVec.substract(RegularInVec);
         wi->addVectorToRow(SumOutVec, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/10000000));
-        L2Loss = L2Loss*0.9 + std::pow(DisExpe - ConExpe, 2)*0.1;
+        L2Loss += std::pow(DisExpe - ConExpe, 2);
 
         return L2Loss;
 

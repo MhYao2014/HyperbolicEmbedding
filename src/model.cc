@@ -38,13 +38,17 @@ real Model::State::getLossHyper() const {
   return lossValueHyper_ / nexamplesTree_;
 }
 
+    real Model::State::getLossRegular() const {
+        return lossValueRegular_;
+    }
+
 void Model::State::incrementNExamples(real loss) {
   lossValue_ += loss;
   nexamples_++;
 }
 
 void Model::State::incrementNExamplesRegular(real loss) {
-    lossValue_ += loss;
+    lossValueRegular_ = lossValueRegular_*0.9 + loss*0.1;
 }
 
 void Model::State::incrementNExamplesHyper(real loss) {
@@ -143,8 +147,9 @@ void Model::updateRegular(
     // 进行in向量采样并更新对应的input vector
     for (int i=0; i < minibatch; i++){
         real lossValue = loss_->forwardRegular(minibatch, hyperparam, SumOutVecIds, wo_, wi_, lr, state,true);
+        state.incrementNExamplesRegular(lossValue);
     }
-    //    state.incrementNExamplesRegular(lossValue);
+
 }
 
 real Model::std_log(real x) const {

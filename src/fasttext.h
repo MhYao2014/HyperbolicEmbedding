@@ -44,6 +44,7 @@ class FastText {
   std::atomic<int64_t> tokenCountTree_{};
   std::atomic<real> loss_{};
   std::atomic<real> lossTree_{};
+  std::atomic<real> lossRegular_{};
 
   std::chrono::steady_clock::time_point start_;
   void signModel(std::ostream&);
@@ -58,6 +59,7 @@ class FastText {
       const std::set<std::string>& banSet);
   void lazyComputeWordVectors();
   void printInfoMine(real, real, real,  real, std::ostream&);
+  void printInfoRegular(real, real,  real, std::ostream&);
   void printInfo(real, real, std::ostream&);
   std::shared_ptr<Matrix> getInputMatrixFromFile(const std::string&) const;
   std::shared_ptr<Matrix> createRandomMatrix() const;
