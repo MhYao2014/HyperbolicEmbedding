@@ -407,7 +407,7 @@ namespace fasttext {
             RegularInVec.addRow(*wi, RegularInVecId);
             real RegularInVecNorm = RegularInVec.norm();
             real InnerProduct = SumOutVec.dotmul(RegularInVec, 1/RegularInVecNorm);
-            state.TotalSum += std::exp(InnerProduct);
+            state.TotalSum += std::exp(InnerProduct) / minibatch;
             state.SampleCount += 1;
             real DisExpe = real (state.TotalSum / state.SampleCount);
             real ConExpe = std::exp(real (pow(SumOutVec.norm(),2) / 2 / 100));
