@@ -402,7 +402,7 @@ namespace fasttext {
         real L2Loss = 0;
         for (int i=0; i < minibatch; i++){
             int32_t RegularInVecId = negatives_[uniform_(state.rng)];
-            std::cerr << "\rrandom ids:" << RegularInVecId << std::endl;
+//            std::cerr << "\rrandom ids:" << RegularInVecId << std::endl;
             RegularInVec.zero();
             RegularInVec.addRow(*wi, RegularInVecId);
             real RegularInVecNorm = RegularInVec.norm();
