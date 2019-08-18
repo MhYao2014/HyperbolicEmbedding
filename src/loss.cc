@@ -417,7 +417,9 @@ namespace fasttext {
         real RegularInVecNorm = RegularInVec.norm();
         real InnerProduct = state.hidden.dotmul(RegularInVec, 1/RegularInVecNorm);
         real f = real(words_[RegularInVecId].count) / real(ntokens_);
-        state.TotalSum += std::exp(InnerProduct)*f ;
+        state.TotalSum += std::exp(InnerProduct)*0.1 ;
+        state.SampleCount += 1;
+        real DisExpe = real (state.TotalSum / state.SampleCount);
         real ConExpe = std::exp(real (pow(state.hidden.norm(),2) / 2 / 100));
         RegularInVec.elemul(RegularInVec);
         RegularInVec.elemul(state.hidden);
@@ -425,8 +427,8 @@ namespace fasttext {
         state.hidden.mul(1/RegularInVecNorm);
         state.hidden.addVector(RegularInVec, -1);
 //        state.grad.addVector(state.hidden, );
-        wi->addVectorToRow(state.hidden, RegularInVecId, -lr*hyperparam*2*(state.TotalSum  - ConExpe)*std::exp(InnerProduct)*f/ minibatch);
-        L2Loss = std::pow(state.TotalSum  - ConExpe, 2) / minibatch;
+        wi->addVectorToRow(state.hidden, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*std::exp(InnerProduct)*f/ minibatch);
+        L2Loss = std::pow(DisExpe - ConExpe, 2) / minibatch;
         return L2Loss;
     }
 
