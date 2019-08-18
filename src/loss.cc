@@ -406,7 +406,7 @@ namespace fasttext {
         RegularInVec.addRow(*wi, RegularInVecId);
         real RegularInVecNorm = RegularInVec.norm();
         real InnerProduct = SumOutVec.dotmul(RegularInVec, 1/RegularInVecNorm);
-        state.TotalSum += std::exp(InnerProduct) / minibatch;
+        state.TotalSum += std::exp(InnerProduct) ;
         state.SampleCount += 1;
         real DisExpe = real (state.TotalSum / state.SampleCount);
         real ConExpe = std::exp(real (pow(SumOutVec.norm(),2) / 2 / 100));
@@ -415,11 +415,9 @@ namespace fasttext {
         RegularInVec.mul(1/pow(RegularInVecNorm,3));
         SumOutVec.mul(1/RegularInVecNorm);
         SumOutVec.substract(RegularInVec);
-        wi->addVectorToRow(SumOutVec, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/10000000));
+        wi->addVectorToRow(SumOutVec, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/1000000)/ minibatch);
         L2Loss += std::pow(DisExpe - ConExpe, 2);
-
         return L2Loss;
-
     }
 
     TreeInUnitLoss::TreeInUnitLoss(
