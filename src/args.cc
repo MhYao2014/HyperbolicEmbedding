@@ -18,6 +18,7 @@ namespace fasttext {
     Args::Args() {
         lr = 0.05;
         lrTree = 0.025;
+        hyperparam = 1;
         dim = 100;
         ws = 5;
         epoch = 5;
@@ -41,6 +42,7 @@ namespace fasttext {
         saveOutput = false;
         IfNeedTree = false;
         IfNeedRegular = false;
+        minibatch = 1;
 
         qout = false;
         retrain = false;
@@ -125,7 +127,9 @@ namespace fasttext {
                 } else if (args[ai] == "-lr") {
                     lr = std::stof(args.at(ai + 1));
                 } else if (args[ai] == "-lrTree") {
-                    lr = std::stof(args.at(ai + 1));
+                    lrTree = std::stof(args.at(ai + 1));
+                } else if (args[ai] == "-hyperparam") {
+                    hyperparam = std::stof(args.at(ai + 1));
                 } else if (args[ai] == "-lrUpdateRate") {
                     lrUpdateRate = std::stoi(args.at(ai + 1));
                 } else if (args[ai] == "-dim") {
@@ -142,6 +146,8 @@ namespace fasttext {
                     minCountLabel = std::stoi(args.at(ai + 1));
                 } else if (args[ai] == "-neg") {
                     neg = std::stoi(args.at(ai + 1));
+                } else if (args[ai] == "-minibatch") {
+                    minibatch = std::stoi(args.at(ai + 1));
                 } else if (args[ai] == "-negTree") {
                     neg = std::stoi(args.at(ai + 1));
                 } else if (args[ai] == "-wordNgrams") {

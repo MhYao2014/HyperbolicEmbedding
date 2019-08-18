@@ -83,6 +83,8 @@ class Model {
           real lr,
           State& state);
   void updateRegular(
+          int minibatch,
+          real hyperparam,
           const std::vector<int32_t>& input,
           const std::vector<int32_t>& targets,
           int32_t targetIndex,

@@ -499,6 +499,8 @@ namespace fasttext {
     }
 
     void FastText::Regularskip(
+            int minibatch,
+            real hyperparam,
             Model::State& state,
             real lr,
             const std::vector<int32_t>& line) {
@@ -511,7 +513,7 @@ namespace fasttext {
             for (int32_t c = -boundary; c <= boundary; c++) {
 //                std::cerr << "\rI am here ! The update done" << std::endl;
                 if (c != 0 && w + c >= 0 && w + c < line.size()) {
-                    model_->updateRegular(ngrams, line, w + c, lr, state);
+                    model_->updateRegular(minibatch, hyperparam, ngrams, line, w + c, lr, state);
                     model_->update(ngrams, line, w + c, lr, state);
                 }
             }
@@ -1002,7 +1004,7 @@ namespace fasttext {
                 real progress = real(tokenCount_) / (args_->epoch * ntokens);
                 real lr = args_->lr * (1.0 - progress);
                 localTokenCount += dict_->getLine(ifs, line, state.rng, ifsBackUp);
-                Regularskip(state, lr, line);
+                Regularskip(args_->minibatch, args_->hyperparam, state, lr, line);
                 if (localTokenCount > args_->lrUpdateRate) {
                     tokenCount_ += localTokenCount;
                     localTokenCount = 0;

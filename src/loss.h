@@ -52,6 +52,8 @@ namespace fasttext {
                 fasttext::real lr,
                 bool backprop) = 0;
         virtual real forwardRegular(
+                int minibatch,
+                real hyperparam,
                 std::vector<int32_t>& SumOutVecIds,
                 std::shared_ptr<fasttext::Matrix> &wo,
                 std::shared_ptr<fasttext::Matrix> &wi,
@@ -111,6 +113,8 @@ namespace fasttext {
                 fasttext::real lr,
                 bool backprop) override {};
         real forwardRegular(
+                int minibatch,
+                real hyperparam,
                 std::vector<int32_t>& SumOutVecIds,
                 std::shared_ptr<fasttext::Matrix> &wo,
                 std::shared_ptr<fasttext::Matrix> &wi,
@@ -216,6 +220,8 @@ namespace fasttext {
         ~InUnitRegularLoss() noexcept override = default;
 
         real forwardRegular (
+                int minibatch,
+                real hyperparam,
                 std::vector<int32_t>& SumOutVecIds,
                 std::shared_ptr<fasttext::Matrix> &wo,
                 std::shared_ptr<fasttext::Matrix> &wi,

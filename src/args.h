@@ -31,6 +31,7 @@ namespace fasttext {
         std::string output;
         double lr;
         double lrTree;
+        double hyperparam;
         int lrUpdateRate;
         int dim;
         int ws;
@@ -39,6 +40,7 @@ namespace fasttext {
         int minCount;
         int minCountLabel;
         int neg;
+        int minibatch;
         int negTree;
         int wordNgrams;
         loss_name loss;

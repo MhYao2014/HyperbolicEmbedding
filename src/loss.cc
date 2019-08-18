@@ -385,6 +385,8 @@ namespace fasttext {
             : InUnitLoss(wo, neg, targetCounts){}
 
     real InUnitRegularLoss::forwardRegular(
+            int minibatch,
+            real hyperparam,
             std::vector<int32_t>& SumOutVecIds,
             std::shared_ptr<fasttext::Matrix> &wo,
             std::shared_ptr<fasttext::Matrix> &wi,
@@ -396,12 +398,10 @@ namespace fasttext {
         for (auto it = SumOutVecIds.cbegin(); it != SumOutVecIds.cend(); ++it) {
             SumOutVec.addRow(*wo, *it);
         }
-        std::minstd_rand rng(0);
-        int minibatch = 32;
+        Vector RegularInVec(wi->size(1));
         real L2Loss = 0;
         for (int i=0; i < minibatch; i++){
             int32_t RegularInVecId = negatives_[uniform_(state.rng)];
-            Vector RegularInVec(wi->size(1));
             RegularInVec.zero();
             RegularInVec.addRow(*wi, RegularInVecId);
             real RegularInVecNorm = RegularInVec.norm();
@@ -410,13 +410,12 @@ namespace fasttext {
             state.SampleCount += 1;
             real DisExpe = real (state.TotalSum / state.SampleCount);
             real ConExpe = std::exp(real (pow(SumOutVec.norm(),2) / 2 / 100));
-//        std::cerr << "\rConExpe: " << ConExpe << std::endl;
             RegularInVec.elemul(RegularInVec);
             RegularInVec.elemul(SumOutVec);
             RegularInVec.mul(1/pow(RegularInVecNorm,3));
             SumOutVec.mul(1/RegularInVecNorm);
             SumOutVec.substract(RegularInVec);
-            wi->addVectorToRow(SumOutVec, RegularInVecId, -2*0.5*lr*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/10000000));
+            wi->addVectorToRow(SumOutVec, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/10000000));
             L2Loss = L2Loss*0.9 + std::pow(DisExpe - ConExpe, 2)*0.1;
         }
         return L2Loss;
