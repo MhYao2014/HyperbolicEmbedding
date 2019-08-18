@@ -43,13 +43,13 @@ class Dictionary {
   int32_t readLineMine(std::istream& in,
                     std::unordered_map<std::string, std::vector<std::string>>& treedict);
   std::shared_ptr<Args> args_;
-  std::vector<entry> words_;
+
 
   std::vector<real> pdiscard_;
   int32_t size_;
-  int32_t nwords_;
+    int32_t nwords_;
   int32_t nlabels_;
-  int64_t ntokens_;
+
   int64_t ntokensTree_;
 
   int64_t pruneidx_size_;
@@ -64,6 +64,9 @@ class Dictionary {
   static const std::string BOW;
   static const std::string EOW;
   std::vector<int32_t> word2int_;
+
+  std::vector<entry> words_;
+  int64_t ntokens_;
 
   explicit Dictionary(std::shared_ptr<Args>);
   explicit Dictionary(std::shared_ptr<Args>, std::istream&);

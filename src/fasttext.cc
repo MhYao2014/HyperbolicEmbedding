@@ -34,19 +34,19 @@ namespace fasttext {
         switch (lossName) {
             case loss_name::ns:
                 return std::make_shared<NegativeSamplingLoss>(
-                        output, args_->neg, getTargetCounts());
+                        output, dict_->words_, dict_->ntokens_, args_->neg, getTargetCounts());
             case loss_name::InUnit:
                 return std::make_shared<InUnitLoss>(
-                        output, args_->neg, getTargetCounts());
+                        output, dict_->words_, dict_->ntokens_, args_->neg, getTargetCounts());
             case loss_name::InUnitRegular:
                 return std::make_shared<InUnitRegularLoss>(
-                        output, args_->neg, getTargetCounts());
+                        output, dict_->words_, dict_->ntokens_, args_->neg, getTargetCounts());
 //            case loss_name::OutUnit:
 //                return std::make_shared<UnitNegativeSamplingLoss>(
 //                        output, args_->neg, getTargetCounts());
             case loss_name::TreeInUnit:
                 return std::make_shared<TreeInUnitLoss>(
-                        output, args_->neg, getTargetCounts());
+                        output, dict_->words_, dict_->ntokens_, args_->neg, getTargetCounts());
 //            case loss_name::TreeOutUnit:
 //                return std::make_shared<UnitNegativeSamplingLoss>(
 //                        output, args_->neg, getTargetCounts());

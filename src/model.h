@@ -17,6 +17,7 @@
 #include "real.h"
 #include "utils.h"
 #include "vector.h"
+#include "dictionary.h"
 
 namespace fasttext {
 

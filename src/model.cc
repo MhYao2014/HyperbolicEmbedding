@@ -144,12 +144,13 @@ void Model::updateRegular(
     }
     int32_t target = targets[targetIndex];
     SumOutVecIds.push_back(target);
+    real batchloss = 0;
     // 进行in向量采样并更新对应的input vector
     for (int i=0; i < minibatch; i++){
         real lossValue = loss_->forwardRegular(minibatch, hyperparam, SumOutVecIds, wo_, wi_, lr, state,true);
-        state.incrementNExamplesRegular(lossValue);
+        batchloss += lossValue;
     }
-
+    state.incrementNExamplesRegular(batchloss);
 }
 
 real Model::std_log(real x) const {

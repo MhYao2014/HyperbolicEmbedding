@@ -17,6 +17,7 @@
 #include "real.h"
 #include "utils.h"
 #include "vector.h"
+#include "dictionary.h"
 
 namespace fasttext {
 
@@ -32,11 +33,14 @@ namespace fasttext {
         std::vector<real> t_sigmoid_;
         std::vector<real> t_log_;
         std::shared_ptr<Matrix>& wo_;
+        std::vector<entry> &words_;
+        int64_t ntokens_;
+
 
         real log(real x) const;
         real sigmoid(real x) const;
     public:
-        explicit Loss(std::shared_ptr<Matrix>& wo);
+        explicit Loss(std::shared_ptr<Matrix>& wo, std::vector<entry> & words, int64_t ntokens);
         virtual ~Loss() = default;
         virtual real forward(
                 const std::vector<int32_t>& targets,
@@ -78,7 +82,7 @@ namespace fasttext {
                 bool backprop) const;
 
     public:
-        explicit BinaryLogisticLoss(std::shared_ptr<Matrix>& wo);
+        explicit BinaryLogisticLoss(std::shared_ptr<Matrix>& wo, std::vector<entry> & words, int64_t ntokens);
         virtual ~BinaryLogisticLoss() noexcept override = default;
         void computeOutput(Model::State& state) const override;
     };
@@ -95,6 +99,8 @@ namespace fasttext {
     public:
         explicit NegativeSamplingLoss(
                 std::shared_ptr<Matrix>& wo,
+                std::vector<entry> & words,
+                int64_t ntokens,
                 int neg,
                 const std::vector<int64_t>& targetCounts);
         ~NegativeSamplingLoss() noexcept override = default;
@@ -135,6 +141,8 @@ namespace fasttext {
     public:
         explicit InUnitLoss(
                 std::shared_ptr<Matrix>& wo,
+                std::vector<entry> & words,
+                int64_t ntokens,
                 int neg,
                 const std::vector<int64_t>& targetCounts);
         ~InUnitLoss() noexcept override = default;
@@ -197,6 +205,8 @@ namespace fasttext {
     public:
         explicit TreeInUnitLoss(
                 std::shared_ptr<Matrix>& wo,
+                std::vector<entry> & words,
+                int64_t ntokens,
                 int neg,
                 const std::vector<int64_t>& targetCounts);
         ~TreeInUnitLoss() noexcept override = default;
@@ -215,6 +225,8 @@ namespace fasttext {
     public:
         explicit InUnitRegularLoss(
                 std::shared_ptr<Matrix>& wo,
+                std::vector<entry> & words,
+                int64_t ntokens,
                 int neg,
                 const std::vector<int64_t>& targetCounts);
         ~InUnitRegularLoss() noexcept override = default;
@@ -232,7 +244,9 @@ namespace fasttext {
 
     class OneVsAllLoss : public BinaryLogisticLoss {
     public:
-        explicit OneVsAllLoss(std::shared_ptr<Matrix>& wo);
+        explicit OneVsAllLoss(std::shared_ptr<Matrix>& wo,
+                              std::vector<entry> & words,
+                              int64_t ntokens);
         ~OneVsAllLoss() noexcept override = default;
         real forward(
                 const std::vector<int32_t>& targets,
@@ -268,6 +282,8 @@ namespace fasttext {
     public:
         explicit HierarchicalSoftmaxLoss(
                 std::shared_ptr<Matrix>& wo,
+                std::vector<entry> & words,
+                int64_t ntokens,
                 const std::vector<int64_t>& counts);
         ~HierarchicalSoftmaxLoss() noexcept override = default;
         real forward(
@@ -285,7 +301,9 @@ namespace fasttext {
 
     class SoftmaxLoss : public Loss {
     public:
-        explicit SoftmaxLoss(std::shared_ptr<Matrix>& wo);
+        explicit SoftmaxLoss(std::shared_ptr<Matrix>& wo,
+                             std::vector<entry> & words,
+                             int64_t ntokens);
         ~SoftmaxLoss() noexcept override = default;
         real forward(
                 const std::vector<int32_t>& targets,

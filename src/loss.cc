@@ -28,7 +28,10 @@ namespace fasttext {
         return std::log(x + 1e-5);
     }
 
-    Loss::Loss(std::shared_ptr<Matrix>& wo) : wo_(wo) {
+    Loss::Loss(std::shared_ptr<Matrix>& wo, std::vector<entry> & words, int64_t ntokens):
+            wo_(wo),
+            words_(words),
+            ntokens_(ntokens){
         t_sigmoid_.reserve(SIGMOID_TABLE_SIZE + 1);
         for (int i = 0; i < SIGMOID_TABLE_SIZE + 1; i++) {
             real x = real(i * 2 * MAX_SIGMOID) / SIGMOID_TABLE_SIZE - MAX_SIGMOID;
@@ -93,8 +96,10 @@ namespace fasttext {
         }
     }
 
-    BinaryLogisticLoss::BinaryLogisticLoss(std::shared_ptr<Matrix>& wo)
-            : Loss(wo) {}
+    BinaryLogisticLoss::BinaryLogisticLoss(std::shared_ptr<Matrix>& wo,
+                                           std::vector<entry> & words,
+                                           int64_t ntokens)
+            : Loss(wo, words, ntokens) {}
 
 //    real UnitBiLogisticLoss::unitBiLogistic(
 //            int32_t target,
@@ -182,9 +187,11 @@ namespace fasttext {
 
     NegativeSamplingLoss::NegativeSamplingLoss(
             std::shared_ptr<Matrix>& wo,
+            std::vector<entry> & words,
+            int64_t ntokens,
             int neg,
             const std::vector<int64_t>& targetCounts)
-            : BinaryLogisticLoss(wo), neg_(neg), negatives_(), uniform_() {
+            : BinaryLogisticLoss(wo, words, ntokens), neg_(neg), negatives_(), uniform_() {
         real z = 0.0;
         for (size_t i = 0; i < targetCounts.size(); i++) {
             z += pow(targetCounts[i], 0.5);
@@ -329,9 +336,11 @@ namespace fasttext {
 
     InUnitLoss::InUnitLoss(
             std::shared_ptr<fasttext::Matrix> &wo,
+            std::vector<entry> & words,
+            int64_t ntokens,
             int neg,
             const std::vector<int64_t> &targetCounts)
-            : NegativeSamplingLoss(wo, neg, targetCounts){}
+            : NegativeSamplingLoss(wo, words, ntokens, neg, targetCounts){}
 
     real InUnitLoss::binaryLogistic (
             int32_t  target,
@@ -380,9 +389,11 @@ namespace fasttext {
 
     InUnitRegularLoss::InUnitRegularLoss(
             std::shared_ptr<fasttext::Matrix> &wo,
+            std::vector<entry> & words,
+            int64_t ntokens,
             int neg,
             const std::vector<int64_t> &targetCounts)
-            : InUnitLoss(wo, neg, targetCounts){}
+            : InUnitLoss(wo, words, ntokens, neg, targetCounts){}
 
     real InUnitRegularLoss::forwardRegular(
             int minibatch,
@@ -393,10 +404,9 @@ namespace fasttext {
             fasttext::real lr,
             Model::State& state,
             bool backprop) {
-        Vector SumOutVec(wo->size(1));
-        SumOutVec.zero();
+        state.hidden.zero();
         for (auto it = SumOutVecIds.cbegin(); it != SumOutVecIds.cend(); ++it) {
-            SumOutVec.addRow(*wo, *it);
+            state.hidden.addRow(*wo, *it);
         }
         Vector RegularInVec(wi->size(1));
         real L2Loss = 0;
@@ -405,26 +415,30 @@ namespace fasttext {
         RegularInVec.zero();
         RegularInVec.addRow(*wi, RegularInVecId);
         real RegularInVecNorm = RegularInVec.norm();
-        real InnerProduct = SumOutVec.dotmul(RegularInVec, 1/RegularInVecNorm);
-        state.TotalSum += std::exp(InnerProduct) / minibatch;
+        real InnerProduct = state.hidden.dotmul(RegularInVec, 1/RegularInVecNorm);
+        state.TotalSum += std::exp(InnerProduct) ;
         state.SampleCount += 1;
         real DisExpe = real (state.TotalSum / state.SampleCount);
-        real ConExpe = std::exp(real (pow(SumOutVec.norm(),2) / 2 / 100));
+        real ConExpe = std::exp(real (pow(state.hidden.norm(),2) / 2 / 100));
         RegularInVec.elemul(RegularInVec);
-        RegularInVec.elemul(SumOutVec);
+        RegularInVec.elemul(state.hidden);
         RegularInVec.mul(1/pow(RegularInVecNorm,3));
-        SumOutVec.mul(1/RegularInVecNorm);
-        SumOutVec.substract(RegularInVec);
-        wi->addVectorToRow(SumOutVec, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*std::exp(InnerProduct)*(1/1000000)/ minibatch);
-        L2Loss += std::pow(DisExpe - ConExpe, 2);
+        state.hidden.mul(1/RegularInVecNorm);
+        state.hidden.addVector(RegularInVec, -1);
+//        state.grad.addVector(state.hidden, );
+        real f = real(words_[RegularInVecId].count) / real(ntokens_);
+        wi->addVectorToRow(state.hidden, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*std::exp(InnerProduct)*f/ minibatch);
+        L2Loss = std::pow(DisExpe - ConExpe, 2) / minibatch;
         return L2Loss;
     }
 
     TreeInUnitLoss::TreeInUnitLoss(
             std::shared_ptr<fasttext::Matrix> &wo,
+            std::vector<entry> & words,
+            int64_t ntokens,
             int neg,
             const std::vector<int64_t> &targetCounts)
-            : InUnitLoss(wo, neg, targetCounts){}
+            : InUnitLoss(wo, words, ntokens, neg, targetCounts){}
 
     int32_t TreeInUnitLoss::getNegativeHyper(
             int32_t inputId,
@@ -631,7 +645,9 @@ namespace fasttext {
         dfs(k, threshold, tree_[node].right, score + std_log(f), heap, hidden);
     }
 
-    SoftmaxLoss::SoftmaxLoss(std::shared_ptr<Matrix>& wo) : Loss(wo) {}
+    SoftmaxLoss::SoftmaxLoss(std::shared_ptr<Matrix>& wo,
+                             std::vector<entry> & words,
+                             int64_t ntokens) : Loss(wo, words, ntokens) {}
 
     void SoftmaxLoss::computeOutput(Model::State& state) const {
         Vector& output = state.output;
@@ -674,8 +690,10 @@ namespace fasttext {
         return -log(state.output[target]);
     };
 
-    OneVsAllLoss::OneVsAllLoss(std::shared_ptr<Matrix>& wo)
-            : BinaryLogisticLoss(wo) {}
+    OneVsAllLoss::OneVsAllLoss(std::shared_ptr<Matrix>& wo,
+                               std::vector<entry> & words,
+                               int64_t ntokens)
+            : BinaryLogisticLoss(wo, words, ntokens) {}
 
     real OneVsAllLoss::forward(
             const std::vector<int32_t>& targets,
