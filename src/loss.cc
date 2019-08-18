@@ -417,7 +417,7 @@ namespace fasttext {
         real RegularInVecNorm = RegularInVec.norm();
         real InnerProduct = state.hidden.dotmul(RegularInVec, 1/RegularInVecNorm);
         real f = real(words_[RegularInVecId].count) / real(ntokens_);
-        state.TotalSum += std::exp(InnerProduct)*0.1 ;
+        state.TotalSum += std::exp(InnerProduct) ;
         state.SampleCount += 1;
         real DisExpe = real (state.TotalSum / state.SampleCount);
         real ConExpe = std::exp(real (pow(state.hidden.norm(),2) / 2 / 100));

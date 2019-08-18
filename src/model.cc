@@ -151,7 +151,7 @@ void Model::updateRegular(
         batchloss += lossValue;
     }
     state.incrementNExamplesRegular(batchloss);
-    state.TotalSum *= 0.9;
+//    state.TotalSum *= 0.9;
 }
 
 real Model::std_log(real x) const {
