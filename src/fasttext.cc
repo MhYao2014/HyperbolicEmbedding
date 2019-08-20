@@ -543,9 +543,9 @@ namespace fasttext {
             for (int32_t c = -boundary; c <= boundary; c++) {
 //                std::cerr << "\rI am here ! The update done" << std::endl;
                 if (c != 0 && w + c >= 0 && w + c < line.size()) {
-                    if (tokenCount_ < (args_->epoch - 3) * dict_->ntokens()) {
-                        model_->updateRegular(minibatch, hyperparam, ngrams, line, w + c, lr, state);
-                    }
+//                    if (tokenCount_ < (args_->epoch - 3) * dict_->ntokens()) {
+                    model_->updateRegular(minibatch, hyperparam, ngrams, line, w + c, lr, state);
+//                    }
                     model_->update(ngrams, line, w + c, lr, state);
                 }
             }

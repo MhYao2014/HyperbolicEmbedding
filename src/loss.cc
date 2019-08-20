@@ -414,7 +414,7 @@ namespace fasttext {
 //            std::cerr << "\rrandom ids:" << RegularInVecId << std::endl;
         RegularInVec.zero();
         RegularInVec.addRow(*wi, RegularInVecId);
-        real RegularInVecNorm = RegularInVec.norm();
+        real RegularInVecNorm =  RegularInVec.norm();
         real InnerProduct = state.hidden.dotmul(RegularInVec, 1/RegularInVecNorm);
         real f = real(words_[RegularInVecId].count) / real(ntokens_);
         state.TotalSum += std::exp(InnerProduct) ;
