@@ -36,7 +36,6 @@ namespace fasttext {
         std::vector<entry> &words_;
         int64_t ntokens_;
 
-
         real log(real x) const;
         real sigmoid(real x) const;
     public:
@@ -44,6 +43,8 @@ namespace fasttext {
         virtual ~Loss() = default;
         real Beta(int m);
         real ReparameterizeOmega(int m, real kappa);
+        void ReparameterizeZ(int m, Vector & Z, Vector & VcTemp);
+        real ReparameterizeVHat(int m, real kappa, Vector & Z, Vector & VHat, Vector & Vc);
 
         virtual real forward(
                 const std::vector<int32_t>& targets,

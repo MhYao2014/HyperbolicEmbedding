@@ -93,7 +93,34 @@ namespace fasttext {
         return omega;
     }
 
-    
+    void Loss::ReparameterizeZ(int m, Vector &Z, Vector & VcTemp) {
+        static std::random_device __randomDevice;
+        static std::mt19937 __randomGen(__randomDevice());
+        static std::normal_distribution<real> distribution(0, 1);
+        for (int i=0; i < m; ++i) {
+            Z[i] = distribution(__randomGen);
+        }
+        VcTemp.mul(Z.dotmul(VcTemp, 1.0));
+        Z.substract(VcTemp);
+        Z.mul(1/Z.norm());
+    }
+
+    real Loss::ReparameterizeVHat(int m,
+            fasttext::real kappa,
+            fasttext::Vector &Z,
+            fasttext::Vector &VHat,
+            fasttext::Vector &Vc) {
+        real omega = ReparameterizeOmega(m, kappa);
+        Vector Vctemp(m);
+        Vctemp.zero();
+        Vctemp.addVector(Vc);
+        ReparameterizeZ(m, Z, Vctemp);
+        Z.mul(std::sqrt(1-omega*omega));
+        VHat.zero();
+        VHat.addVector(Z);
+        VHat.addVector(Vc, omega);
+        return omega;
+    }
 
     void Loss::predict(
             int32_t k,
@@ -379,16 +406,21 @@ namespace fasttext {
             bool labelIsPositive,
             real lr,
             bool backprop ) const {
-        real innerProduct = wo_->dotRow(state.hidden, target);
-        real score = sigmoid( (real)(innerProduct / uNorm) );
+        real innerProduct = wo_->dotRow(state.VHat, target);
+        real score = sigmoid( (real)(innerProduct) );
+//        real innerProduct = wo_->dotRow(state.hidden, target);
+//        real score = sigmoid( (real)(innerProduct / uNorm) );
         if (backprop) {
             real alpha = lr * (real(labelIsPositive) - score);
             // update v
-            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm));
+//            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm));
+            wo_->addVectorToRow(state.VHat, target, (real)(alpha));
             // calculate the first term of u's grad
-            state.grad.addRow(*wo_, target, (real)(alpha / uNorm));
+//            state.grad.addRow(*wo_, target, (real)(alpha / uNorm));
+            state.grad.addRow(*wo_, target, (real)(alpha * state.omega));
             // calculate the second term of u's grad
-            state.grad.addVector(state.hidden, (real)(- alpha * innerProduct / (real)pow(uNorm, 3)));
+//            state.grad.addVector(state.hidden, (real)(- alpha * innerProduct / (real)pow(uNorm, 3)));
+            state.grad.addVector(state.VHat, (real)(- alpha * innerProduct * state.omega));
         }
         if (labelIsPositive){
             return -log(score);
@@ -408,6 +440,12 @@ namespace fasttext {
         assert( targetIndex < targets.size() );
         int32_t target = targets[targetIndex];
         real uNorm = state.hidden.norm();
+        //后来添加的pdf部分
+        state.Vc.zero();
+        state.Vc.addVector(state.hidden, 1/uNorm);
+        real kappa = 100;
+        state.omega = ReparameterizeVHat(state.VHat.size(), kappa, state.Z, state.VHat, state.Vc);
+        //添加的部分结束
         real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
 
         for(int32_t i = 0; i < neg_; i++) {

@@ -26,8 +26,12 @@ Model::State::State(int32_t hiddenSize, int32_t outputSize, int32_t seed)
       output(outputSize),
       grad(hiddenSize),
       gradHyper(hiddenSize + 1),
+      VHat(hiddenSize),
+      Z(hiddenSize),
+      Vc(hiddenSize),
       rng(seed),
       TotalSum(0),
+      omega(0),
       SampleCount(0){}
 
 real Model::State::getLoss() const {
@@ -101,7 +105,6 @@ void Model::update(
     return;
   }
   computeHidden(input, state);
-
   Vector& grad = state.grad;
   grad.zero();
   real lossValue = loss_->forward(targets, targetIndex, state, lr, true);

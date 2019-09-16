@@ -54,9 +54,13 @@ class Model {
     Vector output;
     Vector grad;
     Vector gradHyper;
+      Vector VHat;
+      Vector Z;
+      Vector Vc;
     std::minstd_rand rng;
     int64_t SampleCount;
     real TotalSum;
+      real omega;
 //    int32_t input;
 
     State(int32_t hiddenSize, int32_t outputSize, int32_t seed);
