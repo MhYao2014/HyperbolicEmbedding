@@ -42,6 +42,9 @@ namespace fasttext {
     public:
         explicit Loss(std::shared_ptr<Matrix>& wo, std::vector<entry> & words, int64_t ntokens);
         virtual ~Loss() = default;
+        real Beta(int m);
+        real ReparameterizeOmega(int m, real kappa);
+
         virtual real forward(
                 const std::vector<int32_t>& targets,
                 int32_t targetIndex,

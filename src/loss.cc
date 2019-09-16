@@ -8,6 +8,7 @@
 
 #include "loss.h"
 #include "utils.h"
+#include "bmath.h"
 #include <math.h>
 #include <cmath>
 #include <iostream>
@@ -64,6 +65,35 @@ namespace fasttext {
             return t_sigmoid_[i];
         }
     }
+
+    real Loss::Beta(int m) {
+        real Alpha = 0.5*(m-1);
+        real Beta = 0.5*(m-1);
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        sftrabbit::beta_distribution<real> beta(Alpha, Beta);
+        return beta(gen);
+    }
+
+    real Loss::ReparameterizeOmega(int m, fasttext::real kappa) {
+        real temp = std::sqrt(4*kappa*kappa + (m-1)*(m-1));
+        real b = (-2*kappa + temp) / (m-1);
+        real a = (m - 1 + 2*kappa + temp);
+        real d = 4*a*b / (1 + b) - (m - 1)*log(m - 1);
+        real epsilon, omega, t, u;
+        std::random_device rd;
+        std::mt19937 e2(rd());
+        std::uniform_real_distribution<> dist(0, 1);
+        do {
+            epsilon = Beta(m);
+            omega = (1 - (1+b)*epsilon) / (1 - (1-b)*epsilon);
+            t = 2*a*b / (1 - (1-b)*epsilon);
+            u = dist(e2);
+        } while ((m-1)*log(t)-t+d >= log(u));
+        return omega;
+    }
+
+    
 
     void Loss::predict(
             int32_t k,
