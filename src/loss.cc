@@ -8,7 +8,7 @@
 
 #include "loss.h"
 #include "utils.h"
-#include "bmath.h"
+#include "beta_distribution.hpp"
 #include <math.h>
 #include <cmath>
 #include <iostream>
@@ -66,61 +66,7 @@ namespace fasttext {
         }
     }
 
-    real Loss::Beta(int m) {
-        real Alpha = 0.5*(m-1);
-        real Beta = 0.5*(m-1);
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        sftrabbit::beta_distribution<real> beta(Alpha, Beta);
-        return beta(gen);
-    }
 
-    real Loss::ReparameterizeOmega(int m, fasttext::real kappa) {
-        real temp = std::sqrt(4*kappa*kappa + (m-1)*(m-1));
-        real b = (-2*kappa + temp) / (m-1);
-        real a = (m - 1 + 2*kappa + temp);
-        real d = 4*a*b / (1 + b) - (m - 1)*log(m - 1);
-        real epsilon, omega, t, u;
-        std::random_device rd;
-        std::mt19937 e2(rd());
-        std::uniform_real_distribution<> dist(0, 1);
-        do {
-            epsilon = Beta(m);
-            omega = (1 - (1+b)*epsilon) / (1 - (1-b)*epsilon);
-            t = 2*a*b / (1 - (1-b)*epsilon);
-            u = dist(e2);
-        } while ((m-1)*log(t)-t+d >= log(u));
-        return omega;
-    }
-
-    void Loss::ReparameterizeZ(int m, Vector &Z, Vector & VcTemp) {
-        static std::random_device __randomDevice;
-        static std::mt19937 __randomGen(__randomDevice());
-        static std::normal_distribution<real> distribution(0, 1);
-        for (int i=0; i < m; ++i) {
-            Z[i] = distribution(__randomGen);
-        }
-        VcTemp.mul(Z.dotmul(VcTemp, 1.0));
-        Z.substract(VcTemp);
-        Z.mul(1/Z.norm());
-    }
-
-    real Loss::ReparameterizeVHat(int m,
-            fasttext::real kappa,
-            fasttext::Vector &Z,
-            fasttext::Vector &VHat,
-            fasttext::Vector &Vc) {
-        real omega = ReparameterizeOmega(m, kappa);
-        Vector Vctemp(m);
-        Vctemp.zero();
-        Vctemp.addVector(Vc);
-        ReparameterizeZ(m, Z, Vctemp);
-        Z.mul(std::sqrt(1-omega*omega));
-        VHat.zero();
-        VHat.addVector(Z);
-        VHat.addVector(Vc, omega);
-        return omega;
-    }
 
     void Loss::predict(
             int32_t k,
@@ -406,7 +352,8 @@ namespace fasttext {
             bool labelIsPositive,
             real lr,
             bool backprop ) const {
-        real innerProduct = wo_->dotRow(state.VHat, target);
+        real innerProduct = wo_->dotRow(state.Vc, target);
+        real inner = wo_->dotRow(state.hidden, target);
         real score = sigmoid( (real)(innerProduct) );
 //        real innerProduct = wo_->dotRow(state.hidden, target);
 //        real score = sigmoid( (real)(innerProduct / uNorm) );
@@ -414,19 +361,94 @@ namespace fasttext {
             real alpha = lr * (real(labelIsPositive) - score);
             // update v
 //            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm));
-            wo_->addVectorToRow(state.VHat, target, (real)(alpha));
+            wo_->addVectorToRow(state.Vc, target, (real)(alpha));
             // calculate the first term of u's grad
 //            state.grad.addRow(*wo_, target, (real)(alpha / uNorm));
-            state.grad.addRow(*wo_, target, (real)(alpha * state.omega));
+            state.grad.addRow(*wo_, target, (real)(alpha * state.omega / uNorm));
             // calculate the second term of u's grad
-//            state.grad.addVector(state.hidden, (real)(- alpha * innerProduct / (real)pow(uNorm, 3)));
-            state.grad.addVector(state.VHat, (real)(- alpha * innerProduct * state.omega));
+//            state.grad.addVector(state.hidden, (real)(- alpha * innerProduct / (uNorm*uNorm*uNorm)));
+            state.grad.addVector(state.hidden, (real)(- alpha * inner * state.omega / (uNorm*uNorm*uNorm)));
         }
         if (labelIsPositive){
             return -log(score);
         } else {
             return -log(1.0 - score);
         }
+    }
+
+    real Loss::Beta(int m) {
+        real Alpha = 0.5*(m-1);
+        real Beta = 0.5*(m-1);
+        std::random_device rd;
+        std::mt19937 gen(rd());
+        sftrabbit::beta_distribution<real> beta(Alpha, Beta);
+        return beta(gen);
+    }
+
+    real Loss::ReparameterizeOmega(int m, fasttext::real kappa) {
+        real temp = std::sqrt(4*kappa*kappa + (m-1)*(m-1));
+        real b = (-2*kappa + temp) / (m-1);
+        real a = (m - 1 + 2*kappa + temp);
+        real d = 4*a*b / (1 + b) - (m - 1)*log(m - 1);
+        real epsilon, omega, t, u;
+        std::random_device rd;
+        std::mt19937 e2(rd());
+        std::uniform_real_distribution<> dist(0, 1);
+        sftrabbit::beta_distribution<real> beta(0.5*(m-1), 0.5*(m-1));
+        do {
+            epsilon = beta(e2);
+            omega = (1 - (1+b)*epsilon) / (1 - (1-b)*epsilon);
+            t = 2*a*b / (1 - (1-b)*epsilon);
+            u = dist(e2);
+        } while ((m-1)*log(t)-t+d >= log(u));
+        return omega;
+    }
+
+    void Loss::ReparameterizeZ(int m, Vector &Z, Vector & Vc, real omega) {
+        static std::random_device __randomDevice;
+        static std::mt19937 __randomGen(__randomDevice());
+        static std::normal_distribution<real> distribution(0, 1);
+        for (int i=0; i < m; i++) {
+            Z[i] = distribution(__randomGen);
+        }
+        real temp = -1*Z.dotmul(Vc, 1.0);
+        Z.addVector(Vc, temp);
+//        temp = ;
+        Z.mul(1/Z.norm()*std::sqrt(1-omega*omega));
+    }
+
+    real Loss::ReparameterizeVc(int m,
+                                  fasttext::real kappa,
+                                  fasttext::Vector &Z,
+                                  fasttext::Vector &Vc) {
+        // 抽样omega
+        real temp = std::sqrt(4*kappa*kappa + (m-1)*(m-1));
+        real b = (-2*kappa + temp) / (m-1);
+        real a = (m - 1 + 2*kappa + temp);
+        real d = 4*a*b / (1 + b) - (m - 1)*log(m - 1);
+        real epsilon, omega, t, u;
+        std::random_device rd;
+        std::mt19937 e2(rd());
+        std::uniform_real_distribution<> dist(0, 1);
+        sftrabbit::beta_distribution<real> beta(0.5*(m-1), 0.5*(m-1));
+        do {
+            epsilon = beta(e2);
+            omega = (1 - (1+b)*epsilon) / (1 - (1-b)*epsilon);
+            t = 2*a*b / (1 - (1-b)*epsilon);
+            u = dist(e2);
+        } while ((m-1)*log(t)-t+d >= log(u));
+        // 抽样Z
+        static std::normal_distribution<real> distribution(0, 1);
+        for (int i=0; i < m; i++) {
+            Z[i] = distribution(e2);
+        }
+        temp = -1*Z.dotmul(Vc, 1.0);
+        Z.addVector(Vc, temp);
+        Z.mul(1/Z.norm()*std::sqrt(1-omega*omega));
+        // 计算抽样后的Vc
+        Vc.mul(omega);
+        Vc.addVector(Z);
+        return omega;
     }
 
     real InUnitLoss::forward(
@@ -444,7 +466,7 @@ namespace fasttext {
         state.Vc.zero();
         state.Vc.addVector(state.hidden, 1/uNorm);
         real kappa = 100;
-        state.omega = ReparameterizeVHat(state.VHat.size(), kappa, state.Z, state.VHat, state.Vc);
+        state.omega = ReparameterizeVc(state.Vc.size(), kappa, state.Z, state.Vc);
         //添加的部分结束
         real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
 
@@ -491,7 +513,7 @@ namespace fasttext {
         real ConExpe = std::exp(real (pow(state.hidden.norm(),2) / 2 / 100));
         RegularInVec.elemul(RegularInVec);
         RegularInVec.elemul(state.hidden);
-        RegularInVec.mul(1/pow(RegularInVecNorm,3));
+        RegularInVec.mul(1/(RegularInVecNorm*RegularInVecNorm*RegularInVecNorm));
         state.hidden.mul(1/RegularInVecNorm);
         state.hidden.addVector(RegularInVec, -1);
 //        state.grad.addVector(state.hidden, );

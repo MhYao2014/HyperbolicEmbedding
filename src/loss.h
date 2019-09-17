@@ -43,8 +43,8 @@ namespace fasttext {
         virtual ~Loss() = default;
         real Beta(int m);
         real ReparameterizeOmega(int m, real kappa);
-        void ReparameterizeZ(int m, Vector & Z, Vector & VcTemp);
-        real ReparameterizeVHat(int m, real kappa, Vector & Z, Vector & VHat, Vector & Vc);
+        void ReparameterizeZ(int m, Vector & Z, Vector & VcTemp, real omega);
+        real ReparameterizeVc(int m, real kappa, Vector & Z, Vector & Vc);
 
         virtual real forward(
                 const std::vector<int32_t>& targets,

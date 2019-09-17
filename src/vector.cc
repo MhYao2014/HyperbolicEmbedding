@@ -88,6 +88,15 @@ void Vector::mul(const Matrix& A, const Vector& vec) {
         }
     }
 
+    void Vector::substract(const fasttext::Vector &vec, real t){
+        assert(vec.size() == size());
+        for (int64_t i = 0; i < size(); i++) {
+            data_[i] -= vec.data_[i] * t;
+        }
+    }
+
+
+
     real Vector::dotmul(const Vector& vec, real t) {
         assert(vec.size() == size());
         real result = 0;

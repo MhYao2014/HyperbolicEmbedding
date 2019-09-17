@@ -61,6 +61,7 @@ class Vector {
   void elemul(const Vector&);
   real dotmul(const Vector& vec, real t);
   void substract(const Vector&);
+  void substract(const Vector&, real t);
   int64_t argmax();
 };
 
