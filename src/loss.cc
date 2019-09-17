@@ -465,7 +465,7 @@ namespace fasttext {
         //后来添加的pdf部分
         state.Vc.zero();
         state.Vc.addVector(state.hidden, 1/uNorm);
-        real kappa = 100;
+        real kappa = 1000;
         state.omega = ReparameterizeVc(state.Vc.size(), kappa, state.Z, state.Vc);
         //添加的部分结束
         real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
