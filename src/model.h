@@ -61,6 +61,7 @@ class Model {
     int64_t SampleCount;
     real TotalSum;
       real omega;
+      real alpha;
 //    int32_t input;
 
     State(int32_t hiddenSize, int32_t outputSize, int32_t seed);

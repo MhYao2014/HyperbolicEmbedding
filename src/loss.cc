@@ -352,22 +352,23 @@ namespace fasttext {
             bool labelIsPositive,
             real lr,
             bool backprop ) const {
-        real innerProduct = wo_->dotRow(state.Vc, target);
-        real inner = wo_->dotRow(state.hidden, target);
-        real score = sigmoid( (real)(innerProduct) );
-//        real innerProduct = wo_->dotRow(state.hidden, target);
-//        real score = sigmoid( (real)(innerProduct / uNorm) );
+//        real innerProduct = wo_->dotRow(state.Vc, target);
+//        real inner = wo_->dotRow(state.hidden, target);
+//        real score = sigmoid( (real)(innerProduct) );
+        real innerProduct = wo_->dotRow(state.hidden, target);
+//        innerProduct = innerProduct;
+        real score = sigmoid( (real)(innerProduct  * state.alpha / uNorm) );
         if (backprop) {
             real alpha = lr * (real(labelIsPositive) - score);
             // update v
-//            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm));
-            wo_->addVectorToRow(state.Vc, target, (real)(alpha));
+            wo_->addVectorToRow(state.hidden, target, (real)(alpha * state.alpha / uNorm));
+//            wo_->addVectorToRow(state.Vc, target, (real)(alpha));
             // calculate the first term of u's grad
-//            state.grad.addRow(*wo_, target, (real)(alpha / uNorm));
-            state.grad.addRow(*wo_, target, (real)(alpha * state.omega / uNorm));
+            state.grad.addRow(*wo_, target, (real)(alpha * state.alpha / uNorm));
+//            state.grad.addRow(*wo_, target, (real)(alpha * state.omega / uNorm));
             // calculate the second term of u's grad
-//            state.grad.addVector(state.hidden, (real)(- alpha * innerProduct / (uNorm*uNorm*uNorm)));
-            state.grad.addVector(state.hidden, (real)(- alpha * inner * state.omega / (uNorm*uNorm*uNorm)));
+            state.grad.addVector(state.hidden, (real)(- alpha * state.alpha * innerProduct / (uNorm*uNorm*uNorm)));
+//            state.grad.addVector(state.hidden, (real)(- alpha * inner * state.omega / (uNorm*uNorm*uNorm)));
         }
         if (labelIsPositive){
             return -log(score);
@@ -463,10 +464,10 @@ namespace fasttext {
         int32_t target = targets[targetIndex];
         real uNorm = state.hidden.norm();
         //后来添加的pdf部分
-        state.Vc.zero();
-        state.Vc.addVector(state.hidden, 1/uNorm);
-        real kappa = 1000;
-        state.omega = ReparameterizeVc(state.Vc.size(), kappa, state.Z, state.Vc);
+//        state.Vc.zero();
+//        state.Vc.addVector(state.hidden, 1/uNorm);
+//        real kappa = 1000;
+//        state.omega = ReparameterizeVc(state.Vc.size(), kappa, state.Z, state.Vc);
         //添加的部分结束
         real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
 

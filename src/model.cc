@@ -32,6 +32,7 @@ Model::State::State(int32_t hiddenSize, int32_t outputSize, int32_t seed)
       rng(seed),
       TotalSum(0),
       omega(0),
+      alpha(1.0),
       SampleCount(0){}
 
 real Model::State::getLoss() const {
