@@ -1,1 +1,0 @@
-./fasttext skipgram -input ../../../4TDisk/Downloads/数据集/webbase_all/mbta.txt -inputTree ../../../4TDisk/Documents/Pycharm\ Projects/EMNLP/CoreNlpMultiProcessing/SplitCorpus/quickTestSplitcontext -output ./save/mbta/mbta-ns-dim100-epoch10-lur100-minn0-maxn0-neg5-ws5 -minn 0 -maxn 0 -dim 100 -epoch 10 -epochTree 0 -lrTree 0 -loss ns -thread 12 -saveOutput
