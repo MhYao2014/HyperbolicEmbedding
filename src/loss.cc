@@ -12,7 +12,7 @@
 #include <math.h>
 #include <cmath>
 #include <iostream>
-
+#include <fstream>
 namespace fasttext {
 
     constexpr int64_t SIGMOID_TABLE_SIZE = 512;
@@ -356,6 +356,8 @@ namespace fasttext {
 //        real inner = wo_->dotRow(state.hidden, target);
 //        real score = sigmoid( (real)(innerProduct) );
         real innerProduct = wo_->dotRow(state.hidden, target);
+        // 计算概率值
+
 //        innerProduct = innerProduct;
         real score = sigmoid( (real)(innerProduct  * state.alpha / uNorm) );
         if (backprop) {
@@ -376,6 +378,8 @@ namespace fasttext {
             return -log(1.0 - score);
         }
     }
+
+
 
     real Loss::Beta(int m) {
         real Alpha = 0.5*(m-1);
@@ -452,6 +456,8 @@ namespace fasttext {
         return omega;
     }
 
+
+
     real InUnitLoss::forward(
             const std::vector<int32_t> &targets,
             int32_t targetIndex,
@@ -466,11 +472,17 @@ namespace fasttext {
         //后来添加的pdf部分
 //        state.Vc.zero();
 //        state.Vc.addVector(state.hidden, 1/uNorm);
-//        real kappa = 1000;
+        //计算当前in向量被抽中的概率
+        real kappa = 1000;
+        real Ck = pow(kappa,(100/2-1)) / pow(2*3.1416,100/2) / logbesseli(100/2-1, kappa);
+        for (int32_t i=0; i < wo_->size(0); i++) {
+
+        }
 //        state.omega = ReparameterizeVc(state.Vc.size(), kappa, state.Z, state.Vc);
         //添加的部分结束
+        //
         real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
-
+        // 负采样部分
         for(int32_t i = 0; i < neg_; i++) {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);

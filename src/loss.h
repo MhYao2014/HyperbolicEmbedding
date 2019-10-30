@@ -74,6 +74,14 @@ namespace fasttext {
                 real /*threshold*/,
                 Predictions& /*heap*/,
                 Model::State& /*state*/) const;
+        double logbesseli(double nu, double x) {
+            double frac = x/nu;
+            double square = 1 + frac*frac;
+            double root = sqrt( square );
+            double eta = root + log(frac) - log(1+root);
+            double approx = -1 * log( sqrt( 2 * 3.1416* nu) ) + nu*eta - 0.25*log(square);
+            return approx;
+        }
     };
 
     class BinaryLogisticLoss : public Loss {
