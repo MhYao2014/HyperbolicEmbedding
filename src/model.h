@@ -58,6 +58,7 @@ class Model {
       Vector Z;
       Vector Vc;
     std::minstd_rand rng;
+    std::vector<real> freq;
     int64_t SampleCount;
     real TotalSum;
       real omega;
@@ -104,6 +105,14 @@ class Model {
 
   static const int32_t kUnlimitedPredictions = -1;
   static const int32_t kAllLabelsAsTarget = -1;
+    double logbesseli(double nu, double x) {
+        double frac = x/nu;
+        double square = 1 + frac*frac;
+        double root = sqrt( square );
+        double eta = root + log(frac) - log(1+root);
+        double approx = -1 * log( sqrt( 2 * 3.1416* nu) ) + nu*eta - 0.25*log(square);
+        return approx;
+    }
 };
 
 } // namespace fasttext

@@ -51,6 +51,7 @@ class QuantMatrix : public Matrix {
   void expMapToRow(Vector&, int64_t) override;
 
   real dotRow(const Vector&, int64_t) const override;
+  real CosSim(const Vector&, int64_t) const override;
   void addVectorToRow(const Vector&, int64_t, real) override;
   void addRowToVector(Vector& x, int32_t i) const override;
   void addRowToVector(Vector& x, int32_t i, real a) const override;

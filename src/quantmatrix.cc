@@ -78,6 +78,17 @@ real QuantMatrix::dotRow(const Vector& vec, int64_t i) const {
   return pq_->mulcode(vec, codes_.data(), i, norm);
 }
 
+    real QuantMatrix::CosSim(const Vector& vec, int64_t i) const {
+        assert(i >= 0);
+        assert(i < m_);
+        assert(vec.size() == n_);
+        real norm = 1;
+        if (qnorm_) {
+            norm = npq_->get_centroids(0, norm_codes_[i])[0];
+        }
+        return pq_->mulcode(vec, codes_.data(), i, norm);
+    }
+
 void QuantMatrix::addVectorToRow(const Vector&, int64_t, real) {
   throw std::runtime_error("Operation not permitted on quantized matrices.");
 }

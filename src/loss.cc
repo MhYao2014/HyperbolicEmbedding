@@ -472,12 +472,6 @@ namespace fasttext {
         //后来添加的pdf部分
 //        state.Vc.zero();
 //        state.Vc.addVector(state.hidden, 1/uNorm);
-        //计算当前in向量被抽中的概率
-        real kappa = 1000;
-        real Ck = pow(kappa,(100/2-1)) / pow(2*3.1416,100/2) / logbesseli(100/2-1, kappa);
-        for (int32_t i=0; i < wo_->size(0); i++) {
-
-        }
 //        state.omega = ReparameterizeVc(state.Vc.size(), kappa, state.Z, state.Vc);
         //添加的部分结束
         //
