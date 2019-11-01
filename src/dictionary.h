@@ -29,6 +29,8 @@ struct entry {
   int64_t count;
   entry_type type;
   std::vector<int32_t> subwords;
+  real freq;
+  real kappa;
 };
 
 class Dictionary {

@@ -369,6 +369,8 @@ void Dictionary::initTableDiscard() {
   pdiscard_.resize(size_);
   for (size_t i = 0; i < size_; i++) {
     real f = real(words_[i].count) / real(ntokens_);
+    words_[i].freq = f;
+    words_[i].kappa = 1 / f * 1000;
     pdiscard_[i] = std::sqrt(args_->t / f) + args_->t / f;
   }
 }

@@ -965,6 +965,12 @@ namespace fasttext {
         std::ifstream ifs(args_->input);
         utils::seek(ifs, threadId * utils::size(ifs) / args_->thread);
         Model::State state(args_->dim, output_->size(0), threadId);
+        if (state.freq.empty()) {
+            for (int32_t i=0; i < dict_->nwords(); i++) {
+                state.freq.push_back(dict_->words_[i].freq);
+                state.kappa.push_back(dict_->words_[i].kappa);
+            }
+        }
         const int64_t ntokens = dict_->ntokens();
         int64_t localTokenCount = 0;
         std::vector<int32_t> line, labels;

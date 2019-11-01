@@ -59,6 +59,7 @@ class Model {
       Vector Vc;
     std::minstd_rand rng;
     std::vector<real> freq;
+    std::vector<real> kappa;
     int64_t SampleCount;
     real TotalSum;
       real omega;
