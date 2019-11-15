@@ -31,8 +31,10 @@ namespace fasttext {
               Vc(hiddenSize),
               rng(seed),
               TotalSum(0),
+              CurrentKappa(1.0),
               omega(0),
               alpha(1.0),
+              IfSample(true),
               SampleCount(0){}
 
     real Model::State::getLoss() const {
@@ -106,16 +108,17 @@ namespace fasttext {
             return;
         }
         computeHidden(input, state);
-        real NormHidden = state.hidden.norm();
+        state.CurrentKappa = state.kappa[*input.cbegin()];
+        //real NormHidden = state.hidden.norm();
         //计算当前in向量被抽中的概率
-        real kappa = 1000;
-        real Ck = pow(kappa,(100/2-1)) / pow(2*3.1416,100/2) / exp(logbesseli(100/2-1, kappa));
-        real ProbV = 0;
-        real ProbVhat = 0;
-        for (int32_t i=0; i < wo_->size(0); i++) {
-            ProbVhat = Ck * exp(kappa*wi_->CosSim(state.hidden, i));
-            ProbV += state.freq[i]*ProbVhat;
-        }
+        //real kappa = 1000;
+        //real Ck = pow(kappa,(100/2-1)) / pow(2*3.1416,100/2) / exp(logbesseli(100/2-1, kappa));
+        //real ProbV = 0;
+        //real ProbVhat = 0;
+        //for (int32_t i=0; i < wo_->size(0); i++) {
+            //ProbVhat = Ck * exp(kappa*wi_->CosSim(state.hidden, i));
+            //ProbV += state.freq[i]*ProbVhat;
+        //}
         Vector& grad = state.grad;
         grad.zero();
         real lossValue = loss_->forward(targets, targetIndex, state, lr, true);

@@ -60,10 +60,12 @@ class Model {
     std::minstd_rand rng;
     std::vector<real> freq;
     std::vector<real> kappa;
+    real CurrentKappa;
     int64_t SampleCount;
     real TotalSum;
       real omega;
       real alpha;
+      bool IfSample;
 //    int32_t input;
 
     State(int32_t hiddenSize, int32_t outputSize, int32_t seed);

@@ -44,7 +44,7 @@ namespace fasttext {
         real Beta(int m);
         real ReparameterizeOmega(int m, real kappa);
         void ReparameterizeZ(int m, Vector & Z, Vector & VcTemp, real omega);
-        real ReparameterizeVc(int m, real kappa, Vector & Z, Vector & Vc);
+        real ReparameterizeVc(int64_t m, real kappa, Vector & Z, Vector & Vc);
 
         virtual real forward(
                 const std::vector<int32_t>& targets,

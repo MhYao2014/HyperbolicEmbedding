@@ -139,7 +139,7 @@ namespace fasttext {
                 } else if (args[ai] == "-epoch") {
                     epoch = std::stoi(args.at(ai + 1));
                 } else if (args[ai] == "-epochTree") {
-                    epoch = std::stoi(args.at(ai + 1));
+                    epochTree = std::stoi(args.at(ai + 1));
                 } else if (args[ai] == "-minCount") {
                     minCount = std::stoi(args.at(ai + 1));
                 } else if (args[ai] == "-minCountLabel") {

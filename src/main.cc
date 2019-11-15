@@ -342,7 +342,6 @@ void analogies(const std::vector<std::string> args) {
     std::cin >> wordB;
     std::cin >> wordC;
     printPredictions(fasttext.getAnalogies(k, wordA, wordB, wordC), true, true);
-
     std::cout << prompt;
   }
   exit(0);
