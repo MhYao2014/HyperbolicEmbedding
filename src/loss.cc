@@ -371,14 +371,14 @@ namespace fasttext {
 
         } else {
             real innerProduct = wo_->dotRow(state.hidden, target);
-            real score = sigmoid( (real)(innerProduct / uNorm) );
+            real score = sigmoid( (real)(innerProduct / uNorm / 10) );
             real alpha = lr * (real(labelIsPositive) - score);
             // update v
-            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm));
+            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm / 10));
             // calculate the first term of u's grad
-            state.grad.addRow(*wo_, target, (real)(alpha / uNorm));
+            state.grad.addRow(*wo_, target, (real)(alpha / uNorm / 10));
             // calculate the second term of u's grad
-            state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm)));
+            state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm) / 10));
             if (labelIsPositive){
                 return -log(score);
             } else {
@@ -482,8 +482,6 @@ namespace fasttext {
         return omega;
     }
 
-
-
     real InUnitLoss::forward(
             const std::vector<int32_t> &targets,
             int32_t targetIndex,
@@ -495,7 +493,7 @@ namespace fasttext {
         assert( targetIndex < targets.size() );
         int32_t target = targets[targetIndex];
         real uNorm = state.hidden.norm();
-        if (state.CurrentKappa <= 1000) {
+        if (state.CurrentKappa <= 10) {
             //后来添加的pdf部分
             state.Vc.zero();
             state.Vc.addVector(state.hidden, 1/uNorm);
