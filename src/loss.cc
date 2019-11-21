@@ -345,64 +345,64 @@ namespace fasttext {
             const std::vector<int64_t> &targetCounts)
             : NegativeSamplingLoss(wo, words, ntokens, neg, targetCounts){}
 
-    real InUnitLoss::binaryLogistic (
-            int32_t  target,
-            Model::State& state,
-            real uNorm,
-            bool labelIsPositive,
-            real lr,
-            bool backprop ) const {
-        if (state.IfSample) {
-            real innerProduct = wo_->dotRow(state.Vc, target);
-            real inner = wo_->dotRow(state.hidden, target);
-            real score = sigmoid( (real)(innerProduct) );
-            real alpha = lr * (real(labelIsPositive) - score);
-            // update V
-            wo_->addVectorToRow(state.Vc, target, (real)(alpha));
-            // calculate the first term of u's grad
-            state.grad.addRow(*wo_, target, (real)(alpha * state.omega / uNorm));
-            // calculate the second term of u's grad
-            state.grad.addVector(state.hidden, (real)(- alpha * inner * state.omega / (uNorm*uNorm*uNorm)));
-            if (labelIsPositive){
-                return -log(score);
-            } else {
-                return -log(1.0 - score);
-            }
-
-        } else {
-            real innerProduct = wo_->dotRow(state.hidden, target);
-            real score = sigmoid( (real)(innerProduct / uNorm / 10) );
-            real alpha = lr * (real(labelIsPositive) - score);
-            // update v
-            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm / 10));
-            // calculate the first term of u's grad
-            state.grad.addRow(*wo_, target, (real)(alpha / uNorm / 10));
-            // calculate the second term of u's grad
-            state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm) / 10));
-            if (labelIsPositive){
-                return -log(score);
-            } else {
-                return -log(1.0 - score);
-            }
-        }
-        //
-        // 计算概率值
-
-        //innerProduct = innerProduct;
-//        real score = sigmoid( (real)(innerProduct  * state.alpha / uNorm) );
-//        if (backprop) {
+//    real InUnitLoss::binaryLogistic (
+//            int32_t  target,
+//            Model::State& state,
+//            real uNorm,
+//            bool labelIsPositive,
+//            real lr,
+//            bool backprop ) const {
+//        if (state.IfSample) {
+//            real innerProduct = wo_->dotRow(state.Vc, target);
+//            real inner = wo_->dotRow(state.hidden, target);
+//            real score = sigmoid( (real)(innerProduct) );
 //            real alpha = lr * (real(labelIsPositive) - score);
-//            // update v
-//            //wo_->addVectorToRow(state.hidden, target, (real)(alpha * state.alpha / uNorm));
+//            // update V
 //            wo_->addVectorToRow(state.Vc, target, (real)(alpha));
 //            // calculate the first term of u's grad
-//            //state.grad.addRow(*wo_, target, (real)(alpha * state.alpha / uNorm));
 //            state.grad.addRow(*wo_, target, (real)(alpha * state.omega / uNorm));
 //            // calculate the second term of u's grad
-//            //state.grad.addVector(state.hidden, (real)(- alpha * state.alpha * innerProduct / (uNorm*uNorm*uNorm)));
 //            state.grad.addVector(state.hidden, (real)(- alpha * inner * state.omega / (uNorm*uNorm*uNorm)));
+//            if (labelIsPositive){
+//                return -log(score);
+//            } else {
+//                return -log(1.0 - score);
+//            }
+//
+//        } else {
+//            real innerProduct = wo_->dotRow(state.hidden, target);
+//            real score = sigmoid( (real)(innerProduct / uNorm / 10) );
+//            real alpha = lr * (real(labelIsPositive) - score);
+//            // update v
+//            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm / 10));
+//            // calculate the first term of u's grad
+//            state.grad.addRow(*wo_, target, (real)(alpha / uNorm / 10));
+//            // calculate the second term of u's grad
+//            state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm) / 10));
+//            if (labelIsPositive){
+//                return -log(score);
+//            } else {
+//                return -log(1.0 - score);
+//            }
 //        }
-    }
+//        //
+//        // 计算概率值
+//
+//        //innerProduct = innerProduct;
+////        real score = sigmoid( (real)(innerProduct  * state.alpha / uNorm) );
+////        if (backprop) {
+////            real alpha = lr * (real(labelIsPositive) - score);
+////            // update v
+////            //wo_->addVectorToRow(state.hidden, target, (real)(alpha * state.alpha / uNorm));
+////            wo_->addVectorToRow(state.Vc, target, (real)(alpha));
+////            // calculate the first term of u's grad
+////            //state.grad.addRow(*wo_, target, (real)(alpha * state.alpha / uNorm));
+////            state.grad.addRow(*wo_, target, (real)(alpha * state.omega / uNorm));
+////            // calculate the second term of u's grad
+////            //state.grad.addVector(state.hidden, (real)(- alpha * state.alpha * innerProduct / (uNorm*uNorm*uNorm)));
+////            state.grad.addVector(state.hidden, (real)(- alpha * inner * state.omega / (uNorm*uNorm*uNorm)));
+////        }
+//    }
 
 
 
@@ -481,6 +481,59 @@ namespace fasttext {
         Vc.addVector(Z);
         return omega;
     }
+//    real InUnitLoss::forward(
+//            const std::vector<int32_t> &targets,
+//            int32_t targetIndex,
+//            Model::State &state,
+//            real lr,
+//            bool backprop) {
+//        //std::cerr << "\rI am here ! The forward" << std::endl;
+//        assert( targetIndex >= 0 );
+//        assert( targetIndex < targets.size() );
+//        int32_t target = targets[targetIndex];
+//        real uNorm = state.hidden.norm();
+//        if (state.CurrentKappa <= 10) {
+//            //后来添加的pdf部分
+//            state.Vc.zero();
+//            state.Vc.addVector(state.hidden, 1/uNorm);
+//            state.omega = ReparameterizeVc(state.Vc.size(), state.CurrentKappa, state.Z, state.Vc);
+//            state.IfSample = true;
+//        } else {
+//            state.IfSample = false;
+//        }
+//        //添加的部分结束
+//        real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
+//        // 负采样部分
+//        for(int32_t i = 0; i < neg_; i++) {
+//            auto negativeTarget = getNegative(target, state.rng);
+//            loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
+//        }
+//
+//        return loss;
+//    }
+
+    real InUnitLoss::binaryLogistic (
+            int32_t  target,
+            Model::State& state,
+            real uNorm,
+            bool labelIsPositive,
+            real lr,
+            bool backprop ) const {
+        real innerProduct = wo_->dotRow(state.hidden, target);
+        real score = sigmoid( (real)(innerProduct) );
+        real alpha = lr * (real(labelIsPositive) - score);
+        // update v
+        wo_->addVectorToRow(state.hidden, target, (real)(alpha));
+        // calculate the first term of u's grad
+        state.grad.addRow(*wo_, target, (real)(alpha));
+        // calculate the second term of u's grad
+        state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct));
+        if (labelIsPositive){
+            return -log(score);
+        } else {
+            return -log(1.0 - score);
+        }
+    }
 
     real InUnitLoss::forward(
             const std::vector<int32_t> &targets,
@@ -493,15 +546,6 @@ namespace fasttext {
         assert( targetIndex < targets.size() );
         int32_t target = targets[targetIndex];
         real uNorm = state.hidden.norm();
-        if (state.CurrentKappa <= 10) {
-            //后来添加的pdf部分
-            state.Vc.zero();
-            state.Vc.addVector(state.hidden, 1/uNorm);
-            state.omega = ReparameterizeVc(state.Vc.size(), state.CurrentKappa, state.Z, state.Vc);
-            state.IfSample = true;
-        } else {
-            state.IfSample = false;
-        }
         //添加的部分结束
         real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
         // 负采样部分
@@ -509,7 +553,7 @@ namespace fasttext {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
         }
-
+        state.grad.addVector(state.hidden,2*0.01*(1-1/uNorm));
         return loss;
     }
 
