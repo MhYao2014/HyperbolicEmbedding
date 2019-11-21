@@ -458,7 +458,7 @@ namespace fasttext {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
         }
-        state.grad.addVector(state.hidden,2*0.01*(1-1/uNorm));
+//        state.grad.addVector(state.hidden,2*0.01*(1-1/uNorm));
         return loss;
     }
 
