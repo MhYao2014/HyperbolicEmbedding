@@ -432,7 +432,7 @@ namespace fasttext {
         // calculate the first term of u's grad
         state.grad.addRow(*wo_, target, (real)(alpha));
         // calculate the second term of u's grad
-        state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct));
+//        state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct));
         if (labelIsPositive){
             return -log(score);
         } else {
@@ -458,7 +458,7 @@ namespace fasttext {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
         }
-//        state.grad.addVector(state.hidden,2*0.01*(1-1/uNorm));
+        state.grad.addVector(state.hidden,2*0.01*(1-1/uNorm));
         return loss;
     }
 

@@ -118,7 +118,7 @@ namespace fasttext {
         //for (int32_t i=0; i < wo_->size(0); i++) {
             //ProbVhat = Ck * exp(kappa*wi_->CosSim(state.hidden, i));
             //ProbV += state.freq[i]*ProbVhat;
-        //}
+        //}ty
         Vector& grad = state.grad;
         grad.zero();
         real lossValue = loss_->forward(targets, targetIndex, state, lr, true);
