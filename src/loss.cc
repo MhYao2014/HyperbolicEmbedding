@@ -409,10 +409,10 @@ namespace fasttext {
             bool labelIsPositive,
             real lr,
             bool backprop ) const {
-        real score = sigmoid(wo_->dotRow(state.hidden, target)/uNorm);
+        real score = sigmoid(wo_->dotRow(state.hidden, target));
         real alpha = lr * (real(labelIsPositive) - score);
         state.grad.addRow(*wo_, target,(alpha));
-        wo_->addVectorToRow(state.hidden, target,(alpha/uNorm));
+        wo_->addVectorToRow(state.hidden, target,(alpha));
         if (labelIsPositive){
             return -log(score);
         } else {
@@ -436,7 +436,7 @@ namespace fasttext {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
         }
-        state.grad.addVector(state.hidden,lr*2*0.001*(1-1/uNorm));
+        state.grad.addVector(state.hidden,lr*2*0.001*(1-0.1/uNorm));
         return loss;
     }
     real NegativeSamplingLoss::forward(
