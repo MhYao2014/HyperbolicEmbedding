@@ -409,10 +409,10 @@ namespace fasttext {
             bool labelIsPositive,
             real lr,
             bool backprop ) const {
-        real score = sigmoid(wo_->dotRow(state.hidden, target));
+        real score = sigmoid(wo_->dotRow(state.hidden, target)/uNorm);
         real alpha = lr * (real(labelIsPositive) - score);
         state.grad.addRow(*wo_, target,(alpha));
-        wo_->addVectorToRow(state.hidden, target,(alpha));
+        wo_->addVectorToRow(state.hidden, target,(alpha/uNorm));
         if (labelIsPositive){
             return -log(score);
         } else {
