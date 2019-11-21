@@ -129,24 +129,7 @@ namespace fasttext {
 //        }
 //    }
 
-    real BinaryLogisticLoss::binaryLogistic(
-            int32_t target,
-            Model::State& state,
-            bool labelIsPositive,
-            real lr,
-            bool backprop) const {
-        real score = sigmoid(wo_->dotRow(state.hidden, target));
-        if (backprop) {
-            real alpha = lr * (real(labelIsPositive) - score);
-            state.grad.addRow(*wo_, target, alpha);
-            wo_->addVectorToRow(state.hidden, target, alpha);
-        }
-        if (labelIsPositive) {
-            return -log(score);
-        } else {
-            return -log(1.0 - score);
-        }
-    }
+
 
 //    void UnitBiLogisticLoss::computeOutput(fasttext::Model::State &state) const {
 //        Vector& output = state.output;
@@ -319,23 +302,7 @@ namespace fasttext {
 //        return loss;
 //    }
 
-    real NegativeSamplingLoss::forward(
-            const std::vector<int32_t>& targets,
-            int32_t targetIndex,
-            Model::State& state,
-            real lr,
-            bool backprop) {
-        assert(targetIndex >= 0);
-        assert(targetIndex < targets.size());
-        int32_t target = targets[targetIndex];
-        real loss = binaryLogistic(target, state, true, lr, backprop);
 
-        for (int32_t n = 0; n < neg_; n++) {
-            auto negativeTarget = getNegative(target, state.rng);
-            loss += binaryLogistic(negativeTarget, state, false, lr, backprop);
-        }
-        return loss;
-    }
 
     InUnitLoss::InUnitLoss(
             std::shared_ptr<fasttext::Matrix> &wo,
@@ -417,6 +384,24 @@ namespace fasttext {
 //        return loss;
 //    }
 
+    real BinaryLogisticLoss::binaryLogistic(
+            int32_t target,
+            Model::State& state,
+            bool labelIsPositive,
+            real lr,
+            bool backprop) const {
+        real score = sigmoid(wo_->dotRow(state.hidden, target));
+        if (backprop) {
+            real alpha = lr * (real(labelIsPositive) - score);
+            state.grad.addRow(*wo_, target, alpha);
+            wo_->addVectorToRow(state.hidden, target, alpha);
+        }
+        if (labelIsPositive) {
+            return -log(score);
+        } else {
+            return -log(1.0 - score);
+        }
+    }
     real InUnitLoss::binaryLogistic (
             int32_t  target,
             Model::State& state,
@@ -424,15 +409,10 @@ namespace fasttext {
             bool labelIsPositive,
             real lr,
             bool backprop ) const {
-        real innerProduct = wo_->dotRow(state.hidden, target);
-        real score = sigmoid( (real)(innerProduct) );
+        real score = sigmoid(wo_->dotRow(state.hidden, target));
         real alpha = lr * (real(labelIsPositive) - score);
-        // update v
-        wo_->addVectorToRow(state.hidden, target, (real)(alpha));
-        // calculate the first term of u's grad
-        state.grad.addRow(*wo_, target, (real)(alpha));
-        // calculate the second term of u's grad
-//        state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct));
+        state.grad.addRow(*wo_, target,(alpha));
+        wo_->addVectorToRow(state.hidden, target,(alpha));
         if (labelIsPositive){
             return -log(score);
         } else {
@@ -451,14 +431,29 @@ namespace fasttext {
         assert( targetIndex < targets.size() );
         int32_t target = targets[targetIndex];
         real uNorm = state.hidden.norm();
-        //添加的部分结束
         real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
-        // 负采样部分
         for(int32_t i = 0; i < neg_; i++) {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
         }
 //        state.grad.addVector(state.hidden,2*0.01*(1-1/uNorm));
+        return loss;
+    }
+    real NegativeSamplingLoss::forward(
+            const std::vector<int32_t>& targets,
+            int32_t targetIndex,
+            Model::State& state,
+            real lr,
+            bool backprop) {
+        assert(targetIndex >= 0);
+        assert(targetIndex < targets.size());
+        int32_t target = targets[targetIndex];
+        real loss = binaryLogistic(target, state, true, lr, backprop);
+
+        for (int32_t n = 0; n < neg_; n++) {
+            auto negativeTarget = getNegative(target, state.rng);
+            loss += binaryLogistic(negativeTarget, state, false, lr, backprop);
+        }
         return loss;
     }
 
