@@ -250,9 +250,9 @@ namespace fasttext {
             for (int32_t j = 0; j < neg_; j++) {
                 auto negativeTargetI = getNegative(target, state.rng);
                 auto negativeTargetJ = getNegative(target, state.rng);
-                if (negativeTargetI == negativeTargetJ) {
-                    return 0;
-                }
+//                if (negativeTargetI == negativeTargetJ) {
+//                    return 0;
+//                }
                 state.DicId = negativeTargetJ;
                 loss += InUnitLoss::binaryLogistic(negativeTargetI, state, uNorm, false, lr, backprop);
             }
