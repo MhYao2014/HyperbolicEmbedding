@@ -216,8 +216,8 @@ namespace fasttext {
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
         }
         for(int32_t i = 0; i < neg_; i++) {
-            auto negativeTargetI = getNegative(target, state.rng);
             for (int32_t j = 0; j < neg_; j++) {
+                auto negativeTargetI = getNegative(target, state.rng);
                 auto negativeTargetJ = getNegative(target, state.rng);
                 state.DicId = negativeTargetJ;
                 loss += InUnitLoss::binaryLogistic(negativeTargetI, state, uNorm, false, lr, backprop);
