@@ -104,44 +104,6 @@ namespace fasttext {
                                            int64_t ntokens)
             : Loss(wo, words, ntokens) {}
 
-//    real UnitBiLogisticLoss::unitBiLogistic(
-//            int32_t target,
-//            fasttext::Model::State &state,
-//            real uNorm,
-//            bool labelIsPositive,
-//            fasttext::real lr,
-//            bool backprop) const {
-//        real innerProduct = wo_->dotRow(state.hidden, target);
-//        real score = sigmoid( (real)(innerProduct / uNorm) );
-//        if (backprop) {
-//            real alpha = lr * (real(labelIsPositive) - score);
-//            // update v
-//            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm));
-//            // calculate the first term of u's grad
-//            state.grad.addRow(*wo_, target, (real)(alpha / uNorm));
-//            // calculate the second term of u's grad
-//            state.grad.addVector(state.hidden, (real)(- alpha * innerProduct / (real)pow(uNorm, 3)));
-//        }
-//        if (labelIsPositive){
-//            return -log(score);
-//        } else {
-//            return -log(1.0 - score);
-//        }
-//    }
-
-
-
-//    void UnitBiLogisticLoss::computeOutput(fasttext::Model::State &state) const {
-//        Vector& output = state.output;
-//        real uNorm = state.hidden.norm();
-//        output.mul(*wo_, state.hidden);
-//        output.mul((real)(1.0 / uNorm));
-//        int32_t osz = output.size();
-//        for(int32_t i = 0; i < osz; i++) {
-//            output[i] = sigmoid(output[i]);
-//        }
-//    }
-
     void BinaryLogisticLoss::computeOutput(Model::State& state) const {
         Vector& output = state.output;
         output.mul(*wo_, state.hidden);
@@ -150,16 +112,6 @@ namespace fasttext {
             output[i] = sigmoid(output[i]);
         }
     }
-
-//    int32_t UnitNegativeSamplingLoss::getNegative(
-//            int32_t target,
-//            std::minstd_rand &rng) {
-//        int32_t negative;
-//        do {
-//            negative = negatives_[uniform_(rng)];
-//        } while (target == negative);
-//        return negative;
-//    }
 
     int32_t NegativeSamplingLoss::getNegative(
             int32_t target,
@@ -192,118 +144,6 @@ namespace fasttext {
         uniform_ = std::uniform_int_distribution<size_t>(0, negatives_.size() - 1);
     }
 
-//    real UnitNegativeSamplingLoss::forward(
-//            const std::vector<int32_t> &targets,
-//            int32_t targetIndex,
-//            Model::State &state,
-//            real lr,
-//            bool backprop) {
-//        assert( targetIndex >= 0 );
-//        assert( targetIndex < targets.size() );
-//        int32_t target = targets[targetIndex];
-//        real uNorm = state.hidden.norm();
-//        real loss = unitBiLogistic(target, state, uNorm, true, lr, backprop);
-//
-//        for(int32_t i = 0; i < neg_; i++) {
-//            auto negativeTarget = getNegative(target, state.rng);
-//            loss += unitBiLogistic(negativeTarget, state, uNorm, false, lr, backprop);
-//        }
-//        return loss;
-//    }
-//
-//    real UnitNegativeSamplingLoss::forwardHyper(
-//            Matrix & wi_,
-//            int32_t inWordId,
-//            int32_t targetId,
-//            Model::State& state,
-//            real lr,
-//            bool backprop) {
-//        assert( targetId >= 0 );
-//        real loss = 0;
-//        Vector target(wi_.size(1));
-//        target.zero();
-//        target.addRow(wi_, targetId);
-//        // 生成u^{\hat}与v_{+}^{\hat}
-//        Vector uHat(state.hidden.size()+1);
-//        uHat.generateFrom(state.hidden);
-//        Vector targetHat(target.size()+1);
-//        targetHat.generateFrom(target);
-//        // 计算正样本的洛仑兹内积;
-//        real lorentzProduct = uHat.lorentzPro(targetHat);
-//        assert(-lorentzProduct > 1);
-//        real numeraPos = exp(-acosh(-lorentzProduct));
-//        // 计算hidden与正例的欧式梯度
-//        state.gradHyper = targetHat;
-//        Vector hHatTarget = uHat;
-//        // 计算梯度前的系数并乘上度规矩阵的逆，从而得到双曲梯度
-//        real diffCoff = 1 / std::sqrt(lorentzProduct*lorentzProduct - 1);
-//        hHatTarget.mul(-diffCoff);
-//        state.gradHyper.mul(-diffCoff);
-//        // 对正例利用双曲梯度进行黎曼SGD
-//        hHatTarget.proj(targetHat);
-//        hHatTarget.mul(-lr);
-//        wi_.expMapToRow(hHatTarget, targetId);
-//        // 负采样并计算梯度，最后进行黎曼SGD
-////        std::vector<real> loreProVec;
-////        std::vector<int64_t> negIdVec;
-////        // 第一遍遍历先将每个负样本遍历完，并记录下每个负样本与hidden的内积
-////        for (int32_t i = 0; i < neg_; i++) {
-////            auto negativeTarget = getNegativeHyper(inWordId, targetId, state.rng);
-////            negIdVec.push_back(negativeTarget);
-////            // 抽取负样本的原始词向量
-////            target.zero();
-////            target.addRow(wi_, negativeTarget);
-////            // 生成负样本的双曲向量
-////            targetHat.generateFrom(target);
-////            // 计算负样本的洛伦茨内积
-////            lorentzProduct = uHat.lorentzPro(targetHat);
-////            loreProVec.push_back(lorentzProduct);
-////        }
-////        // 第二遍遍历负样本并计算分子分母
-////        real denomi = 0;
-////        real numerTemp = 0;
-////        std::vector<real> numer;
-////        for (int32_t i = 0; i < neg_; i++) {
-////            assert(-loreProVec[i] > 1);
-////            // 计算分子
-////            numerTemp = exp(-acosh(-loreProVec[i]));
-////            // 梯度计算中出现的负号留在了这里相乘
-////            numer.push_back(-numerTemp);
-////            // 累加分母
-////            denomi += numerTemp;
-////        }
-//        // 计算损失
-//        loss += -log(numeraPos);
-//        // 第三遍遍历负样本并更新梯度
-////        Vector hHatHiddenTemp(targetHat.size());
-////        for (int32_t i = 0; i < neg_; i++) {
-////            // 计算负样本的欧式梯度因子
-////            diffCoff = numer[i] / denomi / std::sqrt((loreProVec[i]*loreProVec[i]) - 1);
-////            // 负样本的欧式梯度是从uHat开始的
-////            hHatTarget.zero();
-////            hHatTarget = uHat;
-////            hHatTarget.mul(-diffCoff);
-////            // 取出负样本的原始词向量
-////            target.zero();
-////            target.addRow(wi_, negIdVec[i]);
-////            targetHat.generateFrom(target);
-////            // 开始做黎曼SGD
-////            hHatTarget.proj(targetHat);
-////            hHatTarget.mul(-lr);
-////            wi_.expMapToRow(hHatTarget, negIdVec[i]);
-////            // 计算hidden的欧式梯度并累加
-////            hHatHiddenTemp.zero();
-////            hHatHiddenTemp = targetHat;
-////            hHatHiddenTemp.mul(-diffCoff);
-////            state.gradHyper.addVector(hHatHiddenTemp);
-////        }
-//        state.gradHyper.proj(uHat);
-//        state.gradHyper.mul(-lr);
-//        return loss;
-//    }
-
-
-
     InUnitLoss::InUnitLoss(
             std::shared_ptr<fasttext::Matrix> &wo,
             std::vector<entry> & words,
@@ -311,78 +151,6 @@ namespace fasttext {
             int neg,
             const std::vector<int64_t> &targetCounts)
             : NegativeSamplingLoss(wo, words, ntokens, neg, targetCounts){}
-//
-//    real InUnitLoss::binaryLogistic (
-//            int32_t  target,
-//            Model::State& state,
-//            real uNorm,
-//            bool labelIsPositive,
-//            real lr,
-//            bool backprop ) const {
-//        if (state.IfSample) {
-//            real innerProduct = wo_->dotRow(state.Vc, target);
-//            real inner = wo_->dotRow(state.hidden, target);
-//            real score = sigmoid( (real)(innerProduct) );
-//            real alpha = lr * (real(labelIsPositive) - score);
-//            // update V
-//            wo_->addVectorToRow(state.Vc, target, (real)(alpha));
-//            // calculate the first term of u's grad
-//            state.grad.addRow(*wo_, target, (real)(alpha * state.omega / uNorm));
-//            // calculate the second term of u's grad
-//            state.grad.addVector(state.hidden, (real)(- alpha * inner * state.omega / (uNorm*uNorm*uNorm)));
-//            if (labelIsPositive){
-//                return -log(score);
-//            } else {
-//                return -log(1.0 - score);
-//            }
-//
-//        } else {
-//            real innerProduct = wo_->dotRow(state.hidden, target);
-//            real score = sigmoid( (real)(innerProduct / uNorm / 10) );
-//            real alpha = lr * (real(labelIsPositive) - score);
-//            // update v
-//            wo_->addVectorToRow(state.hidden, target, (real)(alpha / uNorm / 10));
-//            // calculate the first term of u's grad
-//            state.grad.addRow(*wo_, target, (real)(alpha / uNorm / 10));
-//            // calculate the second term of u's grad
-//            state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm) / 10));
-//            if (labelIsPositive){
-//                return -log(score);
-//            } else {
-//                return -log(1.0 - score);
-//            }
-//        }
-//    }
-//
-//    real InUnitLoss::forward(
-//            const std::vector<int32_t> &targets,
-//            int32_t targetIndex,
-//            Model::State &state,
-//            real lr,
-//            bool backprop) {
-//        //std::cerr << "\rI am here ! The forward" << std::endl;
-//        assert( targetIndex >= 0 );
-//        assert( targetIndex < targets.size() );
-//        int32_t target = targets[targetIndex];
-//        real uNorm = state.hidden.norm();
-//        if (state.CurrentKappa <= 10) {
-//            //后来添加的pdf部分
-//            state.Vc.zero();
-//            state.Vc.addVector(state.hidden, 1/uNorm);
-//            state.omega = ReparameterizeVc(state.Vc.size(), state.CurrentKappa, state.Z, state.Vc);
-//            state.IfSample = true;
-//        } else {
-//            state.IfSample = false;
-//        }
-//        //添加的部分结束
-//        real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
-//        // 负采样部分
-//        for(int32_t i = 0; i < neg_; i++) {
-//            auto negativeTarget = getNegative(target, state.rng);
-//            loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
-//        }
-//        return loss;
-//    }
 
     real BinaryLogisticLoss::binaryLogistic(
             int32_t target,
@@ -402,6 +170,7 @@ namespace fasttext {
             return -log(1.0 - score);
         }
     }
+
     real InUnitLoss::binaryLogistic (
             int32_t  target,
             Model::State& state,
@@ -473,34 +242,7 @@ namespace fasttext {
             std::shared_ptr<fasttext::Matrix> &wi,
             fasttext::real lr,
             Model::State& state,
-            bool backprop) {
-        state.hidden.zero();
-        for (auto it = SumOutVecIds.cbegin(); it != SumOutVecIds.cend(); ++it) {
-            state.hidden.addRow(*wo, *it);
-        }
-        Vector RegularInVec(wi->size(1));
-        real L2Loss = 0;
-        int32_t RegularInVecId = negatives_[uniform_(state.rng)];
-//            std::cerr << "\rrandom ids:" << RegularInVecId << std::endl;
-        RegularInVec.zero();
-        RegularInVec.addRow(*wi, RegularInVecId);
-        real RegularInVecNorm =  RegularInVec.norm();
-        real InnerProduct = state.hidden.dotmul(RegularInVec, 1/RegularInVecNorm);
-        real f = real(words_[RegularInVecId].count) / real(ntokens_);
-        state.TotalSum += std::exp(InnerProduct) ;
-        state.SampleCount += 1;
-        real DisExpe = real (state.TotalSum / state.SampleCount);
-        real ConExpe = std::exp(real (pow(state.hidden.norm(),2) / 2 / 100));
-        RegularInVec.elemul(RegularInVec);
-        RegularInVec.elemul(state.hidden);
-        RegularInVec.mul(1/(RegularInVecNorm*RegularInVecNorm*RegularInVecNorm));
-        state.hidden.mul(1/RegularInVecNorm);
-        state.hidden.addVector(RegularInVec, -1);
-//        state.grad.addVector(state.hidden, );
-        wi->addVectorToRow(state.hidden, RegularInVecId, -lr*hyperparam*2*(DisExpe - ConExpe)*f*std::exp(InnerProduct)/ minibatch);
-        L2Loss = std::pow(DisExpe - ConExpe, 2) / minibatch;
-        return L2Loss;
-    }
+            bool backprop) {}
 
     TreeInUnitLoss::TreeInUnitLoss(
             std::shared_ptr<fasttext::Matrix> &wo,
@@ -513,16 +255,7 @@ namespace fasttext {
     int32_t TreeInUnitLoss::getNegativeHyper(
             int32_t inputId,
             int32_t target,
-            std::minstd_rand &rng) {
-        int32_t negative;
-        do {
-            negative = negatives_[uniform_(rng)];
-            if (negative == inputId) {
-                continue;
-            }
-        } while (target == negative || inputId == negative);
-        return negative;
-    }
+            std::minstd_rand &rng) {}
 
     real TreeInUnitLoss::forwardHyper(
             fasttext::Matrix &wi_,
@@ -530,167 +263,19 @@ namespace fasttext {
             int32_t targetId,
             fasttext::Model::State &state,
             fasttext::real lr,
-            bool backprop) {
-        assert( targetId >= 0 );
-        real loss = 0;
-        Vector target(wi_.size(1));
-        target.zero();
-        target.addRow(wi_, targetId);
-        // 生成u^{\hat}与v_{+}^{\hat}
-        Vector uHat(state.hidden.size()+1);
-        uHat.generateFrom(state.hidden);
-        Vector targetHat(target.size()+1);
-        targetHat.generateFrom(target);
-        // 计算正样本的洛仑兹内积;
-        real lorentzProduct = uHat.lorentzPro(targetHat);
-        assert(-lorentzProduct > 1);
-        real numeraPos = exp(-acosh(-lorentzProduct));
-        // 计算hidden与正例的欧式梯度
-        state.gradHyper = targetHat;
-        Vector hHatTarget = uHat;
-        // 计算梯度前的系数并乘上度规矩阵的逆，从而得到双曲梯度
-        real diffCoff = 1 / std::sqrt(lorentzProduct*lorentzProduct - 1);
-        hHatTarget.mul(-diffCoff);
-        state.gradHyper.mul(-diffCoff);
-        // 对正例利用双曲梯度进行黎曼SGD
-        hHatTarget.proj(targetHat);
-        hHatTarget.mul(-lr);
-        wi_.expMapToRow(hHatTarget, targetId);
-        // 负采样并计算梯度，最后进行黎曼SGD
-        std::vector<real> loreProVec;
-        std::vector<int64_t> negIdVec;
-        // 第一遍遍历先将每个负样本遍历完，并记录下每个负样本与hidden的内积
-        for (int32_t i = 0; i < neg_; i++) {
-            auto negativeTarget = TreeInUnitLoss::getNegativeHyper(inWordId, targetId, state.rng);
-            negIdVec.push_back(negativeTarget);
-            // 抽取负样本的原始词向量
-            target.zero();
-            target.addRow(wi_, negativeTarget);
-            // 生成负样本的双曲向量
-            targetHat.generateFrom(target);
-            // 计算负样本的洛伦茨内积
-            lorentzProduct = uHat.lorentzPro(targetHat);
-            loreProVec.push_back(lorentzProduct);
-        }
-        // 第二遍遍历负样本并计算分子分母
-        real denomi = 0;
-        real numerTemp = 0;
-        std::vector<real> numer;
-        for (int32_t i = 0; i < neg_; i++) {
-            assert(-loreProVec[i] > 1);
-            // 计算分子
-            numerTemp = exp(-acosh(-loreProVec[i]));
-            // 梯度计算中出现的负号留在了这里相乘
-            numer.push_back(-numerTemp);
-            // 累加分母
-            denomi += numerTemp;
-        }
-        // 计算损失
-        loss += -log(numeraPos);
-//         第三遍遍历负样本并更新梯度
-        Vector hHatHiddenTemp(targetHat.size());
-        for (int32_t i = 0; i < neg_; i++) {
-            // 计算负样本的欧式梯度因子
-            diffCoff = numer[i] / denomi / std::sqrt((loreProVec[i]*loreProVec[i]) - 1);
-            // 负样本的欧式梯度是从uHat开始的
-            hHatTarget.zero();
-            hHatTarget = uHat;
-            hHatTarget.mul(-diffCoff);
-            // 取出负样本的原始词向量
-            target.zero();
-            target.addRow(wi_, negIdVec[i]);
-            targetHat.generateFrom(target);
-            // 开始做黎曼SGD
-            hHatTarget.proj(targetHat);
-            hHatTarget.mul(-lr);
-            wi_.expMapToRow(hHatTarget, negIdVec[i]);
-            // 计算hidden的欧式梯度并累加
-            hHatHiddenTemp.zero();
-            hHatHiddenTemp = targetHat;
-            hHatHiddenTemp.mul(-diffCoff);
-            state.gradHyper.addVector(hHatHiddenTemp);
-        }
-        state.gradHyper.proj(uHat);
-        state.gradHyper.mul(-lr);
-        return loss;
-    }
+            bool backprop) {}
 
 
-    real Loss::Beta(int m) {
-        real Alpha = 0.5*(m-1);
-        real Beta = 0.5*(m-1);
-        std::random_device rd;
-        std::mt19937 gen(rd());
-        sftrabbit::beta_distribution<real> beta(Alpha, Beta);
-        return beta(gen);
-    }
+    real Loss::Beta(int m) {}
 
-    real Loss::ReparameterizeOmega(int m, fasttext::real kappa) {
-        real temp = std::sqrt(4*kappa*kappa + (m-1)*(m-1));
-        real b = (-2*kappa + temp) / (m-1);
-        real a = (m - 1 + 2*kappa + temp);
-        real d = 4*a*b / (1 + b) - (m - 1)*log(m - 1);
-        real epsilon, omega, t, u;
-        std::random_device rd;
-        std::mt19937 e2(rd());
-        std::uniform_real_distribution<> dist(0, 1);
-        sftrabbit::beta_distribution<real> beta(0.5*(m-1), 0.5*(m-1));
-        do {
-            epsilon = beta(e2);
-            omega = (1 - (1+b)*epsilon) / (1 - (1-b)*epsilon);
-            t = 2*a*b / (1 - (1-b)*epsilon);
-            u = dist(e2);
-        } while ((m-1)*log(t)-t+d >= log(u));
-        return omega;
-    }
+    real Loss::ReparameterizeOmega(int m, fasttext::real kappa) {}
 
-    void Loss::ReparameterizeZ(int m, Vector &Z, Vector & Vc, real omega) {
-        static std::random_device __randomDevice;
-        static std::mt19937 __randomGen(__randomDevice());
-        static std::normal_distribution<real> distribution(0, 1);
-        for (int i=0; i < m; i++) {
-            Z[i] = distribution(__randomGen);
-        }
-        real temp = -1*Z.dotmul(Vc, 1.0);
-        Z.addVector(Vc, temp);
-//        temp = ;
-        Z.mul(1/Z.norm()*std::sqrt(1-omega*omega));
-    }
+    void Loss::ReparameterizeZ(int m, Vector &Z, Vector & Vc, real omega) {}
 
     real Loss::ReparameterizeVc(int64_t m,
                                 fasttext::real kappa,
                                 fasttext::Vector &Z,
-                                fasttext::Vector &Vc) {
-//        std::cerr << "I am here" << std::endl;
-        // 抽样omega
-        real temp = std::sqrt(4*kappa*kappa + (m-1)*(m-1));
-        real b = (-2*kappa + temp) / (m-1);
-        real a = (m - 1 + 2*kappa + temp);
-        real d = 4*a*b / (1 + b) - (m - 1)*log(m - 1);
-        real epsilon, omega, t, u;
-        std::random_device rd;
-        std::mt19937 e2(rd());
-        std::uniform_real_distribution<> dist(0, 1);
-        sftrabbit::beta_distribution<real> beta(0.5*(m-1), 0.5*(m-1));
-        do {
-            epsilon = beta(e2);
-            omega = (1 - (1+b)*epsilon) / (1 - (1-b)*epsilon);
-            t = 2*a*b / (1 - (1-b)*epsilon);
-            u = dist(e2);
-        } while ((m-1)*log(t)-t+d >= log(u));
-        // 抽样Z
-        static std::normal_distribution<real> distribution(0, 1);
-        for (int i=0; i < m; i++) {
-            Z[i] = distribution(e2);
-        }
-        temp = -1*Z.dotmul(Vc, 1.0);
-        Z.addVector(Vc, temp);
-        Z.mul(1/Z.norm()*std::sqrt(1-omega*omega));
-        // 计算抽样后的Vc
-        Vc.mul(omega);
-        Vc.addVector(Z);
-        return omega;
-    }
+                                fasttext::Vector &Vc) {}
 
     void HierarchicalSoftmaxLoss::buildTree(const std::vector<int64_t>& counts) {
         tree_.resize(2 * osz_ - 1);
