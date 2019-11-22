@@ -207,27 +207,47 @@ namespace fasttext {
             bool labelIsPositive,
             real lr,
             bool backprop ) const {
-        real innerProduct = wo_->dotRow(state.hidden, target);
-        real innerProductSelf = wo_->dotRow(state.hidden,state.DicId);
-        real score = sigmoid(innerProduct / uNorm);
-        real scoreSum = sigmoid((innerProduct + innerProductSelf) / uNorm);
-        real alpha = lr * (real(labelIsPositive) - score);
-        real alphaSum = lr * (real(labelIsPositive) - scoreSum);
-        // update v
-        wo_->addVectorToRow(state.hidden, target, alpha / uNorm);
-        wo_->addVectorToRow(state.hidden, target, alphaSum / uNorm);
-        wo_->addVectorToRow(state.hidden, state.DicId, alphaSum / uNorm);
-        // calculate the first term of u's grad
-        state.grad.addRow(*wo_, target, alpha / uNorm);
-        state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm);
-        state.grad.addRow(*wo_, target, alphaSum / uNorm);
-        // calculate the second term of u's grad
-        state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm)));
-        state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm));
         if (labelIsPositive){
+            real innerProduct = wo_->dotRow(state.hidden, target);
+            real score = sigmoid(innerProduct / uNorm);
+            real alpha = lr * (real(labelIsPositive) - score);
+            real innerProductSelf = wo_->dotRow(state.hidden,state.DicId);
+            real scoreSum = sigmoid((innerProduct + innerProductSelf) / uNorm);
+            real alphaSum = lr * (real(labelIsPositive) - scoreSum);
+            // update v
+            wo_->addVectorToRow(state.hidden, target, alpha / uNorm);
+            wo_->addVectorToRow(state.hidden, target, alphaSum / uNorm);
+            wo_->addVectorToRow(state.hidden, state.DicId, alphaSum / uNorm);
+            // calculate the first term of u's grad
+            state.grad.addRow(*wo_, target, alpha / uNorm);
+            state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm);
+            state.grad.addRow(*wo_, target, alphaSum / uNorm);
+            // calculate the second term of u's grad
+            state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm)));
+            state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm));
             return -log(scoreSum)-log(score);
         } else {
-            return -log(1.0 - scoreSum)-log(1.0 - score);
+            if (state.IfSecondOrder) {
+                real innerProduct = wo_->dotRow(state.hidden, target);
+                real innerProductSelf = wo_->dotRow(state.hidden,state.DicId);
+                real scoreSum = sigmoid((innerProduct + innerProductSelf) / uNorm);
+                real alphaSum = lr * (real(labelIsPositive) - scoreSum);
+                wo_->addVectorToRow(state.hidden, target, alphaSum / uNorm);
+                wo_->addVectorToRow(state.hidden, state.DicId, alphaSum / uNorm);
+                state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm);
+                state.grad.addRow(*wo_, target, alphaSum / uNorm);
+                state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm));
+                return -log(1.0 - scoreSum);
+            } else {
+                real innerProduct = wo_->dotRow(state.hidden, target);
+                real score = sigmoid(innerProduct / uNorm);
+                real alpha = lr * (real(labelIsPositive) - score);
+                wo_->addVectorToRow(state.hidden, target, alpha / uNorm);
+                state.grad.addRow(*wo_, target, alpha / uNorm);
+                state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm)));
+                return -log(1.0 - score);
+            }
+
         }
     }
 
@@ -242,17 +262,16 @@ namespace fasttext {
         int32_t target = targets[targetIndex];
         real uNorm = state.hidden.norm();
         real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
+        state.IfSecondOrder = false;
         for(int32_t i = 0; i < neg_; i++) {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
         }
+        state.IfSecondOrder = true;
         for(int32_t i = 0; i < neg_; i++) {
             for (int32_t j = 0; j < neg_; j++) {
                 auto negativeTargetI = getNegative(target, state.rng);
                 auto negativeTargetJ = getNegative(target, state.rng);
-//                if (negativeTargetI == negativeTargetJ) {
-//                    return 0;
-//                }
                 state.DicId = negativeTargetJ;
                 loss += InUnitLoss::binaryLogistic(negativeTargetI, state, uNorm, false, lr, backprop);
             }

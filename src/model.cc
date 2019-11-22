@@ -34,7 +34,7 @@ namespace fasttext {
               CurrentKappa(1.0),
               omega(0),
               DicId(0),
-              IfSample(true),
+              IfSecondOrder(false),
               SampleCount(0){}
 
     real Model::State::getLoss() const {

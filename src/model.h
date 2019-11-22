@@ -65,7 +65,7 @@ class Model {
     real TotalSum;
       real omega;
       int64_t DicId;
-      bool IfSample;
+      bool IfSecondOrder;
 //    int32_t input;
 
     State(int32_t hiddenSize, int32_t outputSize, int32_t seed);
