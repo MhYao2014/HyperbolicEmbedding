@@ -178,19 +178,20 @@ namespace fasttext {
             bool backprop ) const {
         real innerProduct = wo_->dotRow(state.hidden, target);
         real innerProductSelf = wo_->dotRow(state.hidden,state.DicId);
-//        real score = sigmoid(innerProduct / uNorm / 10);
+        real score = sigmoid(innerProduct / uNorm / 10);
         real scoreSum = sigmoid((innerProduct + innerProductSelf) / uNorm / 10);
-//        real alpha = lr * (real(labelIsPositive) - score);
+        real alpha = lr * (real(labelIsPositive) - score);
         real alphaSum = lr * (real(labelIsPositive) - scoreSum);
         // update v
-//        wo_->addVectorToRow(state.hidden, target, alpha / uNorm / 10);
+        wo_->addVectorToRow(state.hidden, target, alpha / uNorm / 10);
         wo_->addVectorToRow(state.hidden, target, alphaSum / uNorm / 10);
+        wo_->addVectorToRow(state.hidden, state.DicId, alphaSum / uNorm / 10);
         // calculate the first term of u's grad
-//        state.grad.addRow(*wo_, target, alpha / uNorm / 10);
+        state.grad.addRow(*wo_, target, alpha / uNorm / 10);
         state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm / 10);
         state.grad.addRow(*wo_, target, alphaSum / uNorm / 10);
         // calculate the second term of u's grad
-//        state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm) / 10));
+        state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm) / 10));
         state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm) / 10);
         if (labelIsPositive){
             return -log(scoreSum);
@@ -213,6 +214,14 @@ namespace fasttext {
         for(int32_t i = 0; i < neg_; i++) {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
+        }
+        for(int32_t i = 0; i < neg_; i++) {
+            auto negativeTargetI = getNegative(target, state.rng);
+            for (int32_t j = 0; j < neg_; j++) {
+                auto negativeTargetJ = getNegative(target, state.rng);
+                state.DicId = negativeTargetJ;
+                loss += InUnitLoss::binaryLogistic(negativeTargetI, state, uNorm, false, lr, backprop);
+            }
         }
         return loss;
     }
