@@ -66,8 +66,6 @@ namespace fasttext {
         }
     }
 
-
-
     void Loss::predict(
             int32_t k,
             real threshold,
@@ -178,10 +176,22 @@ namespace fasttext {
             bool labelIsPositive,
             real lr,
             bool backprop ) const {
-        real score = sigmoid(wo_->dotRow(state.hidden, target));
+        real innerProduct = wo_->dotRow(state.hidden, target);
+        real innerProductSelf = wo_->dotRow(state.hidden,state.DicId);
+        real score = sigmoid(innerProduct / uNorm / 10);
+        real scoreSum = sigmoid((innerProduct + innerProductSelf) / uNorm / 10);
         real alpha = lr * (real(labelIsPositive) - score);
-        state.grad.addRow(*wo_, target,(alpha));
-        wo_->addVectorToRow(state.hidden, target,(alpha));
+        real alphaSum = lr * (real(labelIsPositive) - scoreSum);
+        // update v
+        wo_->addVectorToRow(state.hidden, target, alpha / uNorm / 10);
+        wo_->addVectorToRow(state.hidden, target, alphaSum / uNorm / 10);
+        // calculate the first term of u's grad
+        state.grad.addRow(*wo_, target, alpha / uNorm / 10);
+        state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm / 10);
+        state.grad.addRow(*wo_, target, alphaSum / uNorm / 10);
+        // calculate the second term of u's grad
+        state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm) / 10));
+        state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm) / 10);
         if (labelIsPositive){
             return -log(score);
         } else {
@@ -195,7 +205,6 @@ namespace fasttext {
             Model::State &state,
             real lr,
             bool backprop) {
-        //std::cerr << "\rI am here ! The forward" << std::endl;
         assert( targetIndex >= 0 );
         assert( targetIndex < targets.size() );
         int32_t target = targets[targetIndex];
@@ -205,9 +214,9 @@ namespace fasttext {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
         }
-        state.grad.addVector(state.hidden,lr*2*0.001*(1-0.1/uNorm));
         return loss;
     }
+
     real NegativeSamplingLoss::forward(
             const std::vector<int32_t>& targets,
             int32_t targetIndex,
@@ -264,7 +273,6 @@ namespace fasttext {
             fasttext::Model::State &state,
             fasttext::real lr,
             bool backprop) {}
-
 
     real Loss::Beta(int m) {}
 

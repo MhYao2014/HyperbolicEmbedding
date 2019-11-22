@@ -938,8 +938,6 @@ namespace fasttext {
                     printInfoMine(progress, progressTree, loss_, lossTree_, std::cerr);
                 }
             }
-//  std::cerr << "\rOriginal: " << ntokens << std::endl;
-//  std::cerr << "\rTree: " << ntokensTree << std::endl;
         } else if (args_->IfNeedRegular == 1){
             while (tokenCount_ < args_->epoch * ntokens) {
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -965,13 +963,13 @@ namespace fasttext {
         std::ifstream ifs(args_->input);
         utils::seek(ifs, threadId * utils::size(ifs) / args_->thread);
         Model::State state(args_->dim, output_->size(0), threadId);
-        if (state.freq.empty()) {
-            for (int32_t i=0; i < dict_->nwords(); i++) {
-                state.freq.push_back(dict_->words_[i].freq);
-                state.kappa.push_back(dict_->words_[i].kappa);
-//                std::cerr << dict_->words_[0].kappa << std::endl;
-            }
-        }
+//        if (state.freq.empty()) {
+//            for (int32_t i=0; i < dict_->nwords(); i++) {
+//                state.freq.push_back(dict_->words_[i].freq);
+//                state.kappa.push_back(dict_->words_[i].kappa);
+////                std::cerr << dict_->words_[0].kappa << std::endl;
+//            }
+//        }
         const int64_t ntokens = dict_->ntokens();
         int64_t localTokenCount = 0;
         std::vector<int32_t> line, labels;

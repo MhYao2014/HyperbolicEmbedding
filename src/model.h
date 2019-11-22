@@ -64,7 +64,7 @@ class Model {
     int64_t SampleCount;
     real TotalSum;
       real omega;
-      real alpha;
+      int64_t DicId;
       bool IfSample;
 //    int32_t input;
 

@@ -33,7 +33,7 @@ namespace fasttext {
               TotalSum(0),
               CurrentKappa(1.0),
               omega(0),
-              alpha(1.0),
+              DicId(0),
               IfSample(true),
               SampleCount(0){}
 
@@ -70,15 +70,6 @@ namespace fasttext {
             bool normalizeGradient)
             : wi_(wi), wo_(wo), loss_(loss), normalizeGradient_(normalizeGradient) {}
 
-    void Model::computeHidden(const std::vector<int32_t>& input, State& state)
-    const {
-        Vector& hidden = state.hidden;
-        hidden.zero();
-        for (auto it = input.cbegin(); it != input.cend(); ++it) {
-            hidden.addRow(*wi_, *it);
-        }
-        hidden.mul(1.0 / input.size());
-    }
 
     void Model::predict(
             const std::vector<int32_t>& input,
@@ -97,18 +88,28 @@ namespace fasttext {
         loss_->predict(k, threshold, heap, state);
     }
 
+    void Model::computeHidden(const std::vector<int32_t>& input, State& state)
+    const {
+        Vector& hidden = state.hidden;
+        hidden.zero();
+        for (auto it = input.cbegin(); it != input.cend(); ++it) {
+            hidden.addRow(*wi_, *it);
+            state.DicId = *it;
+        }
+        hidden.mul(1.0 / input.size());
+    }
+
     void Model::update(
-            const std::vector<int32_t>& input,
-            const std::vector<int32_t>& targets,
+            const std::vector<int32_t>& InputDicId,
+            const std::vector<int32_t>& line,
             int32_t targetIndex,
             real lr,
             State& state) {
-//    std::cerr << "\rI am here ! The updata" << std::endl;
-        if (input.size() == 0) {
+        if (InputDicId.size() == 0) {
             return;
         }
-        computeHidden(input, state);
-        state.CurrentKappa = state.kappa[*input.cbegin()];
+        computeHidden(InputDicId, state);
+        //state.CurrentKappa = state.kappa[*input.cbegin()];
         //real NormHidden = state.hidden.norm();
         //计算当前in向量被抽中的概率
         //real kappa = 1000;
@@ -121,13 +122,12 @@ namespace fasttext {
         //}ty
         Vector& grad = state.grad;
         grad.zero();
-        real lossValue = loss_->forward(targets, targetIndex, state, lr, true);
+        real lossValue = loss_->forward(line, targetIndex, state, lr, true);
         state.incrementNExamples(lossValue);
-
         if (normalizeGradient_) {
-            grad.mul(1.0 / input.size());
+            grad.mul(1.0 / InputDicId.size());
         }
-        for (auto it = input.cbegin(); it != input.cend(); ++it) {
+        for (auto it = InputDicId.cbegin(); it != InputDicId.cend(); ++it) {
             wi_->addVectorToRow(grad, *it, 1.0);
         }
     }
