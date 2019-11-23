@@ -209,42 +209,42 @@ namespace fasttext {
             bool backprop ) const {
         if (labelIsPositive){
             real innerProduct = wo_->dotRow(state.hidden, target);
-            real score = sigmoid(innerProduct / uNorm);
+            real score = sigmoid(innerProduct / uNorm / 10);
             real alpha = lr * (real(labelIsPositive) - score);
             real innerProductSelf = wo_->dotRow(state.hidden,state.DicId);
-            real scoreSum = sigmoid((innerProduct + innerProductSelf) / uNorm);
+            real scoreSum = sigmoid((innerProduct + innerProductSelf) / uNorm / 10);
             real alphaSum = lr * (real(labelIsPositive) - scoreSum);
             // update v
-            wo_->addVectorToRow(state.hidden, target, alpha / uNorm);
-            wo_->addVectorToRow(state.hidden, target, alphaSum / uNorm);
-            wo_->addVectorToRow(state.hidden, state.DicId, alphaSum / uNorm);
+            wo_->addVectorToRow(state.hidden, target, alpha / uNorm / 10);
+            wo_->addVectorToRow(state.hidden, target, alphaSum / uNorm / 10);
+            wo_->addVectorToRow(state.hidden, state.DicId, alphaSum / uNorm / 10);
             // calculate the first term of u's grad
-            state.grad.addRow(*wo_, target, alpha / uNorm);
-            state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm);
-            state.grad.addRow(*wo_, target, alphaSum / uNorm);
+            state.grad.addRow(*wo_, target, alpha / uNorm / 10);
+            state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm / 10);
+            state.grad.addRow(*wo_, target, alphaSum / uNorm / 10);
             // calculate the second term of u's grad
-            state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm)));
-            state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm));
+            state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm) / 10));
+            state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm) / 10);
             return -log(scoreSum)-log(score);
         } else {
             if (state.IfSecondOrder) {
                 real innerProduct = wo_->dotRow(state.hidden, target);
                 real innerProductSelf = wo_->dotRow(state.hidden,state.DicId);
-                real scoreSum = sigmoid((innerProduct + innerProductSelf) / uNorm);
+                real scoreSum = sigmoid((innerProduct + innerProductSelf) / uNorm / 10);
                 real alphaSum = lr * (real(labelIsPositive) - scoreSum);
-                wo_->addVectorToRow(state.hidden, target, alphaSum / uNorm);
-                wo_->addVectorToRow(state.hidden, state.DicId, alphaSum / uNorm);
-                state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm);
-                state.grad.addRow(*wo_, target, alphaSum / uNorm);
-                state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm));
+                wo_->addVectorToRow(state.hidden, target, alphaSum / uNorm / 10);
+                wo_->addVectorToRow(state.hidden, state.DicId, alphaSum / uNorm / 10);
+                state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm / 10);
+                state.grad.addRow(*wo_, target, alphaSum / uNorm / 10);
+                state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm) / 10);
                 return -log(1.0 - scoreSum);
             } else {
                 real innerProduct = wo_->dotRow(state.hidden, target);
-                real score = sigmoid(innerProduct / uNorm);
+                real score = sigmoid(innerProduct / uNorm / 10);
                 real alpha = lr * (real(labelIsPositive) - score);
-                wo_->addVectorToRow(state.hidden, target, alpha / uNorm);
-                state.grad.addRow(*wo_, target, alpha / uNorm);
-                state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm)));
+                wo_->addVectorToRow(state.hidden, target, alpha / uNorm / 10);
+                state.grad.addRow(*wo_, target, alpha / uNorm / 10);
+                state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm) / 10));
                 return -log(1.0 - score);
             }
 
