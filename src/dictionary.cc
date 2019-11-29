@@ -568,6 +568,7 @@ bool Dictionary::readWord(std::istream& in, std::string& word) const {
     std::streambuf& sb = *in.rdbuf();
     word.clear();
     while ((c = sb.sbumpc()) != EOF) {
+        // 当遇到下面的情况时,表明读取结束
         if (c == ' ' || c == '\n' || c == '\r' || c == '\t' || c == '\v' ||
             c == '\f' || c == '\0') {
             if (word.empty()) {
@@ -581,6 +582,20 @@ bool Dictionary::readWord(std::istream& in, std::string& word) const {
                     sb.sungetc();
                 return true;
             }
+        }
+        // 在单词开始遇到了标点符号
+        if (ispunct(c) && word.empty()) {
+            word.push_back(c);
+            return true;
+        }
+        // 在单词结束遇到了标点符号
+        if (ispunct(c) && !word.empty()) {
+            sb.sungetc();
+            return true;
+        }
+        // 大小写转换
+        if (c > 64 && c < 91) {
+            c += 32;
         }
         word.push_back(c);
     }
