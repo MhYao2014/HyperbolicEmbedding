@@ -225,6 +225,16 @@ namespace fasttext {
             // calculate the second term of u's grad
             state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm)));
             state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm));
+            // ZhuangLianShen's term
+            Vector &outVectarget = state.outVectarget;
+            outVectarget.zero();
+            outVectarget.addRow(*wo_,target);
+            real outInner = wo_->dotRow(outVectarget,state.DicId);
+            Vector &inVectarget = state.inVectarget;
+            real inVectargetNorm = inVectarget.norm();
+            real inInner = inVectarget.dotmul(state.hidden,1);
+            state.grad.addVector(inVectarget,2*(outInner/inVectargetNorm/uNorm-inInner/(inVectargetNorm*inVectargetNorm)/(uNorm*uNorm)));
+            state.grad.addVector(state.hidden,-inInner/inVectargetNorm/(uNorm*uNorm*uNorm));
             return -log(scoreSum)-log(score);
         } else {
             if (state.IfSecondOrder) {

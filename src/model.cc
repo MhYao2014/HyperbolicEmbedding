@@ -26,9 +26,9 @@ namespace fasttext {
               output(outputSize),
               grad(hiddenSize),
               gradHyper(hiddenSize + 1),
-              VHat(hiddenSize),
-              Z(hiddenSize),
-              Vc(hiddenSize),
+              outVectarget(hiddenSize),
+              outVeccenter(hiddenSize),
+              inVectarget(hiddenSize),
               rng(seed),
               TotalSum(0),
               CurrentKappa(1.0),
@@ -94,6 +94,7 @@ namespace fasttext {
         hidden.zero();
         for (auto it = input.cbegin(); it != input.cend(); ++it) {
             hidden.addRow(*wi_, *it);
+            state.inVectarget.addRow(*wi_,*it);
             state.DicId = *it;
         }
         hidden.mul(1.0 / input.size());

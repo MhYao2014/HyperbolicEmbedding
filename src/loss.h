@@ -150,6 +150,7 @@ namespace fasttext {
                 bool labelIsPositive,
                 real lr,
                 bool backprop ) const ;
+        
     public:
         explicit InUnitLoss(
                 std::shared_ptr<Matrix>& wo,

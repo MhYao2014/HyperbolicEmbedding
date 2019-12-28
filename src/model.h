@@ -54,9 +54,9 @@ class Model {
     Vector output;
     Vector grad;
     Vector gradHyper;
-      Vector VHat;
-      Vector Z;
-      Vector Vc;
+    Vector outVectarget;
+    Vector outVeccenter;
+    Vector inVectarget;
     std::minstd_rand rng;
     std::vector<real> freq;
     std::vector<real> kappa;
