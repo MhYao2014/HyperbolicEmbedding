@@ -995,6 +995,7 @@ namespace fasttext {
             }
             if (threadId == 0) {
                 loss_ = state.getLoss();
+                lossSecOrder_ = state.getLossSecOrder();
             }
             ifs.close();
         } else if (args_->IfNeedTree == 1){
