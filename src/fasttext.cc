@@ -990,6 +990,7 @@ namespace fasttext {
                     localTokenCount = 0;
                     if (threadId == 0 && args_->verbose > 1)
                         loss_ = state.getLoss();
+                        lossSecOrder_ = state.getLossSecOrder();
                 }
             }
             if (threadId == 0) {
