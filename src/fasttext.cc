@@ -343,12 +343,12 @@ namespace fasttext {
 
         log_stream << std::fixed;
         log_stream << "Progress: ";
-        log_stream << std::setprecision(1) << std::setw(5) << progress << "%";
-        log_stream << " words/sec/thread: " << std::setw(7) << int64_t(wst);
-        log_stream << " lr: " << std::setw(9) << std::setprecision(6) << lr;
+        log_stream << std::setprecision(1) << std::setw(3) << progress << "%";
+        log_stream << " words/sec/thread: " << std::setw(3) << int64_t(wst);
+        log_stream << " lr: " << std::setw(6) << std::setprecision(5) << lr;
+        log_stream << " loss: " << std::setw(6) << std::setprecision(5) << loss;
         log_stream << " lossSec: " << std::setw(7) << std::setprecision(5) << lossSecOrder;
-        log_stream << " loss: " << std::setw(9) << std::setprecision(6) << loss;
-        log_stream << " ETA: " << std::setw(3) << etah;
+        log_stream << " ETA: " << std::setw(1) << etah;
         log_stream << "h" << std::setw(2) << etam << "m";
         log_stream << std::flush;
     }
@@ -926,7 +926,7 @@ namespace fasttext {
                 if (args_->verbose > 1) {
                     real progress = real(tokenCount_) / (args_->epoch * ntokens);
                     std::cerr << "\r";
-                    printInfo(progress, loss_, std::cerr);
+                    printInfo(progress, loss_, lossSecOrder_, std::cerr);
                 }
             }
         } else if (args_->IfNeedTree == 1){
@@ -956,7 +956,7 @@ namespace fasttext {
         }
         if (args_->verbose > 0) {
             std::cerr << "\r";
-            printInfo(1.0, loss_, std::cerr);
+            printInfo(1.0, loss_, lossSecOrder_, std::cerr);
             std::cerr << std::endl;
         }
     }
