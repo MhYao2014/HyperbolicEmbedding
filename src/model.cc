@@ -19,8 +19,10 @@ namespace fasttext {
 
     Model::State::State(int32_t hiddenSize, int32_t outputSize, int32_t seed)
             : lossValue_(0.0),
+              lossValueSecOrder_(0.0),
               lossValueHyper_(0.0),
               nexamples_(0),
+              nexamplesSecOrder_(0),
               nexamplesTree_(0),
               hidden(hiddenSize),
               output(outputSize),
@@ -41,6 +43,10 @@ namespace fasttext {
         return lossValue_ / nexamples_;
     }
 
+    real Model::State::getLossSecOrder() const {
+        return lossValueSecOrder_ / nexamplesSecOrder_;
+    }
+
     real Model::State::getLossHyper() const {
         return lossValueHyper_ / nexamplesTree_;
     }
@@ -52,6 +58,11 @@ namespace fasttext {
     void Model::State::incrementNExamples(real loss) {
         lossValue_ += loss;
         nexamples_++;
+    }
+
+    void Model::State::incrementNExamplesSecOrder(real loss) {
+        lossValueSecOrder_ += loss;
+        nexamplesSecOrder_++;
     }
 
     void Model::State::incrementNExamplesRegular(real loss) {
@@ -125,6 +136,7 @@ namespace fasttext {
         grad.zero();
         real lossValue = loss_->forward(line, targetIndex, state, lr, true);
         state.incrementNExamples(lossValue);
+        state.incrementNExamplesSecOrder(0.0);
         if (normalizeGradient_) {
             grad.mul(1.0 / InputDicId.size());
         }

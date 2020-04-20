@@ -226,16 +226,17 @@ namespace fasttext {
             state.grad.addVector(state.hidden, (real)(- alpha  * innerProduct / (uNorm*uNorm*uNorm)));
             state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm));
             // ZhuangLianShen's term
-            Vector &outVectarget = state.outVectarget;
-            outVectarget.zero();
-            outVectarget.addRow(*wo_,target);
-            real outInner = wo_->dotRow(outVectarget,state.DicId);
-            Vector &inVectarget = state.inVectarget;
-            real inVectargetNorm = inVectarget.norm();
-            real inInner = inVectarget.dotmul(state.hidden,1);
-            state.grad.addVector(inVectarget,2*(outInner/inVectargetNorm/uNorm-inInner/(inVectargetNorm*inVectargetNorm)/(uNorm*uNorm)));
-            state.grad.addVector(state.hidden,-inInner/inVectargetNorm/(uNorm*uNorm*uNorm));
-            return -log(scoreSum)-log(score);
+//            Vector &outVectarget = state.outVectarget;
+//            outVectarget.zero();
+//            outVectarget.addRow(*wo_,target);
+//            real outInner = wo_->dotRow(outVectarget,state.DicId);
+//            Vector &inVectarget = state.inVectarget;
+//            real inVectargetNorm = inVectarget.norm();
+//            real inInner = inVectarget.dotmul(state.hidden,1);
+//            state.grad.addVector(inVectarget,2*(outInner/inVectargetNorm/uNorm-inInner/(inVectargetNorm*inVectargetNorm)/(uNorm*uNorm)));
+//            state.grad.addVector(state.hidden,-inInner/inVectargetNorm/(uNorm*uNorm*uNorm));
+            state.lossValueSecOrder_ += -log(scoreSum);
+            return -log(score);
         } else {
             if (state.IfSecondOrder) {
                 real innerProduct = wo_->dotRow(state.hidden, target);
@@ -247,7 +248,8 @@ namespace fasttext {
                 state.grad.addRow(*wo_, state.DicId, alphaSum / uNorm);
                 state.grad.addRow(*wo_, target, alphaSum / uNorm );
                 state.grad.addVector(state.hidden, - alphaSum * (innerProductSelf+innerProduct) / (uNorm*uNorm*uNorm));
-                return -log(1.0 - scoreSum);
+                state.lossValueSecOrder_ += -log(1.0 - scoreSum);
+                return 0;
             } else {
                 real innerProduct = wo_->dotRow(state.hidden, target);
                 real score = sigmoid(innerProduct / uNorm);

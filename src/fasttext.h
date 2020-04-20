@@ -43,6 +43,7 @@ class FastText {
   std::atomic<int64_t> tokenCount_{};
   std::atomic<int64_t> tokenCountTree_{};
   std::atomic<real> loss_{};
+  std::atomic<real> lossSecOrder_{};
   std::atomic<real> lossTree_{};
   std::atomic<real> lossRegular_{};
 
@@ -60,7 +61,7 @@ class FastText {
   void lazyComputeWordVectors();
   void printInfoMine(real, real, real,  real, std::ostream&);
   void printInfoRegular(real, real,  real, std::ostream&);
-  void printInfo(real, real, std::ostream&);
+  void printInfo(real, real, real, std::ostream&);
   std::shared_ptr<Matrix> getInputMatrixFromFile(const std::string&) const;
   std::shared_ptr<Matrix> createRandomMatrix() const;
   std::shared_ptr<Matrix> createTrainOutputMatrix() const;

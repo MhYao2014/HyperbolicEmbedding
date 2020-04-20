@@ -323,7 +323,7 @@ namespace fasttext {
         log_stream << std::flush;
     }
 
-    void FastText::printInfo(real progress, real loss, std::ostream& log_stream) {
+    void FastText::printInfo(real progress, real loss, real lossSecOrder, std::ostream& log_stream) {
         std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
         double t =
                 std::chrono::duration_cast<std::chrono::duration<double>>(end - start_)
@@ -346,6 +346,7 @@ namespace fasttext {
         log_stream << std::setprecision(1) << std::setw(5) << progress << "%";
         log_stream << " words/sec/thread: " << std::setw(7) << int64_t(wst);
         log_stream << " lr: " << std::setw(9) << std::setprecision(6) << lr;
+        log_stream << " lossSec: " << std::setw(7) << std::setprecision(5) << lossSecOrder;
         log_stream << " loss: " << std::setw(9) << std::setprecision(6) << loss;
         log_stream << " ETA: " << std::setw(3) << etah;
         log_stream << "h" << std::setw(2) << etam << "m";
