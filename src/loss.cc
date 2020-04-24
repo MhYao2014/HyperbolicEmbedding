@@ -275,13 +275,13 @@ namespace fasttext {
         real uNorm = state.hidden.norm();
         real loss = InUnitLoss::binaryLogistic(target, state, uNorm, true, lr, backprop);
         state.IfSecondOrder = false;
-        for(int32_t i = 0; i < neg_; i++) {
+        for(int32_t i = 0; i < neg_%2; i++) {
             auto negativeTarget = getNegative(target, state.rng);
             loss += InUnitLoss::binaryLogistic(negativeTarget, state, uNorm, false, lr, backprop);
         }
         state.IfSecondOrder = true;
-        for(int32_t i = 0; i < neg_; i++) {
-            for (int32_t j = 0; j < neg_; j++) {
+        for(int32_t i = 0; i < neg_%2; i++) {
+            for (int32_t j = 0; j < neg_%2; j++) {
                 auto negativeTargetI = getNegative(target, state.rng);
                 auto negativeTargetJ = getNegative(target, state.rng);
                 state.DicId = negativeTargetJ;
